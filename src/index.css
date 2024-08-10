@@ -27,6 +27,10 @@
   font-style: normal;
 }
 
+body {
+  @apply bg-black text-white;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
