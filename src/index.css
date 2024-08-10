@@ -1,10 +1,36 @@
 /* src/index.css */
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@font-face {
+  font-family: 'PixelMplus10';
+  src: url('/src/assets/fonts/PixelMplus10-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PixelMplus10';
+  src: url('/src/assets/fonts/PixelMplus10-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PixelMplus12';
+  src: url('/src/assets/fonts/PixelMplus12-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PixelMplus12';
+  src: url('/src/assets/fonts/PixelMplus12-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  font-family: 'Press Start 2P', cursive;
+  font-family: 'PixelMplus10', cursive;
 }
