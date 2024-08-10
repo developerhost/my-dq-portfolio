@@ -1,0 +1,32 @@
+# Ignore artifacts:
+build
+coverage
+dist
+node_modules
+
+# Ignore specific file types:
+*.min.js
+*.map
+*.lock
+
+# Ignore specific configuration or environment files:
+.env
+.env.local
+.env.*.local
+
+# Ignore all JavaScript files in a specific directory:
+src/legacy/**/*.js
+
+# Ignore specific files:
+src/some-large-file.js
+
+# Ignore generated files:
+package-lock.json
+yarn.lock
+
+# Ignore Prettier configuration files themselves:
+.prettierrc
+.prettierrc.json
+.prettierrc.js
+.prettierrc.yml
+.prettierignore
