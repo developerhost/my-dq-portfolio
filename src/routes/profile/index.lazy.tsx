@@ -1,7 +1,7 @@
 import { createLazyFileRoute } from '@tanstack/react-router';
 import { FaUser } from 'react-icons/fa';
 
-export const Route = createLazyFileRoute('/profile')({
+export const Route = createLazyFileRoute('/profile/')({
   component: Profile,
 });
 
