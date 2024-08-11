@@ -5,6 +5,7 @@ import Floor from '@/assets/img/tile/floor.svg';
 import Hero from '@/assets/img/character/hero.svg';
 import Murabito from '@/assets/img/character/murabito.svg';
 import Cat from '@/assets/img/character/cat.svg';
+import Bed from '@/assets/img/object/bed.svg';
 
 export const Route = createFileRoute('/room/Tile')({
   component: () => Tile,
@@ -46,13 +47,19 @@ export function Tile({ type, onClick }: TileProps) {
           />
         );
       case 3:
-        return <div className="bg-black w-full h-full" />; // マップ外
+        return <div className="bg-black w-full h-full absolute z-10" />; // マップ外
       case 4:
-        return <FaBoxOpen className="text-yellow-500" />; // 宝箱オブジェクト①
+        return <FaBoxOpen className="text-yellow-500 absolute z-10" />; // 宝箱オブジェクト①
       case 5:
-        return <FaBox className="text-yellow-700" />; // 宝箱オブジェクト②
+        return <FaBox className="text-yellow-700 absolute z-10" />; // 宝箱オブジェクト②
+      case 6:
+        return (
+          <img src={Bed} alt="Bed" className="w-full h-full absolute z-10" />
+        );
       case 9:
-        return <img src={Wall} alt="Wall" className="w-full h-full" />;
+        return (
+          <img src={Wall} alt="Wall" className="w-full h-full absolute z-10" />
+        );
       default:
         return <img src={Floor} alt="Floor" className="w-full h-full" />; // デフォルト: 床
     }
