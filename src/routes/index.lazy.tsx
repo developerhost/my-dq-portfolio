@@ -12,7 +12,7 @@ function Home() {
         橋田至のポートフォリオサイト
       </h1>
       <Link
-        to="/profile"
+        to="/room"
         className="flex items-center space-x-2 border-2 p-2 rounded w-1/2"
       >
         <span>▶︎</span>

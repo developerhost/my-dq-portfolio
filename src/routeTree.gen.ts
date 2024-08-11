@@ -13,10 +13,12 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as RoomTileImport } from './routes/room/Tile'
 
 // Create Virtual Routes
 
 const IndexLazyImport = createFileRoute('/')()
+const RoomIndexLazyImport = createFileRoute('/room/')()
 const ProfileIndexLazyImport = createFileRoute('/profile/')()
 
 // Create/Update Routes
@@ -26,10 +28,20 @@ const IndexLazyRoute = IndexLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
 
+const RoomIndexLazyRoute = RoomIndexLazyImport.update({
+  path: '/room/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/room/index.lazy').then((d) => d.Route))
+
 const ProfileIndexLazyRoute = ProfileIndexLazyImport.update({
   path: '/profile/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/profile/index.lazy').then((d) => d.Route))
+
+const RoomTileRoute = RoomTileImport.update({
+  path: '/room/Tile',
+  getParentRoute: () => rootRoute,
+} as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -42,11 +54,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexLazyImport
       parentRoute: typeof rootRoute
     }
+    '/room/Tile': {
+      id: '/room/Tile'
+      path: '/room/Tile'
+      fullPath: '/room/Tile'
+      preLoaderRoute: typeof RoomTileImport
+      parentRoute: typeof rootRoute
+    }
     '/profile/': {
       id: '/profile/'
       path: '/profile'
       fullPath: '/profile'
       preLoaderRoute: typeof ProfileIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/room/': {
+      id: '/room/'
+      path: '/room'
+      fullPath: '/room'
+      preLoaderRoute: typeof RoomIndexLazyImport
       parentRoute: typeof rootRoute
     }
   }
@@ -56,7 +82,9 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   IndexLazyRoute,
+  RoomTileRoute,
   ProfileIndexLazyRoute,
+  RoomIndexLazyRoute,
 })
 
 /* prettier-ignore-end */
@@ -68,14 +96,22 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/profile/"
+        "/room/Tile",
+        "/profile/",
+        "/room/"
       ]
     },
     "/": {
       "filePath": "index.lazy.tsx"
     },
+    "/room/Tile": {
+      "filePath": "room/Tile.tsx"
+    },
     "/profile/": {
       "filePath": "profile/index.lazy.tsx"
+    },
+    "/room/": {
+      "filePath": "room/index.lazy.tsx"
     }
   }
 }
