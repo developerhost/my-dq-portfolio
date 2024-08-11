@@ -16,7 +16,7 @@ export function Room() {
 
   return (
     <div className="min-h-screen bg-black text-white flex items-center justify-center">
-      <div className="grid grid-cols-9 gap-1 bg-black p-4">
+      <div className="grid grid-cols-9 bg-black p-4">
         {roomMap.flatMap((row, rowIndex) =>
           row.map((tile, colIndex) => (
             <div

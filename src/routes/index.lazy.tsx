@@ -7,7 +7,7 @@ export const Route = createLazyFileRoute('/')({
 
 function Home() {
   return (
-    <div className="flex flex-col justify-between min-h-[calc(100vh-100px)] p-2">
+    <div className="flex flex-col justify-between min-h-[calc(100vh-200px)] p-2">
       <h1 className="text-4xl mb-8 text-center">
         橋田至のポートフォリオサイト
       </h1>
