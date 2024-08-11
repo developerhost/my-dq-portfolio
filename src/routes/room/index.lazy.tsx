@@ -19,22 +19,20 @@ export function Room() {
   const [message, setMessage] = useState('');
 
   const handleTileClick = (type: number) => {
-    let newMessage = '';
     switch (type) {
       case 0:
-        newMessage = 'こんにちは、私は橋田至です！';
+        setMessage('こんにちは、私は橋田至です！');
         break;
       case 1:
-        newMessage = '村人: ようこそ、冒険者！';
+        setMessage('村人: ようこそ、冒険者！');
         break;
       case 2:
-        newMessage = '猫: にゃーん';
+        setMessage('猫: にゃーん');
         break;
       default:
-        newMessage = '';
+        setMessage('');
         break;
     }
-    setMessage(newMessage);
   };
 
   return (
