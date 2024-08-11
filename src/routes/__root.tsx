@@ -14,7 +14,7 @@ export const Route = createRootRoute({
             Profile
           </Link>
         </div>
-        <BgmPlayer src="/src/assets/bgm/8bit-jo-jokyoku.mp3" />
+        <BgmPlayer src="/bgm/8bit-jo-jokyoku.mp3" />
       </div>
       <hr />
       <Outlet />
