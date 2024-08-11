@@ -1,11 +1,12 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { FaBoxOpen, FaBox } from 'react-icons/fa';
 import Wall from '@/assets/img/tile/wall.svg';
 import Floor from '@/assets/img/tile/floor.svg';
 import Hero from '@/assets/img/character/hero.svg';
 import Murabito from '@/assets/img/character/murabito.svg';
 import Cat from '@/assets/img/character/cat.svg';
 import Bed from '@/assets/img/object/bed.svg';
+import TreasureRedGold from '@/assets/img/treasure/treasure_red_gold.svg';
+import TreasureGreenGold from '@/assets/img/treasure/treasure_green_gold.svg';
 
 export const Route = createFileRoute('/room/Tile')({
   component: () => Tile,
@@ -49,9 +50,21 @@ export function Tile({ type, onClick }: TileProps) {
       case 3:
         return <div className="bg-black w-full h-full absolute z-10" />; // マップ外
       case 4:
-        return <FaBoxOpen className="text-yellow-500 absolute z-10" />; // 宝箱オブジェクト①
+        return (
+          <img
+            src={TreasureRedGold}
+            alt="TreasureRedGold"
+            className="w-full h-full absolute z-10"
+          />
+        ); // 宝箱オブジェクト①
       case 5:
-        return <FaBox className="text-yellow-700 absolute z-10" />; // 宝箱オブジェクト②
+        return (
+          <img
+            src={TreasureGreenGold}
+            alt="TreasureGreenGold"
+            className="w-full h-full absolute z-10"
+          />
+        ); // 宝箱オブジェクト②
       case 6:
         return (
           <img src={Bed} alt="Bed" className="w-full h-full absolute z-10" />
