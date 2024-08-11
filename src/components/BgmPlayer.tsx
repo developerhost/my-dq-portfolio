@@ -4,14 +4,10 @@ import { FaPlay, FaPause } from 'react-icons/fa';
 
 export function BgmPlayer({ src }: { src: string }) {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(0.3);
+  const volume = 0.3;
 
   const toggleBGM = () => {
     setIsPlaying(!isPlaying);
-  };
-
-  const handleVolumeChange = (event: { target: { value: string } }) => {
-    setVolume(parseFloat(event.target.value));
   };
 
   return (
@@ -22,15 +18,6 @@ export function BgmPlayer({ src }: { src: string }) {
       >
         {isPlaying ? <FaPause /> : <FaPlay />}
       </button>
-      <input
-        type="range"
-        min="0"
-        max="1"
-        step="0.01"
-        value={volume}
-        onChange={handleVolumeChange}
-        className="mt-2"
-      />
       <ReactHowler src={src} playing={isPlaying} loop={true} volume={volume} />
     </div>
   );
