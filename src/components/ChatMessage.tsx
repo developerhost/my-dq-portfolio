@@ -8,6 +8,7 @@ export function ChatMessage({ message }: ChatMessageProps) {
   return (
     <div style={{ whiteSpace: 'pre-line' }}>
       <Typewriter
+        key={message}
         words={[message]}
         cursor
         cursorStyle="_"
