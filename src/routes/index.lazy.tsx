@@ -11,7 +11,7 @@ function Home() {
   return (
     <div className="flex flex-col justify-between min-h-[calc(100vh-200px)] p-2">
       <h1 className="text-4xl mb-8 text-center">
-        橋田至の冒険 <br /> ~Tiles Of Hashida~
+        橋田至の冒険 <br /> ~Tales Of Hashida~
       </h1>
       <Link
         to="/room"
