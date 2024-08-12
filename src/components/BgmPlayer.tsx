@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ReactHowler from 'react-howler';
-import { FaPlay, FaPause } from 'react-icons/fa';
+import { FaVolumeUp, FaVolumeMute } from 'react-icons/fa';
 
 export function BgmPlayer({ src }: { src: string }) {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -16,7 +16,7 @@ export function BgmPlayer({ src }: { src: string }) {
         onClick={toggleBGM}
         className="bg-gray-200 p-2 rounded text-center text-black"
       >
-        {isPlaying ? <FaPause /> : <FaPlay />}
+        {isPlaying ? <FaVolumeUp /> : <FaVolumeMute />}
       </button>
       <ReactHowler src={src} playing={isPlaying} loop={true} volume={volume} />
     </div>
