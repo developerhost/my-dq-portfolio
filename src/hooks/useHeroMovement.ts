@@ -1,3 +1,4 @@
+import { TILES } from '@/constants';
 import { useState } from 'react';
 import { useKey } from 'react-use';
 
@@ -15,6 +16,10 @@ interface DirectionMap {
 
 type Direction = DirectionMap[keyof DirectionMap];
 
+function canMoveToTile(tile: number): boolean {
+  return tile === TILES.HERO || tile === TILES.FLOOR;
+}
+
 export function useHeroMovement(
   initialPosition: Position,
   roomMap: number[][]
@@ -25,22 +30,22 @@ export function useHeroMovement(
     setHeroPosition((prevPosition) => {
       const { row, col } = prevPosition;
 
-      // 8のタイルは通行可能
+      // 0と8のタイルは通行可能
       const moveMap: Record<Direction, Position> = {
         ArrowUp:
-          row > 0 && roomMap[row - 1][col] === 8
+          row > 0 && canMoveToTile(roomMap[row - 1][col])
             ? { row: row - 1, col }
             : prevPosition,
         ArrowDown:
-          row < roomMap.length - 1 && roomMap[row + 1][col] === 8
+          row < roomMap.length - 1 && canMoveToTile(roomMap[row + 1][col])
             ? { row: row + 1, col }
             : prevPosition,
         ArrowLeft:
-          col > 0 && roomMap[row][col - 1] === 8
+          col > 0 && canMoveToTile(roomMap[row][col - 1])
             ? { row, col: col - 1 }
             : prevPosition,
         ArrowRight:
-          col < roomMap[row].length - 1 && roomMap[row][col + 1] === 8
+          col < roomMap[row].length - 1 && canMoveToTile(roomMap[row][col + 1])
             ? { row, col: col + 1 }
             : prevPosition,
       };

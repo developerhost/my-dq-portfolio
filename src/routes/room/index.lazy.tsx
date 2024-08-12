@@ -3,6 +3,7 @@ import { Tile } from './Tile';
 import ChatMessage from '@/components/ChatMessage';
 import { useHeroMovement } from '@/hooks/useHeroMovement';
 import { useMessage } from './-hooks/useMessage';
+import { TILES } from '@/constants';
 
 export const Route = createLazyFileRoute('/room/')({
   component: Room,
@@ -17,7 +18,7 @@ export function Room() {
     [9, 9, 9, 9, 9, 9, 9, 9, 9],
   ];
 
-  const initialPosition = { row: 2, col: 2 };
+  const initialPosition = { row: 1, col: 6 };
 
   const heroPosition = useHeroMovement(initialPosition, roomMap);
   const { message, handleTileClick } = useMessage();
@@ -31,7 +32,11 @@ export function Room() {
               rowIndex === heroPosition.row && colIndex === heroPosition.col;
             const isPreviousHeroPosition = roomMap[rowIndex][colIndex] === 0;
 
-            const type = isHeroPosition ? 0 : isPreviousHeroPosition ? 8 : tile;
+            const type = isHeroPosition
+              ? TILES.HERO
+              : isPreviousHeroPosition
+                ? TILES.FLOOR
+                : tile;
 
             return (
               <div
