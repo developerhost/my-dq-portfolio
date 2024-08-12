@@ -1,3 +1,4 @@
+import { useArrowNavigation } from '../../hooks/useArrowNavigation';
 import { createLazyFileRoute } from '@tanstack/react-router';
 import { FaUser } from 'react-icons/fa';
 
@@ -6,6 +7,15 @@ export const Route = createLazyFileRoute('/profile/')({
 });
 
 function Profile() {
+  const fields = [
+    '名前: 橋田至',
+    'Lv: 28',
+    '職業: エンジニア',
+    '趣味: スマブラ・ピアノ',
+    '好きな食べ物: ラーメン二郎・天下一品・麻婆豆腐',
+  ];
+  const selectedIndex = useArrowNavigation(fields.length);
+
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="bg-black border-2 border-white rounded-md p-6 w-72">
@@ -14,10 +24,14 @@ function Profile() {
           <h2 className="text-xl font-bold ml-2">Profile</h2>
         </div>
         <div className="text-left">
-          <p>名前: 橋田至</p>
-          <p>Lv: 27</p>
-          <p>職業: エンジニア</p>
-          <p>趣味: スマブラ・ピアノ</p>
+          {fields.map((field, index) => (
+            <p key={index} className="flex items-center">
+              {selectedIndex === index && (
+                <span className="mr-2 animate-blink">{'▶️'}</span>
+              )}
+              {field}
+            </p>
+          ))}
         </div>
       </div>
     </div>
