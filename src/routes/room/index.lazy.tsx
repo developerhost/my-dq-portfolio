@@ -1,7 +1,7 @@
 import { createLazyFileRoute } from '@tanstack/react-router';
 import { Tile } from './Tile';
-import { useState } from 'react';
 import ChatMessage from '@/components/ChatMessage';
+import { useMessage } from './hooks/useMessage';
 
 export const Route = createLazyFileRoute('/room/')({
   component: Room,
@@ -16,24 +16,7 @@ export function Room() {
     [9, 9, 9, 9, 9, 9, 9, 9, 9],
   ];
 
-  const [message, setMessage] = useState('');
-
-  const handleTileClick = (type: number) => {
-    switch (type) {
-      case 0:
-        setMessage('こんにちは、私は橋田至です！');
-        break;
-      case 1:
-        setMessage('村人: ようこそ、冒険者！');
-        break;
-      case 2:
-        setMessage('猫: にゃーん');
-        break;
-      default:
-        setMessage('');
-        break;
-    }
-  };
+  const { message, handleTileClick } = useMessage();
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center">
