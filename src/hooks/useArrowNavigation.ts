@@ -27,5 +27,5 @@ export function useArrowNavigation(length: number) {
     );
   });
 
-  return selectedIndex;
+  return { selectedIndex, updateIndex };
 }

@@ -25,12 +25,13 @@ function Profile() {
     '味の濃い食べ物はだいたいなんでも好きです',
   ];
 
-  const selectedIndex = useArrowNavigation(fields.length);
+  const { selectedIndex, updateIndex } = useArrowNavigation(fields.length);
   const selectedIndexRef = useRef(selectedIndex);
   selectedIndexRef.current = selectedIndex;
   const [selectedMessage, setSelectedMessage] = useState('');
 
   const handleSelect = (index: number) => {
+    updateIndex(index);
     setSelectedMessage(messages[index]);
   };
 
