@@ -18,11 +18,11 @@ function Profile() {
     '好きな食べ物: ラーメン二郎・天下一品・麻婆豆腐',
   ];
   const messages = [
-    'こんにちは、橋田至です！',
-    'レベルは28です。',
-    'エンジニアとして働いています。',
-    'スマブラとピアノが趣味です。',
-    '好きな食べ物はラーメン二郎、天下一品、麻婆豆腐です。',
+    '橋田至はペンネームです',
+    '誕生日は6/9です。ロックの日とおぼえてください',
+    'エンジニアとしてフロントエンドをメインに活動しています。',
+    'スマブラの持ちキャラはドンキーコング。ピアノで好きな曲は久石譲のSummerです',
+    '味の濃い食べ物はだいたいなんでも好きです',
   ];
 
   const selectedIndex = useArrowNavigation(fields.length);
@@ -39,7 +39,7 @@ function Profile() {
   });
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="min-h-screen flex flex-col items-center justify-center">
       <div className="bg-black border-2 border-white rounded-md p-6 w-72">
         <div className="flex items-center justify-center mb-4">
           <FaUser className="w-8 h-8" />
@@ -60,10 +60,12 @@ function Profile() {
             </p>
           ))}
         </div>
-        <div className="mt-4">
-          {selectedMessage && <ChatMessage message={selectedMessage} />}
-        </div>
       </div>
+      {selectedMessage && (
+        <div className=" border-2 border-white rounded p-4 w-72 mt-6">
+          <ChatMessage message={selectedMessage} />
+        </div>
+      )}
     </div>
   );
 }
