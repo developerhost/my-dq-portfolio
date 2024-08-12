@@ -1,6 +1,9 @@
+import ChatMessage from '@/components/ChatMessage';
 import { useArrowNavigation } from '../../hooks/useArrowNavigation';
 import { createLazyFileRoute } from '@tanstack/react-router';
+import { useRef, useState } from 'react';
 import { FaUser } from 'react-icons/fa';
+import { useKey } from 'react-use';
 
 export const Route = createLazyFileRoute('/profile/')({
   component: Profile,
@@ -14,7 +17,26 @@ function Profile() {
     '趣味: スマブラ・ピアノ',
     '好きな食べ物: ラーメン二郎・天下一品・麻婆豆腐',
   ];
+  const messages = [
+    'こんにちは、橋田至です！',
+    'レベルは28です。',
+    'エンジニアとして働いています。',
+    'スマブラとピアノが趣味です。',
+    '好きな食べ物はラーメン二郎、天下一品、麻婆豆腐です。',
+  ];
+
   const selectedIndex = useArrowNavigation(fields.length);
+  const selectedIndexRef = useRef(selectedIndex);
+  selectedIndexRef.current = selectedIndex;
+  const [selectedMessage, setSelectedMessage] = useState('');
+
+  const handleSelect = (index: number) => {
+    setSelectedMessage(messages[index]);
+  };
+
+  useKey('Enter', () => {
+    handleSelect(selectedIndexRef.current);
+  });
 
   return (
     <div className="min-h-screen flex items-center justify-center">
@@ -25,13 +47,21 @@ function Profile() {
         </div>
         <div className="text-left">
           {fields.map((field, index) => (
-            <p key={index} className="flex items-center">
+            <p
+              key={index}
+              className="flex items-center"
+              onClick={() => handleSelect(index)}
+              tabIndex={0}
+            >
               {selectedIndex === index && (
                 <span className="mr-2 animate-blink">{'▶️'}</span>
               )}
               {field}
             </p>
           ))}
+        </div>
+        <div className="mt-4">
+          {selectedMessage && <ChatMessage message={selectedMessage} />}
         </div>
       </div>
     </div>
