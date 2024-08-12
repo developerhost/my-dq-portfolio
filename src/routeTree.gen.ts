@@ -14,7 +14,6 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as RoomTileImport } from './routes/room/Tile'
-import { Route as RoomHooksUseMessageImport } from './routes/room/hooks/useMessage'
 
 // Create Virtual Routes
 
@@ -41,11 +40,6 @@ const ProfileIndexLazyRoute = ProfileIndexLazyImport.update({
 
 const RoomTileRoute = RoomTileImport.update({
   path: '/room/Tile',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const RoomHooksUseMessageRoute = RoomHooksUseMessageImport.update({
-  path: '/room/hooks/useMessage',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -81,13 +75,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RoomIndexLazyImport
       parentRoute: typeof rootRoute
     }
-    '/room/hooks/useMessage': {
-      id: '/room/hooks/useMessage'
-      path: '/room/hooks/useMessage'
-      fullPath: '/room/hooks/useMessage'
-      preLoaderRoute: typeof RoomHooksUseMessageImport
-      parentRoute: typeof rootRoute
-    }
   }
 }
 
@@ -98,7 +85,6 @@ export const routeTree = rootRoute.addChildren({
   RoomTileRoute,
   ProfileIndexLazyRoute,
   RoomIndexLazyRoute,
-  RoomHooksUseMessageRoute,
 })
 
 /* prettier-ignore-end */
@@ -112,8 +98,7 @@ export const routeTree = rootRoute.addChildren({
         "/",
         "/room/Tile",
         "/profile/",
-        "/room/",
-        "/room/hooks/useMessage"
+        "/room/"
       ]
     },
     "/": {
@@ -127,9 +112,6 @@ export const routeTree = rootRoute.addChildren({
     },
     "/room/": {
       "filePath": "room/index.lazy.tsx"
-    },
-    "/room/hooks/useMessage": {
-      "filePath": "room/hooks/useMessage.ts"
     }
   }
 }

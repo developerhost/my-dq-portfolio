@@ -1,7 +1,8 @@
 import { createLazyFileRoute } from '@tanstack/react-router';
 import { Tile } from './Tile';
 import ChatMessage from '@/components/ChatMessage';
-import { useMessage } from './hooks/useMessage';
+import { useHeroMovement } from '@/hooks/useHeroMovement';
+import { useMessage } from './-hooks/useMessage';
 
 export const Route = createLazyFileRoute('/room/')({
   component: Room,
@@ -16,20 +17,31 @@ export function Room() {
     [9, 9, 9, 9, 9, 9, 9, 9, 9],
   ];
 
+  const initialPosition = { row: 2, col: 2 };
+
+  const heroPosition = useHeroMovement(initialPosition, roomMap);
   const { message, handleTileClick } = useMessage();
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center">
       <div className="grid grid-cols-9 bg-black p-4">
         {roomMap.flatMap((row, rowIndex) =>
-          row.map((tile, colIndex) => (
-            <div
-              key={`${rowIndex}-${colIndex}`}
-              className="flex items-center justify-center w-8 h-8 bg-gray-800 border border-gray-700"
-            >
-              <Tile type={tile} onClick={() => handleTileClick(tile)} />
-            </div>
-          ))
+          row.map((tile, colIndex) => {
+            const isHeroPosition =
+              rowIndex === heroPosition.row && colIndex === heroPosition.col;
+            const isPreviousHeroPosition = roomMap[rowIndex][colIndex] === 0;
+
+            const type = isHeroPosition ? 0 : isPreviousHeroPosition ? 8 : tile;
+
+            return (
+              <div
+                key={`${rowIndex}-${colIndex}`}
+                className="flex items-center justify-center w-8 h-8 bg-gray-800 border border-gray-700"
+              >
+                <Tile type={type} onClick={() => handleTileClick(type)} />
+              </div>
+            );
+          })
         )}
       </div>
       {message && (
