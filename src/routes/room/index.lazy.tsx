@@ -21,7 +21,12 @@ export function Room() {
   const initialPosition = { row: 1, col: 6 };
 
   const heroPosition = useHeroMovement(initialPosition, roomMap);
-  const { message, handleTileClick } = useMessage();
+  const {
+    message,
+    handleTileClick,
+    treasureRedGoldTaken,
+    treasureGreenGoldTaken,
+  } = useMessage();
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center">
@@ -43,7 +48,12 @@ export function Room() {
                 key={`${rowIndex}-${colIndex}`}
                 className="flex items-center justify-center w-8 h-8 bg-gray-800 border border-gray-700"
               >
-                <Tile type={type} onClick={() => handleTileClick(type)} />
+                <Tile
+                  type={type}
+                  onClick={() => handleTileClick(type)}
+                  isTreasureRedGoldTaken={treasureRedGoldTaken}
+                  isTreasureGreenGoldTaken={treasureGreenGoldTaken}
+                />
               </div>
             );
           })

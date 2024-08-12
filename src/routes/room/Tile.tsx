@@ -6,7 +6,9 @@ import Murabito from '@/assets/img/character/murabito.svg';
 import Cat from '@/assets/img/character/cat.svg';
 import Bed from '@/assets/img/object/bed.svg';
 import TreasureRedGold from '@/assets/img/treasure/treasure_red_gold.svg';
+import TreasureRedGoldEmpty from '@/assets/img/treasure/treasure_red_gold_empty.svg';
 import TreasureGreenGold from '@/assets/img/treasure/treasure_green_gold.svg';
+import TreasureGreenGoldEmpty from '@/assets/img/treasure/treasure_green_gold_empty.svg';
 
 export const Route = createFileRoute('/room/Tile')({
   component: () => Tile,
@@ -15,9 +17,16 @@ export const Route = createFileRoute('/room/Tile')({
 interface TileProps {
   type: number;
   onClick: () => void;
+  isTreasureRedGoldTaken: boolean;
+  isTreasureGreenGoldTaken: boolean;
 }
 
-export function Tile({ type, onClick }: TileProps) {
+export function Tile({
+  type,
+  onClick,
+  isTreasureRedGoldTaken,
+  isTreasureGreenGoldTaken,
+}: TileProps) {
   const renderTileContent = () => {
     switch (type) {
       case 0:
@@ -52,17 +61,33 @@ export function Tile({ type, onClick }: TileProps) {
       case 4:
         return (
           <img
-            src={TreasureRedGold}
-            alt="TreasureRedGold"
+            src={
+              isTreasureRedGoldTaken ? TreasureRedGoldEmpty : TreasureRedGold
+            }
+            alt={
+              isTreasureRedGoldTaken
+                ? 'TreasureRedGoldEmpty'
+                : 'TreasureRedGold'
+            }
             className="w-full h-full absolute z-10"
+            onClick={onClick}
           />
         ); // 宝箱オブジェクト①
       case 5:
         return (
           <img
-            src={TreasureGreenGold}
-            alt="TreasureGreenGold"
+            src={
+              isTreasureGreenGoldTaken
+                ? TreasureGreenGoldEmpty
+                : TreasureGreenGold
+            }
+            alt={
+              isTreasureGreenGoldTaken
+                ? 'TreasureGreenGoldEmpty'
+                : 'TreasureGreenGold'
+            }
             className="w-full h-full absolute z-10"
+            onClick={onClick}
           />
         ); // 宝箱オブジェクト②
       case 6:
