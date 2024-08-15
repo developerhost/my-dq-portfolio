@@ -47,6 +47,52 @@ https://github.com/developerhost/my-dq-portfolio
 
 [^1]: [推奨されるブランチの運用方法](https://futureys.tokyo/summary-of-recommended-branch-model-on-git/)
 
+# ディレクトリ構成
+
+```
+├── README.md                   # プロジェクトの概要やセットアップ手順を記載したファイル
+├── eslint.config.js            # ESLintの設定ファイル。コードスタイルや品質をチェックするためのルールを定義
+├── index.html                  # アプリケーションのエントリーポイントとなるHTMLファイル
+├── package-lock.json           # npmの依存関係を固定するためのファイル。インストールされるパッケージのバージョンを管理
+├── package.json                # プロジェクトのメタデータや依存パッケージの情報を記載したファイル
+├── postcss.config.js           # PostCSSの設定ファイル。CSSの処理やプラグインを設定
+├── public                      # 公開される静的ファイルを配置するディレクトリ
+├── src                         # アプリケーションのソースコードを格納するディレクトリ
+│   ├── assets                  # 画像、フォント、その他の静的アセットを格納するディレクトリ
+│   ├── components              # 再利用可能なReactコンポーネントを格納するディレクトリ
+│   ├── constants.ts            # アプリケーション内で使用される定数を定義したファイル
+│   ├── hooks                   # Reactカスタムフックを格納するディレクトリ
+│   ├── index.css               # グローバルCSSスタイルを定義したファイル
+│   ├── main.tsx                # アプリケーションのエントリーポイントとなるTypeScriptファイル
+│   ├── routeTree.gen.ts        # ルーティングの定義を自動生成したファイル
+│   ├── routes                  # 各ページのコンポーネントを格納するディレクトリ
+│   │   ├── __root.tsx              # アプリケーション全体のルートコンポーネント。全体のレイアウトや共通要素を定義
+│   │   ├── index.lazy.tsx          # トップページのルートコンポーネント。遅延読み込みされる設定
+│   │   ├── profile                 # プロファイルページに関するコンポーネントを格納するディレクトリ
+│   │   │   └── index.lazy.tsx          # プロファイルページのルートコンポーネント。遅延読み込みされる設定
+│   │   └── room                    # "room" 関連の機能やページを格納するディレクトリ
+│   │       ├── -hooks              # Roomページ専用のカスタムフックを格納するディレクトリ
+│   │       ├── Tile.tsx            # Room内で表示されるタイルコンポーネント
+│   │       ├── TileContent.tsx     # Tileコンポーネント内で使用されるコンテンツを表示するコンポーネント
+│   │       └── index.lazy.tsx      # Roomページのルートコンポーネント。遅延読み込みされる設定
+│   └── vite-env.d.ts           # Viteの環境変数や型補完を設定するファイル
+├── tailwind.config.js          # Tailwind CSSの設定ファイル。カスタムテーマやユーティリティクラスの設定を行う
+├── tsconfig.app.json           # アプリケーションのTypeScriptコンパイル設定ファイル
+├── tsconfig.json               # プロジェクト全体のTypeScriptコンパイル設定ファイル
+├── tsconfig.node.json          # Node.js関連のTypeScriptコンパイル設定ファイル
+├── vercel.json                 # Vercelにデプロイする際の設定ファイル
+└── vite.config.ts              # Viteの設定ファイル。ビルドや開発サーバーの設定を行う
+
+```
+
+工夫点としては、routesがpagesの代わりに使われているのですがここにcomponentsとhooksを配置しています。
+
+これによりそのページでしか使用しないコンポーネントやカスタムフックを分けて管理することができます。
+
+個人的にはこの構成が気に入っており、コンポーネントをすべてcomponentsディレクトリに配置するよりも、より高凝縮なディレクトリ構成になると感じています。
+
+tanstack-routerでは、`routes`ディレクトリ内のフォルダをルーティングに含めないようにするには先頭に`-`をつけることで実現できるようです。
+
 # サイトデザイン
 
 このサイトでは、PRG風のデザインにするために、以下のような要素を取り入れました。
@@ -190,6 +236,8 @@ export const Route = createRootRoute({
 プロファイルページでは、RPG風の選択肢を表示し、選択肢に応じて会話文が表示されるようにしました。
 
 スマホとPCどちらにも対応するために、PCではキーボード入力、スマホではタッチ入力を受け付けるようにしました。
+
+![profile.gif](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/706631/77202d66-2692-2e71-ff6b-bede49832309.gif)
 
 <details>
 <summary>実装詳細</summary>
@@ -420,11 +468,22 @@ export function BgmPlayer({ src }: { src: string }) {
 
 ## RPG風のゲーム画面の実装
 
+![room.gif](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/706631/c8c86820-ab71-9944-dfbe-e969434426a6.gif)
+
 こちらが一番工夫した実装になります。
-勇者の部屋が表示されるページを作成するために、以下の手順で実装しました。
+やっぱりRPG風のポートフォリオサイトを作るなら、ゲーム画面を作りたいです。
+
+実装したい機能としては、以下のようなものを考えました。
+- 主人公は移動可能に
+  - ただし壁やオブジェクト、マップ外には移動できない
+- マップには宝箱や村人などを配置し、クリックすると会話が表示される
+  - 宝箱は一度開けると空になり、メッセージが切り替わる
+- 壁以外のオブジェクトの背景は床タイルになる
+
+まずは勇者の部屋が表示されるページを作成するために、以下の手順で実装しました。
 
 1. **部屋のマップデータを作成**: マップを構成するためのデータを2D配列で作成
-2. **各オブジェクトを表示するための Tile コンポーネントを作成**: キャラクター、壁、床、宝箱などのオブジェクトを表示するための Tile コンポーネントを作成
+2. **各オブジェクトを表示するための Tile, TileContent コンポーネントを作成**: キャラクター、壁、床、宝箱などのオブジェクトを表示するための Tile コンポーネントを作成
 3. **部屋全体を表示する Room コンポーネントを作成**: マップデータに基づいて部屋をレンダリングする Room コンポーネントを作成
 
 ### 1. 部屋のマップデータを作成
@@ -441,7 +500,7 @@ const roomMap = [
 ];
 ```
 
-### 2. 各オブジェクトを表示するための Tile コンポーネントを作成
+### 2. 各オブジェクトを表示するための TileContent, Tile コンポーネントを作成
 
 各オブジェクトに対応する画像素材はDOT ILLUSTというサイト[^4]からダウンロードしました。
 
@@ -449,10 +508,173 @@ const roomMap = [
 
 マップデータの値に応じて、キャラクター、壁、床、宝箱などのオブジェクトをswitch文で分岐させ、それぞれの画像を表示するTileコンポーネントを作成しました。
 
-```tsx:src/routes/room/Tile.tsx
+オブジェクトの背景には部屋の床が表示されるように、壁以外のタイルには床画像が表示されるようにして、z-indexを指定して重なりを調整しています。
+
+また、できるだけ条件分岐ではマジックナンバーを使用しないために定数ファイルを作成し、それを参照するようにしています。
+
+<details>
+<summary>実装の詳細</summary>
+
+```ts:src/constants.ts
+export const TILES = {
+  HERO: 0, // 勇者タイル
+  MURABITO: 1, // 村人タイル
+  CAT: 2, // 猫タイル
+  OUT_OF_MAP: 3, // マップ外タイル
+  TREASURE_RED_GOLD: 4, // 宝箱オブジェクト①
+  TREASURE_GREEN_GOLD: 5, // 宝箱オブジェクト②
+  BED: 6, // ベッドタイル
+  FLOOR: 8, // 床タイル
+  WALL: 9, // 壁タイル
+} as const;
+
 ```
 
+```tsx:src/routes/room/TileContent.tsx
+import Hero from '@/assets/img/character/hero.svg';
+import Murabito from '@/assets/img/character/murabito.svg';
+import Cat from '@/assets/img/character/cat.svg';
+import Bed from '@/assets/img/object/bed.svg';
+import TreasureRedGold from '@/assets/img/treasure/treasure_red_gold.svg';
+import TreasureRedGoldEmpty from '@/assets/img/treasure/treasure_red_gold_empty.svg';
+import TreasureGreenGold from '@/assets/img/treasure/treasure_green_gold.svg';
+import TreasureGreenGoldEmpty from '@/assets/img/treasure/treasure_green_gold_empty.svg';
+import Wall from '@/assets/img/tile/wall.svg';
+import Floor from '@/assets/img/tile/floor.svg';
+import { TILES } from '@/constants';
+import { createFileRoute } from '@tanstack/react-router';
+
+interface TileContentProps {
+  type: number;
+  onClick: () => void;
+  isTreasureRedGoldTaken: boolean;
+  isTreasureGreenGoldTaken: boolean;
+}
+
+export const Route = createFileRoute('/room/TileContent')({
+  component: () => TileContent,
+});
+
+const TileContent = ({
+  type,
+  isTreasureRedGoldTaken,
+  isTreasureGreenGoldTaken,
+  onClick,
+}: TileContentProps) => {
+  switch (type) {
+    case TILES.HERO:
+      return (
+        <img
+          src={Hero}
+          alt="Hero"
+          onClick={onClick}
+          className="w-full h-full absolute z-10"
+        />
+      );
+    case TILES.MURABITO:
+      return (
+        <img
+          src={Murabito}
+          alt="Murabito"
+          onClick={onClick}
+          className="w-full h-full absolute z-10"
+        />
+      );
+    case TILES.CAT:
+      return (
+        <img
+          src={Cat}
+          alt="Cat"
+          onClick={onClick}
+          className="w-full h-full absolute z-10"
+        />
+      );
+    case TILES.TREASURE_RED_GOLD:
+      return (
+        <img
+          src={isTreasureRedGoldTaken ? TreasureRedGoldEmpty : TreasureRedGold}
+          alt="Treasure Red Gold"
+          onClick={onClick}
+          className="w-full h-full absolute z-10"
+        />
+      );
+    case TILES.TREASURE_GREEN_GOLD:
+      return (
+        <img
+          src={
+            isTreasureGreenGoldTaken
+              ? TreasureGreenGoldEmpty
+              : TreasureGreenGold
+          }
+          alt="Treasure Green Gold"
+          onClick={onClick}
+          className="w-full h-full absolute z-10"
+        />
+      );
+    case TILES.BED:
+      return (
+        <img src={Bed} alt="Bed" className="w-full h-full absolute z-10" />
+      );
+    case TILES.WALL:
+      return <img src={Wall} alt="Wall" />;
+    default:
+      return <img src={Floor} alt="Floor" className="w-full h-full absolute" />;
+  }
+};
+
+export default TileContent;
+
+```
+
+```tsx:src/routes/room/Tile.tsx
+import { createFileRoute } from '@tanstack/react-router';
+import Floor from '@/assets/img/tile/floor.svg';
+import { TILES } from '@/constants';
+import TileContent from './TileContent';
+
+export const Route = createFileRoute('/room/Tile')({
+  component: () => Tile,
+});
+
+interface TileProps {
+  type: number;
+  onClick: () => void;
+  isTreasureRedGoldTaken: boolean;
+  isTreasureGreenGoldTaken: boolean;
+}
+
+export function Tile({
+  type,
+  onClick,
+  isTreasureRedGoldTaken,
+  isTreasureGreenGoldTaken,
+}: TileProps) {
+  return (
+    <div className="relative w-full h-full" onClick={onClick}>
+      <TileContent
+        type={type}
+        isTreasureRedGoldTaken={isTreasureRedGoldTaken}
+        isTreasureGreenGoldTaken={isTreasureGreenGoldTaken}
+        onClick={onClick}
+      />
+      {type !== TILES.WALL && (
+        <img src={Floor} alt="Floor" className="w-full h-full absolute z-0" />
+      )}
+    </div>
+  );
+}
+
+```
+
+</details>
+
 ### 3. 部屋全体を表示する Room コンポーネントを作成
+
+### 工夫した点
+宝箱を空にすると、画像が切り替わるようにしました。
+ただ、素材サイトには空の宝箱の画像がなかったため、宝箱の画像のsvgを編集して空の宝箱の画像を作成しました。
+
+これはsvgファイルを直接編集したので、けっこう大変でした、、、
 
 # ハマったポイント
 
@@ -486,6 +708,14 @@ https://x.com/tannerlinsley/status/1823043769295577193
   - ブラウザでの音声再生には制限があるため、howler.jsを使って音声再生を行っているが、howler.jsがうまく制限を回避できていない可能性がある
 
 https://stackoverflow.com/questions/70127003/howler-js-react-audiocontext-console-warning
+
+- react-simple-typewriterでのアニメーションが同じメッセージ内容だと再生されない
+
+  - keyに設定する値をuuidにしてみましたが、解決しませんでした
+  - useEffectで再レンダリングを強制すれば解決できたかもしれませんが、良い方法ではないかなと思い実装していないです。
+
+
+もしこれらの解決策をご存知の方がいれば、教えていただけると幸いです。
 
 # まとめ
 
