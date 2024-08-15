@@ -12,14 +12,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@pixi/react": "^7.1.2",
     "@radix-ui/react-slot": "^1.1.0",
     "@tanstack/react-router": "^1.47.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.3.24",
     "lucide-react": "^0.427.0",
-    "pixi.js": "^7.4.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.2.1",
