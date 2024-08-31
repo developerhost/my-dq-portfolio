@@ -60,7 +60,7 @@ function SNS() {
           <FaShareAlt className="w-8 h-8" />
           <h2 className="text-xl font-bold ml-2">SNS Links</h2>
         </div>
-        <div className="text-left">
+        <div className="text-left flex flex-col gap-y-2">
           {fields.map((field, index) => (
             <Link
               key={index}
