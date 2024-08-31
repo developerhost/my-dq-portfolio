@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router';
-import { FaHome, FaShareAlt, FaUser } from 'react-icons/fa';
+import { FaHome, FaShareAlt, FaUser, FaBriefcase } from 'react-icons/fa';
 import { BgmPlayer } from '@/components/BgmPlayer';
 
 export const Header = () => {
@@ -20,6 +20,12 @@ export const Header = () => {
           className="[&.active]:font-bold flex items-center gap-1"
         >
           <FaShareAlt /> SNS
+        </Link>
+        <Link
+          to="/portfolio"
+          className="[&.active]:font-bold flex items-center gap-1"
+        >
+          <FaBriefcase /> Portfolio
         </Link>
       </div>
       <BgmPlayer src="/bgm/8bit-jo-jokyoku.mp3" />
