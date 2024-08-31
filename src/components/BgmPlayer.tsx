@@ -11,7 +11,7 @@ export function BgmPlayer({ src }: { src: string }) {
   };
 
   return (
-    <div className="flex flex-col items-center mt-4">
+    <div className="flex flex-col items-center">
       <button
         onClick={toggleBGM}
         className="bg-gray-200 p-2 rounded text-center text-black"

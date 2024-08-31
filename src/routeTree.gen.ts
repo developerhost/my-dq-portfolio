@@ -19,6 +19,7 @@ import { Route as RoomTileImport } from './routes/room/Tile'
 // Create Virtual Routes
 
 const IndexLazyImport = createFileRoute('/')()
+const SnsIndexLazyImport = createFileRoute('/sns/')()
 const RoomIndexLazyImport = createFileRoute('/room/')()
 const ProfileIndexLazyImport = createFileRoute('/profile/')()
 
@@ -28,6 +29,11 @@ const IndexLazyRoute = IndexLazyImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+
+const SnsIndexLazyRoute = SnsIndexLazyImport.update({
+  path: '/sns/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/sns/index.lazy').then((d) => d.Route))
 
 const RoomIndexLazyRoute = RoomIndexLazyImport.update({
   path: '/room/',
@@ -88,6 +94,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RoomIndexLazyImport
       parentRoute: typeof rootRoute
     }
+    '/sns/': {
+      id: '/sns/'
+      path: '/sns'
+      fullPath: '/sns'
+      preLoaderRoute: typeof SnsIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -99,6 +112,7 @@ export const routeTree = rootRoute.addChildren({
   RoomTileContentRoute,
   ProfileIndexLazyRoute,
   RoomIndexLazyRoute,
+  SnsIndexLazyRoute,
 })
 
 /* prettier-ignore-end */
@@ -113,7 +127,8 @@ export const routeTree = rootRoute.addChildren({
         "/room/Tile",
         "/room/TileContent",
         "/profile/",
-        "/room/"
+        "/room/",
+        "/sns/"
       ]
     },
     "/": {
@@ -130,6 +145,9 @@ export const routeTree = rootRoute.addChildren({
     },
     "/room/": {
       "filePath": "room/index.lazy.tsx"
+    },
+    "/sns/": {
+      "filePath": "sns/index.lazy.tsx"
     }
   }
 }
