@@ -3,6 +3,9 @@ import { createFileRoute } from '@tanstack/react-router';
 import { FaBookOpen } from 'react-icons/fa';
 import QiitaIcon from '@/assets/icon/qiita-icon.png';
 
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
 type Article = {
   id: string;
   title: string;
@@ -22,7 +25,7 @@ const fetchArticles = async (): Promise<Article[]> => {
     : {};
 
   const qiitaUserId = 'app_js';
-  const url = `https://qiita.com/api/v2/items?query=user:${qiitaUserId}&page=1&per_page=5`;
+  const url = `https://qiita.com/api/v2/items?query=user:${qiitaUserId}&page=1&per_page=100`;
 
   const response = await fetch(url, { headers });
 
@@ -55,7 +58,7 @@ export const Articles = () => {
         ) : isError ? (
           <p>エラーが発生しました: {error.message}</p>
         ) : (
-          <ul className="space-y-4">
+          <ul className="space-y-4 overflow-y-auto max-h-64 w-full">
             {articles?.map((article) => (
               <a
                 key={article.id}
@@ -70,7 +73,9 @@ export const Articles = () => {
                     alt="Qiita Icon"
                     className="w-6 h-6 mr-2"
                   />
-                  <span>{article.title}</span>
+                  <span className="text-blue-400 underline">
+                    {article.title}
+                  </span>
                 </div>
                 <p className="text-gray-400 text-sm mt-2">
                   更新日: {new Date(article.updated_at).toLocaleDateString()}
