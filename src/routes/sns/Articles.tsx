@@ -3,9 +3,6 @@ import { createFileRoute } from '@tanstack/react-router';
 import { FaBookOpen } from 'react-icons/fa';
 import QiitaIcon from '@/assets/icon/qiita-icon.png';
 
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-
 type Article = {
   id: string;
   title: string;
