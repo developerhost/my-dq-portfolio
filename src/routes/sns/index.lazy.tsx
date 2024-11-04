@@ -6,6 +6,7 @@ import QiitaIcon from '@/assets/icon/qiita-icon.png';
 import ZennIcon from '@/assets/icon/zenn-logo.svg';
 import NoteIcon from '@/assets/icon/note-icon.svg';
 import { useKey } from 'react-use';
+import { Articles } from './Articles';
 
 export const Route = createLazyFileRoute('/sns/')({
   component: SNS,
@@ -79,6 +80,7 @@ function SNS() {
           ))}
         </div>
       </div>
+      <Articles />
     </div>
   );
 }
