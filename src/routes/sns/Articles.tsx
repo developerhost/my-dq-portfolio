@@ -43,8 +43,6 @@ export const Articles = () => {
     queryFn: fetchArticles,
   });
 
-  console.log('articles', articles);
-
   return (
     <div className="bg-black border-2 border-white rounded-md p-6 w-72 mt-2">
       <div className="flex flex-col items-center justify-center mb-4">
