@@ -1,0 +1,130 @@
+[
+  {
+    "title": "【全エンジニアに告げる】エンジニア起業のススメ",
+    "url": "https://zenn.dev/dirtyman/books/64592e8ad75a14",
+    "date": "2023-12-11T07:21:48.000Z",
+    "thumbnail": "https://res.cloudinary.com/zenn/image/upload/s--ZE1BsedQ--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci84MTI4Y2E5MzIwLmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg",
+    "favicon": "https://zenn.dev/images/logo-transparent.png",
+    "site": "zenn"
+  },
+  {
+    "title": "【AI自動レビューシステム】CodeRabbitを1ヶ月運用してみた感想",
+    "url": "https://zenn.dev/dirtyman/articles/e0a159179ec124",
+    "date": "2023-12-01T02:23:26.000Z",
+    "thumbnail": "https://res.cloudinary.com/zenn/image/upload/s--JrB3l7GD--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590AI%25E8%2587%25AA%25E5%258B%2595%25E3%2583%25AC%25E3%2583%2593%25E3%2583%25A5%25E3%2583%25BC%25E3%2582%25B7%25E3%2582%25B9%25E3%2583%2586%25E3%2583%25A0%25E3%2580%2591CodeRabbit%25E3%2582%25921%25E3%2583%25B6%25E6%259C%2588%25E9%2581%258B%25E7%2594%25A8%25E3%2581%2597%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%25E6%2584%259F%25E6%2583%25B3%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A9%258B%25E7%2594%25B0%25E8%2587%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjOTgwMGE1MGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png",
+    "favicon": "https://zenn.dev/images/logo-transparent.png",
+    "site": "zenn"
+  },
+  {
+    "title": "【Next.js】iPhoneで撮影した写真の拡張子、HEIFとHEICをJPGに変換する方法",
+    "url": "https://zenn.dev/dirtyman/articles/da4cdfb3bfba0c",
+    "date": "2023-11-29T02:18:30.000Z",
+    "thumbnail": "https://res.cloudinary.com/zenn/image/upload/s--3-lhkN8v--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Next.js%25E3%2580%2591iPhone%25E3%2581%25A7%25E6%2592%25AE%25E5%25BD%25B1%25E3%2581%2597%25E3%2581%259F%25E5%2586%2599%25E7%259C%259F%25E3%2581%25AE%25E6%258B%25A1%25E5%25BC%25B5%25E5%25AD%2590%25E3%2580%2581HEIF%25E3%2581%25A8HEIC%25E3%2582%2592JPG%25E3%2581%25AB%25E5%25A4%2589%25E6%258F%259B%25E3%2581%2599%25E3%2582%258B%25E6%2596%25B9%25E6%25B3%2595%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A9%258B%25E7%2594%25B0%25E8%2587%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjOTgwMGE1MGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png",
+    "favicon": "https://zenn.dev/images/logo-transparent.png",
+    "site": "zenn"
+  },
+  {
+    "title": "【Next.js】チーム開発までの環境整備手順",
+    "url": "https://zenn.dev/dirtyman/articles/3dbefb5a09a778",
+    "date": "2023-11-27T03:44:40.000Z",
+    "thumbnail": "https://res.cloudinary.com/zenn/image/upload/s--W42OXPxc--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Next.js%25E3%2580%2591%25E3%2583%2581%25E3%2583%25BC%25E3%2583%25A0%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%25AE%25E7%2592%25B0%25E5%25A2%2583%25E6%2595%25B4%25E5%2582%2599%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A9%258B%25E7%2594%25B0%25E8%2587%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjOTgwMGE1MGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png",
+    "favicon": "https://zenn.dev/images/logo-transparent.png",
+    "site": "zenn"
+  },
+  {
+    "title": "【Next.js】middlewareでリダイレクト処理を行いつつ、動的OGPを設定する際にハマった話",
+    "url": "https://zenn.dev/dirtyman/articles/9ed469e6be715f",
+    "date": "2023-11-24T05:27:55.000Z",
+    "thumbnail": "https://res.cloudinary.com/zenn/image/upload/s--k7hMrJP---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Next.js%25E3%2580%2591middleware%25E3%2581%25A7%25E3%2583%25AA%25E3%2583%2580%25E3%2582%25A4%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E8%25A1%258C%25E3%2581%2584%25E3%2581%25A4%25E3%2581%25A4%25E3%2580%2581%25E5%258B%2595%25E7%259A%2584OGP%25E3%2582%2592%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%25E9%259A%259B%25E3%2581%25AB%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A9%258B%25E7%2594%25B0%25E8%2587%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjOTgwMGE1MGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png",
+    "favicon": "https://zenn.dev/images/logo-transparent.png",
+    "site": "zenn"
+  },
+  {
+    "title": "VercelにデプロイしたNext13(App Router)のRSCでのコンソールの見方",
+    "url": "https://zenn.dev/dirtyman/articles/dcc68b6bb65609",
+    "date": "2023-11-21T04:33:05.000Z",
+    "thumbnail": "https://res.cloudinary.com/zenn/image/upload/s--Bcsq7LNM--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Vercel%25E3%2581%25AB%25E3%2583%2587%25E3%2583%2597%25E3%2583%25AD%25E3%2582%25A4%25E3%2581%2597%25E3%2581%259FNext13%2528App%2520Router%2529%25E3%2581%25AERSC%25E3%2581%25A7%25E3%2581%25AE%25E3%2582%25B3%25E3%2583%25B3%25E3%2582%25BD%25E3%2583%25BC%25E3%2583%25AB%25E3%2581%25AE%25E8%25A6%258B%25E6%2596%25B9%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A9%258B%25E7%2594%25B0%25E8%2587%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjOTgwMGE1MGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png",
+    "favicon": "https://zenn.dev/images/logo-transparent.png",
+    "site": "zenn"
+  },
+  {
+    "title": "VscodeのAll Changesが表示されなくなる",
+    "url": "https://qiita.com/app_js/items/1cd03373e02aeb61ccec",
+    "date": "2024-09-11T10:54:20.000Z",
+    "thumbnail": "",
+    "favicon": "https://cdn.qiita.com/assets/favicons/public/production-c620d3e403342b1022967ba5e3db1aaa.ico",
+    "site": "qiita"
+  },
+  {
+    "title": "RPG風のポートフォリオサイトを作成してみた!",
+    "url": "https://qiita.com/app_js/items/110f7ee36eeef9790c81",
+    "date": "2024-08-18T08:02:47.000Z",
+    "thumbnail": "",
+    "favicon": "https://cdn.qiita.com/assets/favicons/public/production-c620d3e403342b1022967ba5e3db1aaa.ico",
+    "site": "qiita"
+  },
+  {
+    "title": "リモートワークでやる気が出ないときの対策",
+    "url": "https://qiita.com/app_js/items/ec4d13e4aa1df9cc5bd7",
+    "date": "2024-08-08T11:32:09.000Z",
+    "thumbnail": "",
+    "favicon": "https://cdn.qiita.com/assets/favicons/public/production-c620d3e403342b1022967ba5e3db1aaa.ico",
+    "site": "qiita"
+  },
+  {
+    "title": "エンジニア歴３年目が転職活動をした結果",
+    "url": "https://qiita.com/app_js/items/117d2f3a7be9eedcafcd",
+    "date": "2024-01-17T10:30:26.000Z",
+    "thumbnail": "",
+    "favicon": "https://cdn.qiita.com/assets/favicons/public/production-c620d3e403342b1022967ba5e3db1aaa.ico",
+    "site": "qiita"
+  },
+  {
+    "title": "「読書メモ」考えすぎない人の考え方",
+    "url": "https://note.com/dall_develop/n/nf10e5b364fbf",
+    "date": "2024-11-03T04:46:42.000Z",
+    "thumbnail": "",
+    "favicon": "https://assets.st-note.com/poc-image/manual/note-common-images/production/svg/production.ico",
+    "site": "note"
+  },
+  {
+    "title": "毎日の楽しみ",
+    "url": "https://note.com/dall_develop/n/nde0cf4f59ae7",
+    "date": "2024-09-04T13:07:40.000Z",
+    "thumbnail": "",
+    "favicon": "https://assets.st-note.com/poc-image/manual/note-common-images/production/svg/production.ico",
+    "site": "note"
+  },
+  {
+    "title": "私がエンジニアになるまで",
+    "url": "https://note.com/dall_develop/n/n5823e4450efb",
+    "date": "2024-08-31T11:32:08.000Z",
+    "thumbnail": "",
+    "favicon": "https://assets.st-note.com/poc-image/manual/note-common-images/production/svg/production.ico",
+    "site": "note"
+  },
+  {
+    "title": "ラーメン二郎は最高",
+    "url": "https://note.com/dall_develop/n/nceaa6f8f5fb0",
+    "date": "2024-08-11T00:11:32.000Z",
+    "thumbnail": "",
+    "favicon": "https://assets.st-note.com/poc-image/manual/note-common-images/production/svg/production.ico",
+    "site": "note"
+  },
+  {
+    "title": "美容院の上手い下手が分からない",
+    "url": "https://note.com/dall_develop/n/n23ad23f3afa7",
+    "date": "2024-08-10T10:27:26.000Z",
+    "thumbnail": "",
+    "favicon": "https://assets.st-note.com/poc-image/manual/note-common-images/production/svg/production.ico",
+    "site": "note"
+  },
+  {
+    "title": "リモートワークでやる気が出ないとき",
+    "url": "https://note.com/dall_develop/n/nbf5599bbc8bd",
+    "date": "2024-08-08T11:00:55.000Z",
+    "thumbnail": "",
+    "favicon": "https://assets.st-note.com/poc-image/manual/note-common-images/production/svg/production.ico",
+    "site": "note"
+  }
+]

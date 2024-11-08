@@ -1,62 +1,33 @@
-import { useQuery } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router';
 import { FaBookOpen } from 'react-icons/fa';
-import QiitaIcon from '@/assets/icon/qiita-icon.png';
+import articlesData from '../../rss/data.json';
 
 type Article = {
-  id: string;
   title: string;
   url: string;
-  updated_at: string;
+  date: string;
+  thumbnail?: string;
+  favicon: string;
+  site: string;
 };
 
 export const Route = createFileRoute('/sns/Articles')({
   component: () => Articles,
 });
 
-const fetchArticles = async (): Promise<Article[]> => {
-  const token = import.meta.env.VITE_QIITA_ACCESS_TOKEN;
-
-  const headers: HeadersInit = token
-    ? { Authorization: `Bearer ${token}` }
-    : {};
-
-  const qiitaUserId = 'app_js';
-  const url = `https://qiita.com/api/v2/items?query=user:${qiitaUserId}&page=1&per_page=100`;
-
-  const response = await fetch(url, { headers });
-
-  if (!response.ok) {
-    throw new Error('Failed to fetch articles');
-  }
-  return response.json();
-};
-
 export const Articles = () => {
-  const {
-    data: articles,
-    isLoading,
-    isError,
-    error,
-  } = useQuery<Article[], Error>({
-    queryKey: ['articles'],
-    queryFn: fetchArticles,
-  });
+  const articles = articlesData as Article[];
 
   return (
     <div className="bg-black border-2 border-white rounded-md p-6 w-72 mt-2">
       <div className="flex flex-col items-center justify-center mb-4">
         <FaBookOpen className="w-8 h-8" />
         <h2 className="text-xl font-bold ml-2 mb-2">記事一覧</h2>
-        {isLoading ? (
-          <p>読み込み中...</p>
-        ) : isError ? (
-          <p>エラーが発生しました: {error.message}</p>
-        ) : (
-          <ul className="space-y-4 overflow-y-auto max-h-64 w-full">
-            {articles?.map((article) => (
+        <ul className="space-y-4 overflow-y-auto max-h-64 w-full">
+          {articles &&
+            articles.map((article, index) => (
               <a
-                key={article.id}
+                key={`${article.site}-${index}`}
                 href={article.url}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -64,21 +35,18 @@ export const Articles = () => {
               >
                 <div className="flex items-center">
                   <img
-                    src={QiitaIcon}
-                    alt="Qiita Icon"
+                    src={article.favicon}
+                    alt={`${article.site} Icon`}
                     className="w-6 h-6 mr-2"
                   />
-                  <span className="text-blue-400 underline">
-                    {article.title}
-                  </span>
+                  <span>{article.title}</span>
                 </div>
                 <p className="text-gray-400 text-sm mt-2">
-                  更新日: {new Date(article.updated_at).toLocaleDateString()}
+                  更新日: {new Date(article.date).toLocaleDateString()}
                 </p>
               </a>
             ))}
-          </ul>
-        )}
+        </ul>
       </div>
     </div>
   );
