@@ -4,15 +4,20 @@ import { createLazyFileRoute } from '@tanstack/react-router';
 import { useRef, useState } from 'react';
 import { FaUser } from 'react-icons/fa';
 import { useKey } from 'react-use';
+import { differenceInYears } from 'date-fns';
 
 export const Route = createLazyFileRoute('/profile/')({
   component: Profile,
 });
 
+const birthDate = new Date(1996, 6, 9);
+
 function Profile() {
+  const currentAge = differenceInYears(new Date(), birthDate);
+
   const fields = [
     '名前: 橋田至',
-    'Lv: 28',
+    `LV: ${currentAge}`,
     '職業: エンジニア',
     '趣味: スマブラ・ピアノ',
     '好きな食べ物: ラーメン二郎・天下一品・麻婆豆腐',
