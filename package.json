@@ -10,7 +10,9 @@
     "test": "vitest",
     "format": "prettier --write src",
     "preview": "vite preview",
-    "update-rss": "node ./src/rss/rss-parser.mjs"
+    "update-rss": "node ./src/rss/rss-parser.mjs",
+    "prepare": "husky install",
+    "lint-staged": "lint-staged"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.0",
@@ -52,6 +54,7 @@
     "globals": "^15.9.0",
     "happy-dom": "^14.12.3",
     "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
     "msw": "^2.3.5",
     "postcss": "^8.4.41",
     "prettier": "^3.3.3",
@@ -62,5 +65,15 @@
     "vite": "^5.4.0",
     "vite-tsconfig-paths": "^5.0.1",
     "vitest": "^2.0.5"
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix",
+    "*.src": "prettier --write"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run lint && npm run prettier -- --check"
+    }
   }
 }
