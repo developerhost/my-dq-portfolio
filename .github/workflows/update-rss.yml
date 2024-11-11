@@ -33,5 +33,5 @@ jobs:
           git add src/rss/data.json
           if [ -n "$(git status -s)" ]; then
             git commit -m "Update RSS JSON file $(date +'%Y-%m-%d %H:%M:%S')"
-            git push origin main
+            git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
           fi
