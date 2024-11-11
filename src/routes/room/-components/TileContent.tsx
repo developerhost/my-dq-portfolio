@@ -9,7 +9,6 @@ import TreasureGreenGoldEmpty from '@/assets/img/treasure/treasure_green_gold_em
 import Wall from '@/assets/img/tile/wall.svg';
 import Floor from '@/assets/img/tile/floor.svg';
 import { TILES } from '@/constants';
-import { createFileRoute } from '@tanstack/react-router';
 
 interface TileContentProps {
   type: number;
@@ -17,10 +16,6 @@ interface TileContentProps {
   isTreasureRedGoldTaken: boolean;
   isTreasureGreenGoldTaken: boolean;
 }
-
-export const Route = createFileRoute('/room/TileContent')({
-  component: () => TileContent,
-});
 
 const TileContent = ({
   type,

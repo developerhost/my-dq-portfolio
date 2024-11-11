@@ -1,11 +1,6 @@
-import { createFileRoute } from '@tanstack/react-router';
 import Floor from '@/assets/img/tile/floor.svg';
 import { TILES } from '@/constants';
 import TileContent from './TileContent';
-
-export const Route = createFileRoute('/room/Tile')({
-  component: () => Tile,
-});
 
 interface TileProps {
   type: number;

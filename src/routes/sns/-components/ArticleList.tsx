@@ -1,4 +1,3 @@
-import { createFileRoute } from '@tanstack/react-router';
 import type { Article } from './Articles';
 import { FaBookOpen } from 'react-icons/fa';
 
@@ -6,10 +5,6 @@ type ArticleListProps = {
   title: string;
   articles: Article[];
 };
-
-export const Route = createFileRoute('/sns/ArticleList')({
-  component: () => <div>Hello /sns/ArticleList!</div>,
-});
 
 export const ArticleList = ({ title, articles }: ArticleListProps) => {
   return (

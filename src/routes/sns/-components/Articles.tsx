@@ -1,5 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router';
-import articlesData from '../../rss/data.json';
+import articlesData from '../../../rss/data.json';
 import { ArticleList } from './ArticleList';
 
 export type Article = {
@@ -10,10 +9,6 @@ export type Article = {
   favicon: string;
   site: string;
 };
-
-export const Route = createFileRoute('/sns/Articles')({
-  component: () => Articles,
-});
 
 export const Articles = () => {
   const articles = articlesData as Article[];

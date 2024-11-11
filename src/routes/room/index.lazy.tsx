@@ -1,5 +1,5 @@
 import { createLazyFileRoute } from '@tanstack/react-router';
-import { Tile } from './Tile';
+import { Tile } from './-components/Tile';
 import ChatMessage from '@/components/ChatMessage';
 import { useHeroMovement } from '@/hooks/useHeroMovement';
 import { useMessage } from './-hooks/useMessage';
