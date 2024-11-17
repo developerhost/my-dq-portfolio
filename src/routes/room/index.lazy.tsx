@@ -4,6 +4,7 @@ import ChatMessage from '@/components/ChatMessage';
 import { useHeroMovement } from '@/hooks/useHeroMovement';
 import { useMessage } from './-hooks/useMessage';
 import { TILES } from '@/constants';
+import GameController from '@/components/GameController';
 
 export const Route = createLazyFileRoute('/room/')({
   component: Room,
@@ -20,7 +21,7 @@ export function Room() {
 
   const initialPosition = { row: 1, col: 6 };
 
-  const heroPosition = useHeroMovement(initialPosition, roomMap);
+  const { heroPosition, moveHero } = useHeroMovement(initialPosition, roomMap);
   const {
     message,
     handleTileClick,
@@ -30,6 +31,7 @@ export function Room() {
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center">
+      <GameController moveHero={moveHero} />
       <div className="grid grid-cols-9 bg-black p-4">
         {roomMap.flatMap((row, rowIndex) =>
           row.map((tile, colIndex) => {

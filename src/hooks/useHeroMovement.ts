@@ -60,5 +60,5 @@ export function useHeroMovement(
   useKey('ArrowLeft', () => moveHero('ArrowLeft'));
   useKey('ArrowRight', () => moveHero('ArrowRight'));
 
-  return heroPosition;
+  return { heroPosition, moveHero };
 }
