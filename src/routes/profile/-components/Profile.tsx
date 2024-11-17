@@ -41,31 +41,35 @@ export default function Profile() {
   });
 
   return (
-    <div className="bg-black border-2 border-white rounded-md p-6 w-72">
-      <div className="flex items-center justify-center mb-4">
-        <FaUser className="w-8 h-8" />
-        <h2 className="text-xl font-bold ml-2">Profile</h2>
-      </div>
-      <div className="text-left">
-        {fields.map((field, index) => (
-          <p
-            key={index}
-            className="flex items-center"
-            onClick={() => handleSelect(index)}
-            tabIndex={0}
-          >
-            {selectedIndex === index && (
-              <span className="mr-2 animate-blink">{'▶️'}</span>
-            )}
-            {field}
-          </p>
-        ))}
-      </div>
-      {selectedMessage && (
-        <div className=" border-2 border-white rounded p-4 w-72 mt-6">
-          <ChatMessage message={selectedMessage} />
+    <div>
+      <div className="bg-black border-2 border-white rounded-md p-6 w-72">
+        <div className="flex items-center justify-center mb-4">
+          <FaUser className="w-8 h-8" />
+          <h2 className="text-xl font-bold ml-2">Profile</h2>
         </div>
-      )}
+        <div className="text-left">
+          {fields.map((field, index) => (
+            <p
+              key={index}
+              className="flex items-center"
+              onClick={() => handleSelect(index)}
+              tabIndex={0}
+            >
+              {selectedIndex === index && (
+                <span className="mr-2 animate-blink">{'▶️'}</span>
+              )}
+              {field}
+            </p>
+          ))}
+        </div>
+      </div>
+      <div className="my-2">
+        {selectedMessage && (
+          <div className=" border-2 border-white rounded p-4 w-72 mt-6">
+            <ChatMessage message={selectedMessage} />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
