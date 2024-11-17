@@ -24,7 +24,7 @@ function Portfolio() {
     {
       title: 'サメの3D水族館',
       description: 'Three.jsで作ったサメの3D水族館です',
-      image: 'src/assets/img/iCatch/shark3d.png',
+      image: '@/assets/img/iCatch/shark3d.png',
       link: 'https://fish3d.vercel.app/',
     },
   ];
