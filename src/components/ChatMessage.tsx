@@ -2,9 +2,10 @@ import { Typewriter } from 'react-simple-typewriter';
 
 interface ChatMessageProps {
   message: string;
+  typeSpeed?: number;
 }
 
-export function ChatMessage({ message }: ChatMessageProps) {
+export function ChatMessage({ message, typeSpeed = 50 }: ChatMessageProps) {
   return (
     <div style={{ whiteSpace: 'pre-line' }}>
       <Typewriter
@@ -12,7 +13,7 @@ export function ChatMessage({ message }: ChatMessageProps) {
         words={[message]}
         cursor
         cursorStyle="_"
-        typeSpeed={50}
+        typeSpeed={typeSpeed}
         delaySpeed={1000}
       />
     </div>
