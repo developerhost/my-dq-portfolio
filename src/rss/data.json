@@ -1,5 +1,13 @@
 [
   {
+    "title": "Tanstack Table v8使ってみた",
+    "url": "https://zenn.dev/dirtyman/articles/cdfc9f27202cc4",
+    "date": "2024-11-19T23:23:06.000Z",
+    "thumbnail": "https://res.cloudinary.com/zenn/image/upload/s--D-cOZGrH--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Tanstack%2520Table%2520v8%25E4%25BD%25BF%25E3%2581%25A3%25E3%2581%25A6%25E3%2581%25BF%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A9%258B%25E7%2594%25B0%25E8%2587%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjOTgwMGE1MGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png",
+    "favicon": "https://zenn.dev/images/logo-transparent.png",
+    "site": "zenn"
+  },
+  {
     "title": "【全エンジニアに告げる】エンジニア起業のススメ",
     "url": "https://zenn.dev/dirtyman/books/64592e8ad75a14",
     "date": "2023-12-11T07:21:48.000Z",
@@ -78,6 +86,14 @@
     "thumbnail": "",
     "favicon": "https://cdn.qiita.com/assets/favicons/public/production-c620d3e403342b1022967ba5e3db1aaa.ico",
     "site": "qiita"
+  },
+  {
+    "title": "【読書感想】脳に収まるコードの書き方を読んで",
+    "url": "https://note.com/dall_develop/n/n7d0d3c1e55d9",
+    "date": "2024-11-20T10:47:13.000Z",
+    "thumbnail": "",
+    "favicon": "https://assets.st-note.com/poc-image/manual/note-common-images/production/svg/production.ico",
+    "site": "note"
   },
   {
     "title": "「読書メモ」考えすぎない人の考え方",
