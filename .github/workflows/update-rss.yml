@@ -27,11 +27,13 @@ jobs:
         run: npm run update-rss
 
       - name: Commit and push RSS update
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add src/rss/data.json
           if [ -n "$(git status -s)" ]; then
             git commit -m "Update RSS JSON file $(date +'%Y-%m-%d %H:%M:%S')"
-            git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+            git push origin HEAD:main
           fi
