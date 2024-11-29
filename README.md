@@ -1,3 +1,6 @@
+# About
+The repository developerhost/my-dq-portfolio is a profile site styled after the Dragon Quest RPG series. It is built using React, TypeScript, and Vite. The site is hosted [here](https://my-dq-portfolio.vercel.app/).
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
