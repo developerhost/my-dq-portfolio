@@ -22,6 +22,7 @@ export const Profile = () => {
     '好きな漫画',
     '好きな書籍',
     '好きなアーティスト',
+    '好きなYoutubeチャンネル',
   ];
   const messages = [
     '橋田至はペンネームです',
@@ -61,6 +62,47 @@ export const Profile = () => {
     ・秋山黄色
     ・My Hair is Bad
     ・Måneskin`,
+    `・100秒tech
+      ・ゆるコンピュータ科学ラジオ
+      ・バキ童
+      ・幕末志士
+      ・VAIENCE
+      ・ブライトサイド
+      ・うしゃすらいむ
+      ・ぐんぐにるチャンネル
+      ・TSKaigi
+      ・戦極MCBATTLE
+      ・やがみ
+      ・宮永えいと
+      ・小西詠斗
+      ・三科光平
+      ・えびすじゃっぷ
+      ・Make up GYUTAE
+      ・プログラミングチュートリアル
+      ・Code With Antonio
+      ・ムーザルちゃんねる
+      ・ラムダ技術部
+      ・フェルミ漫画研究所
+      ・デルタのゆっくり科学
+      ・3Blue1BrownJapan
+      ・霊夢の3分ハッキング
+      ・破壊兄弟
+      ・でんどろ
+      ・FORESTちゃんねる
+      ・ごりたん
+      ・ふぅ
+      ・TED
+      ・PIVOT
+      ・ダストマン
+      ・あるごめとりい
+      ・キリン
+      ・ヨビノリ
+      ・WIRED.jp
+      ・丸山ゴンザレスの裏社会ジャーニー
+      ・じゅじゅ
+      ・iamSHUM
+      ・ゼパ
+      ・陽介`,
   ];
 
   const { selectedIndex, updateIndex } = useArrowNavigation(fields.length);
