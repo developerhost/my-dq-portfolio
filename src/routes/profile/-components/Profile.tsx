@@ -23,6 +23,7 @@ export const Profile = () => {
     '好きな書籍',
     '好きなアーティスト',
     '好きなYoutubeチャンネル',
+    '好きなアニメ',
   ];
   const messages = [
     '橋田至はペンネームです',
@@ -103,6 +104,9 @@ export const Profile = () => {
       ・iamSHUM
       ・ゼパ
       ・陽介`,
+    `・STEINS;GATE
+      ・四畳半神話大系
+      ・NHKへようこそ!`,
   ];
 
   const { selectedIndex, updateIndex } = useArrowNavigation(fields.length);
