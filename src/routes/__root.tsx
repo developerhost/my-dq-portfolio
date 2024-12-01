@@ -5,10 +5,12 @@ import { AnimatePresence } from 'framer-motion';
 
 // import { useLocation } from '@tanstack/react-router';
 import { Header } from '@/components/Header';
-
+import usePageTracking from '@/hooks/useTracking';
 const RootComponent = () => {
   // const location = useLocation();
   // NOTE: Tanstack Routerでのページ遷移アニメーションは、エラーが発生するためコメントアウト
+
+  usePageTracking();
 
   return (
     <>
