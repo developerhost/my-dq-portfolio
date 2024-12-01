@@ -18,6 +18,6 @@ export const ChatMessage = ({ message, typeSpeed = 50 }: ChatMessageProps) => {
       />
     </div>
   );
-}
+};
 
 export default ChatMessage;
