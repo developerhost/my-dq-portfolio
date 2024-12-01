@@ -1,16 +1,14 @@
 import { createLazyFileRoute } from '@tanstack/react-router';
+
 import { Tile } from './-components/Tile';
-import ChatMessage from '@/components/ChatMessage';
-import { useHeroMovement } from '@/hooks/useHeroMovement';
 import { useMessage } from './-hooks/useMessage';
-import { TILES } from '@/constants';
+
+import ChatMessage from '@/components/ChatMessage';
 import GameController from '@/components/GameController';
+import { TILES } from '@/constants';
+import { useHeroMovement } from '@/hooks/useHeroMovement';
 
-export const Route = createLazyFileRoute('/room/')({
-  component: Room,
-});
-
-export function Room() {
+export const Room = () => {
   const roomMap = [
     [9, 9, 9, 9, 9, 9, 9, 9, 9],
     [9, 4, 5, 8, 8, 8, 0, 6, 9],
@@ -47,14 +45,14 @@ export function Room() {
 
             return (
               <div
-                key={`${rowIndex}-${colIndex}`}
                 className="flex items-center justify-center w-8 h-8 bg-gray-800 border border-gray-700"
+                key={`${rowIndex}-${colIndex}`}
               >
                 <Tile
-                  type={type}
-                  onClick={() => handleTileClick(type)}
-                  isTreasureRedGoldTaken={treasureRedGoldTaken}
                   isTreasureGreenGoldTaken={treasureGreenGoldTaken}
+                  isTreasureRedGoldTaken={treasureRedGoldTaken}
+                  onClick={() => handleTileClick(type)}
+                  type={type}
                 />
               </div>
             );
@@ -68,4 +66,8 @@ export function Room() {
       )}
     </div>
   );
-}
+};
+
+export const Route = createLazyFileRoute('/room/')({
+  component: Room,
+});

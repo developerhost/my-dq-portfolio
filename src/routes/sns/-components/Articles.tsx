@@ -1,13 +1,13 @@
-import articlesData from '../../../rss/data.json';
 import { ArticleList } from './ArticleList';
+import articlesData from '../../../rss/data.json';
 
 export type Article = {
-  title: string;
-  url: string;
   date: string;
-  thumbnail?: string;
   favicon: string;
   site: string;
+  thumbnail?: string;
+  title: string;
+  url: string;
 };
 
 export const Articles = () => {
@@ -22,9 +22,9 @@ export const Articles = () => {
     <div className="flex flex-col items-center space-y-4">
       <h2 className="text-xl font-bold mt-4">記事一覧</h2>
       <div className="grid gap-4">
-        <ArticleList title="Zenn" articles={articlesBySite.zenn} />
-        <ArticleList title="Qiita" articles={articlesBySite.qiita} />
-        <ArticleList title="note" articles={articlesBySite.note} />
+        <ArticleList articles={articlesBySite.zenn} title="Zenn" />
+        <ArticleList articles={articlesBySite.qiita} title="Qiita" />
+        <ArticleList articles={articlesBySite.note} title="note" />
       </div>
     </div>
   );

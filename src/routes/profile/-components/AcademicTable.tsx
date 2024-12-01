@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
   createColumnHelper,
   flexRender,
@@ -7,9 +8,9 @@ import {
 } from '@tanstack/react-table';
 
 type Academic = {
-  year: number;
-  month: number;
   description: string;
+  month: number;
+  year: number;
 };
 
 const tableData: Academic[] = [
@@ -107,9 +108,9 @@ const AcademicTable: React.FC = () => {
       <table className="min-w-full border-collapse">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id} className="bg-gray-800">
+            <tr className="bg-gray-800" key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id} className="border px-4 py-2 text-left">
+                <th className="border px-4 py-2 text-left" key={header.id}>
                   {header.isPlaceholder
                     ? null
                     : flexRender(
@@ -123,9 +124,9 @@ const AcademicTable: React.FC = () => {
         </thead>
         <tbody>
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} className="hover:bg-gray-800">
+            <tr className="hover:bg-gray-800" key={row.id}>
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="border px-4 py-2">
+                <td className="border px-4 py-2" key={cell.id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}

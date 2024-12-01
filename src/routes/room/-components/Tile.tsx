@@ -1,31 +1,42 @@
-import Floor from '@/assets/img/tile/floor.svg';
-import { TILES } from '@/constants';
 import TileContent from './TileContent';
 
+import Floor from '@/assets/img/tile/floor.svg';
+import { TILES } from '@/constants';
+
 interface TileProps {
-  type: number;
-  onClick: () => void;
-  isTreasureRedGoldTaken: boolean;
   isTreasureGreenGoldTaken: boolean;
+  isTreasureRedGoldTaken: boolean;
+  onClick: () => void;
+  type: number;
 }
 
-export function Tile({
+export const Tile = ({
   type,
   onClick,
   isTreasureRedGoldTaken,
   isTreasureGreenGoldTaken,
-}: TileProps) {
+}: TileProps) => {
   return (
-    <div className="relative w-full h-full" onClick={onClick}>
+    <div
+      className="relative w-full h-full"
+      onClick={onClick}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          onClick(); // Enterキーまたはスペースキーでクリックをシミュレート
+        }
+      }}
+      role="button"
+      tabIndex={0}
+    >
       <TileContent
-        type={type}
-        isTreasureRedGoldTaken={isTreasureRedGoldTaken}
         isTreasureGreenGoldTaken={isTreasureGreenGoldTaken}
+        isTreasureRedGoldTaken={isTreasureRedGoldTaken}
         onClick={onClick}
+        type={type}
       />
       {type !== TILES.WALL && (
-        <img src={Floor} alt="Floor" className="w-full h-full absolute z-0" />
+        <img alt="Floor" className="w-full h-full absolute z-0" src={Floor} />
       )}
     </div>
   );
-}
+};

@@ -1,3 +1,4 @@
+import { FaHtml5, FaCss3Alt, FaCogs, FaAws, FaGithub } from 'react-icons/fa';
 import {
   SiTypescript,
   SiJavascript,
@@ -18,7 +19,6 @@ import {
   SiZod,
   SiRecoil,
 } from 'react-icons/si';
-import { FaHtml5, FaCss3Alt, FaCogs, FaAws, FaGithub } from 'react-icons/fa';
 
 const skills = [
   { name: 'TypeScript', icon: <SiTypescript /> },
@@ -45,7 +45,7 @@ const skills = [
   { name: 'trpc', icon: <SiTrpc /> },
 ];
 
-export default function Skills() {
+export const Skills = () => {
   return (
     <div className="bg-black border-2 border-white rounded-md p-6 w-72 mt-2">
       <div className="flex items-center justify-center mb-4">
@@ -54,7 +54,7 @@ export default function Skills() {
       </div>
       <div className="flex flex-wrap">
         {skills.map((skill, index) => (
-          <div key={index} className="m-2 flex items-center">
+          <div className="m-2 flex items-center" key={index}>
             {skill.icon}
             <span className="ml-1">{skill.name}</span>
           </div>
@@ -62,4 +62,4 @@ export default function Skills() {
       </div>
     </div>
   );
-}
+};

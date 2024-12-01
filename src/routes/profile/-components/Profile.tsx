@@ -1,14 +1,15 @@
 import { useRef, useState } from 'react';
-import { useKey } from 'react-use';
+
 import { differenceInYears } from 'date-fns';
 import { FaUser } from 'react-icons/fa';
+import { useKey } from 'react-use';
 
 import ChatMessage from '@/components/ChatMessage';
 import { useArrowNavigation } from '@/hooks/useArrowNavigation';
 
 const birthDate = new Date(1996, 6, 9);
 
-export default function Profile() {
+export const Profile = () => {
   const currentAge = differenceInYears(new Date(), birthDate);
 
   const fields = [
@@ -72,6 +73,12 @@ export default function Profile() {
     setSelectedMessage(messages[index]);
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent, index: number) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      handleSelect(index);
+    }
+  };
+
   useKey('Enter', () => {
     handleSelect(selectedIndexRef.current);
   });
@@ -85,17 +92,17 @@ export default function Profile() {
         </div>
         <div className="text-left">
           {fields.map((field, index) => (
-            <p
+            <button
+              className="flex items-center mb-2 text-left w-full bg-transparent border-none focus:outline-none"
               key={index}
-              className="flex items-center mb-2"
               onClick={() => handleSelect(index)}
-              tabIndex={0}
+              onKeyDown={(event) => handleKeyDown(event, index)}
             >
               {selectedIndex === index && (
-                <span className="mr-2 animate-blink">{'▶️'}</span>
+                <span className="mr-2 animate-blink">▶️</span>
               )}
               {field}
-            </p>
+            </button>
           ))}
         </div>
       </div>
@@ -108,4 +115,4 @@ export default function Profile() {
       </div>
     </div>
   );
-}
+};

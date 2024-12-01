@@ -5,16 +5,16 @@ interface ChatMessageProps {
   typeSpeed?: number;
 }
 
-export function ChatMessage({ message, typeSpeed = 50 }: ChatMessageProps) {
+export const ChatMessage = ({ message, typeSpeed = 50 }: ChatMessageProps) => {
   return (
     <div style={{ whiteSpace: 'pre-line' }}>
       <Typewriter
-        key={message}
-        words={[message]}
         cursor
         cursorStyle="_"
-        typeSpeed={typeSpeed}
         delaySpeed={1000}
+        key={message}
+        typeSpeed={typeSpeed}
+        words={[message]}
       />
     </div>
   );

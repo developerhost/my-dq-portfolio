@@ -1,17 +1,19 @@
-import { TILES } from '@/constants';
 import { useState } from 'react';
+
 import { useKey } from 'react-use';
 
+import { TILES } from '@/constants';
+
 interface Position {
-  row: number;
   col: number;
+  row: number;
 }
 
 interface DirectionMap {
-  ArrowUp: 'ArrowUp';
   ArrowDown: 'ArrowDown';
   ArrowLeft: 'ArrowLeft';
   ArrowRight: 'ArrowRight';
+  ArrowUp: 'ArrowUp';
 }
 
 type Direction = DirectionMap[keyof DirectionMap];

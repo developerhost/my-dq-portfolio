@@ -1,9 +1,10 @@
-import type { Article } from './Articles';
 import { FaBookOpen } from 'react-icons/fa';
 
+import type { Article } from './Articles';
+
 type ArticleListProps = {
-  title: string;
   articles: Article[];
+  title: string;
 };
 
 export const ArticleList = ({ title, articles }: ArticleListProps) => {
@@ -15,17 +16,17 @@ export const ArticleList = ({ title, articles }: ArticleListProps) => {
         <ul className="space-y-4 overflow-y-auto max-h-64 w-full">
           {articles.map((article, index) => (
             <a
-              key={`${article.site}-${index}`}
-              href={article.url}
-              target="_blank"
-              rel="noopener noreferrer"
               className="block bg-gray-800 rounded-lg p-4 shadow-lg hover:bg-gray-700 transition-colors duration-200"
+              href={article.url}
+              key={`${article.site}-${index}`}
+              rel="noopener noreferrer"
+              target="_blank"
             >
               <div className="flex items-center">
                 <img
-                  src={article.favicon}
                   alt={`${article.site} Icon`}
                   className="w-6 h-6 mr-2"
+                  src={article.favicon}
                 />
                 <span>{article.title}</span>
               </div>

@@ -1,4 +1,5 @@
 import { writeFileSync } from 'fs';
+
 import Parser from 'rss-parser';
 const parser = new Parser();
 

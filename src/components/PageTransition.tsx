@@ -18,15 +18,15 @@ interface PageTransitionProps {
   children: React.ReactNode;
 }
 
-export function PageTransition({ children }: PageTransitionProps) {
+export const PageTransition = ({ children }: PageTransitionProps) => {
   return (
     <motion.div
-      initial="initial"
       animate="in"
-      variants={pageVariants}
+      initial="initial"
       transition={pageTransition}
+      variants={pageVariants}
     >
       {children}
     </motion.div>
   );
-}
+};

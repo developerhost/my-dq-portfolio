@@ -1,11 +1,7 @@
 import { createLazyFileRoute } from '@tanstack/react-router';
 import { FaBriefcase } from 'react-icons/fa';
 
-export const Route = createLazyFileRoute('/portfolio/')({
-  component: Portfolio,
-});
-
-function Portfolio() {
+const Portfolio = () => {
   const portfolioSites = [
     {
       title: 'ランダム指名くん',
@@ -36,18 +32,22 @@ function Portfolio() {
       </h1>
       <div className="flex flex-col gap-4">
         {portfolioSites.map((site, index) => (
-          <div className="border-2 border-white rounded-md p-6 w-72">
+          <div
+            className="border-2 border-white rounded-md p-6 w-72"
+            key={index}
+          >
             <a
-              key={index}
-              href={site.link}
-              target="_blank"
               className="border-2 rounded-md p-4 shadow-lg w-full max-w-md flex flex-col items-center border-black"
+              href={site.link}
+              key={index}
+              rel="noreferrer"
+              target="_blank"
             >
               <h2 className="text-xl font-bold mb-2">{site.title}</h2>
               <img
-                src={site.image}
                 alt={site.title}
                 className="rounded-md mb-4 w-full h-72 object-cover"
+                src={site.image}
               />
               <p className="text-gray-500 text-center">{site.description}</p>
             </a>
@@ -56,4 +56,8 @@ function Portfolio() {
       </div>
     </div>
   );
-}
+};
+
+export const Route = createLazyFileRoute('/portfolio/')({
+  component: Portfolio,
+});
