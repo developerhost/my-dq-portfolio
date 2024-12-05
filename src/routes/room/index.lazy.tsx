@@ -23,14 +23,10 @@ export const Room = () => {
   const {
     message,
     handleTileClick,
+    handleAButtonPress,
     treasureRedGoldTaken,
     treasureGreenGoldTaken,
   } = useMessage();
-
-  const handleAButtonPress = () => {
-    alert('Aボタンが押されました！');
-    // Aボタンに対応する処理をここに追加
-  };
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center">
@@ -73,7 +69,10 @@ export const Room = () => {
           </div>
         )}
       </div>
-      <GameController moveHero={moveHero} onAButtonPress={handleAButtonPress} />
+      <GameController
+        moveHero={moveHero}
+        onAButtonPress={() => handleAButtonPress(heroPosition, roomMap)}
+      />
     </div>
   );
 };

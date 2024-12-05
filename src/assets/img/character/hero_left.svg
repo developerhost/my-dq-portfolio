@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<svg version="1.1" width="510" height="540" xmlns="http://www.w3.org/2000/svg">
+  <!-- 横向きの頭部 -->
+  <rect x="60" y="0" width="30" height="30" fill="#000000" />
+  <rect x="90" y="0" width="30" height="30" fill="#000000" />
+  <rect x="30" y="30" width="30" height="30" fill="#000000" />
+  <rect x="60" y="30" width="30" height="30" fill="#FFFFFF" />
+  <rect x="90" y="30" width="30" height="30" fill="#E0E0E0" />
+  <rect x="120" y="30" width="30" height="30" fill="#000000" />
+
+  <!-- 顔の向きを変更 -->
+  <rect x="30" y="60" width="30" height="30" fill="#000000" />
+  <rect x="60" y="60" width="30" height="30" fill="#FFFFFF" />
+  <rect x="90" y="60" width="30" height="30" fill="#FFFFFF" />
+  <rect x="120" y="60" width="30" height="30" fill="#000000" />
+  <rect x="150" y="60" width="30" height="30" fill="#000000" />
+
+  <!-- 胴体を調整 -->
+  <rect x="30" y="90" width="30" height="30" fill="#000000" />
+  <rect x="60" y="90" width="30" height="30" fill="#8D6E63" />
+  <rect x="90" y="90" width="30" height="30" fill="#8D6E63" />
+  <rect x="120" y="90" width="30" height="30" fill="#8D6E63" />
+  <rect x="150" y="90" width="30" height="30" fill="#000000" />
+
+  <!-- 脚部 -->
+  <rect x="60" y="120" width="30" height="30" fill="#000000" />
+  <rect x="90" y="120" width="30" height="30" fill="#000000" />
+  <rect x="120" y="120" width="30" height="30" fill="#000000" />
+
+  <!-- 横向き感を強調する装飾 -->
+  <rect x="90" y="150" width="30" height="30" fill="#E0E0E0" />
+  <rect x="120" y="150" width="30" height="30" fill="#8D6E63" />
+  <rect x="150" y="150" width="30" height="30" fill="#6D4C41" />
+</svg>
