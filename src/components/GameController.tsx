@@ -1,49 +1,51 @@
 import React from 'react';
 
-import {
-  ChevronUp,
-  ChevronDown,
-  ChevronLeft,
-  ChevronRight,
-} from 'lucide-react';
-
 interface GameControllerProps {
   moveHero: (
     direction: 'ArrowUp' | 'ArrowDown' | 'ArrowLeft' | 'ArrowRight'
   ) => void;
+  onAButtonPress: () => void;
 }
 
-const GameController: React.FC<GameControllerProps> = ({ moveHero }) => {
+const GameController: React.FC<GameControllerProps> = ({
+  moveHero,
+  onAButtonPress,
+}) => {
   return (
-    <div className="w-24 h-24 relative">
-      <button
-        aria-label="上"
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-8 bg-gray-200 hover:bg-gray-300 active:bg-gray-400 rounded-full flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500"
-        onClick={() => moveHero('ArrowUp')}
-      >
-        <ChevronUp className="w-4 h-4 text-gray-700" />
-      </button>
-      <button
-        aria-label="下"
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-8 bg-gray-200 hover:bg-gray-300 active:bg-gray-400 rounded-full flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500"
-        onClick={() => moveHero('ArrowDown')}
-      >
-        <ChevronDown className="w-4 h-4 text-gray-700" />
-      </button>
-      <button
-        aria-label="左"
-        className="absolute left-0 top-1/2 -translate-y-1/2 w-8 h-8 bg-gray-200 hover:bg-gray-300 active:bg-gray-400 rounded-full flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500"
-        onClick={() => moveHero('ArrowLeft')}
-      >
-        <ChevronLeft className="w-4 h-4 text-gray-700" />
-      </button>
-      <button
-        aria-label="右"
-        className="absolute right-0 top-1/2 -translate-y-1/2 w-8 h-8 bg-gray-200 hover:bg-gray-300 active:bg-gray-400 rounded-full flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-blue-500"
-        onClick={() => moveHero('ArrowRight')}
-      >
-        <ChevronRight className="w-4 h-4 text-gray-700" />
-      </button>
+    <div className="flex flex-col items-center p-4 bg-gray-700 rounded-lg shadow-lg border-4 border-gray-800 w-full max-w-lg">
+      <div className="flex justify-between items-center w-full">
+        {/* 矢印ボタンエリア */}
+        <div className="relative w-32 h-32 bg-gray-800 rounded-full border-4 border-gray-800 flex items-center justify-center">
+          <button
+            aria-label="上"
+            className="absolute top-2 left-1/2 -translate-x-1/2 w-8 h-8 bg-gray-300 rounded-md shadow-inner hover:bg-gray-400 active:bg-gray-500"
+            onClick={() => moveHero('ArrowUp')}
+          />
+          <button
+            aria-label="下"
+            className="absolute bottom-2 left-1/2 -translate-x-1/2 w-8 h-8 bg-gray-300 rounded-md shadow-inner hover:bg-gray-400 active:bg-gray-500"
+            onClick={() => moveHero('ArrowDown')}
+          />
+          <button
+            aria-label="左"
+            className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-gray-300 rounded-md shadow-inner hover:bg-gray-400 active:bg-gray-500"
+            onClick={() => moveHero('ArrowLeft')}
+          />
+          <button
+            aria-label="右"
+            className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-gray-300 rounded-md shadow-inner hover:bg-gray-400 active:bg-gray-500"
+            onClick={() => moveHero('ArrowRight')}
+          />
+        </div>
+
+        <button
+          aria-label="Aボタン"
+          className="ml-8 w-16 h-16 bg-red-800 hover:bg-red-900 active:bg-red-800 rounded-full shadow-md border-4 border-red-900 flex items-center justify-center text-white font-bold text-xl"
+          onClick={onAButtonPress}
+        >
+          A
+        </button>
+      </div>
     </div>
   );
 };

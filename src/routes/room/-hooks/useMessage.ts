@@ -43,9 +43,48 @@ export function useMessage() {
     }
   };
 
+  const handleAButtonPress = (
+    heroPosition: { col: number; row: number },
+    roomMap: number[][]
+  ) => {
+    if (message) {
+      // メッセージがすでに表示されている場合はクリア
+      setMessage('');
+      return;
+    }
+
+    const directions = [
+      { rowOffset: -1, colOffset: 0 }, // 上
+      { rowOffset: 1, colOffset: 0 }, // 下
+      { rowOffset: 0, colOffset: -1 }, // 左
+      { rowOffset: 0, colOffset: 1 }, // 右
+    ];
+
+    for (const { rowOffset, colOffset } of directions) {
+      const neighborRow = heroPosition.row + rowOffset;
+      const neighborCol = heroPosition.col + colOffset;
+
+      if (
+        neighborRow >= 0 &&
+        neighborRow < roomMap.length &&
+        neighborCol >= 0 &&
+        neighborCol < roomMap[0].length
+      ) {
+        const tileType = roomMap[neighborRow][neighborCol];
+        if (tileType !== TILES.FLOOR && tileType !== TILES.WALL) {
+          handleTileClick(tileType);
+          return; // 最初に見つかったオブジェクトのメッセージを表示
+        }
+      }
+    }
+
+    setMessage('近くに何もないようだ');
+  };
+
   return {
     message,
     handleTileClick,
+    handleAButtonPress,
     treasureRedGoldTaken,
     treasureGreenGoldTaken,
   };

@@ -23,47 +23,56 @@ export const Room = () => {
   const {
     message,
     handleTileClick,
+    handleAButtonPress,
     treasureRedGoldTaken,
     treasureGreenGoldTaken,
   } = useMessage();
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center">
-      <GameController moveHero={moveHero} />
-      <div className="grid grid-cols-9 bg-black p-4">
-        {roomMap.flatMap((row, rowIndex) =>
-          row.map((tile, colIndex) => {
-            const isHeroPosition =
-              rowIndex === heroPosition.row && colIndex === heroPosition.col;
-            const isPreviousHeroPosition = roomMap[rowIndex][colIndex] === 0;
+    <div className="min-h-screen bg-black text-white flex flex-col items-center">
+      {/* ゲーム画面 */}
+      <div className="relative w-full max-w-4xl aspect-video bg-black border-2 border-gray-700">
+        {/* タイル表示 */}
+        <div className="grid grid-cols-9 gap-0.5 w-full h-full">
+          {roomMap.flatMap((row, rowIndex) =>
+            row.map((tile, colIndex) => {
+              const isHeroPosition =
+                rowIndex === heroPosition.row && colIndex === heroPosition.col;
+              const isPreviousHeroPosition = roomMap[rowIndex][colIndex] === 0;
 
-            const type = isHeroPosition
-              ? TILES.HERO
-              : isPreviousHeroPosition
-                ? TILES.FLOOR
-                : tile;
+              const type = isHeroPosition
+                ? TILES.HERO
+                : isPreviousHeroPosition
+                  ? TILES.FLOOR
+                  : tile;
 
-            return (
-              <div
-                className="flex items-center justify-center w-8 h-8 bg-gray-800 border border-gray-700"
-                key={`${rowIndex}-${colIndex}`}
-              >
-                <Tile
-                  isTreasureGreenGoldTaken={treasureGreenGoldTaken}
-                  isTreasureRedGoldTaken={treasureRedGoldTaken}
-                  onClick={() => handleTileClick(type)}
-                  type={type}
-                />
-              </div>
-            );
-          })
+              return (
+                <div
+                  className="flex items-center justify-center bg-gray-800 border border-gray-700"
+                  key={`${rowIndex}-${colIndex}`}
+                >
+                  <Tile
+                    isTreasureGreenGoldTaken={treasureGreenGoldTaken}
+                    isTreasureRedGoldTaken={treasureRedGoldTaken}
+                    onClick={() => handleTileClick(type)}
+                    type={type}
+                  />
+                </div>
+              );
+            })
+          )}
+        </div>
+        {/* チャット表示 */}
+        {message && (
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-4/5 bg-black bg-opacity-70 p-4 rounded border border-gray-500">
+            <ChatMessage message={message} />
+          </div>
         )}
       </div>
-      {message && (
-        <div className="mt-4 p-4 border-2 rounded">
-          <ChatMessage message={message} />
-        </div>
-      )}
+      <GameController
+        moveHero={moveHero}
+        onAButtonPress={() => handleAButtonPress(heroPosition, roomMap)}
+      />
     </div>
   );
 };
