@@ -6,7 +6,7 @@ type LongPressSet = {
   onMouseLeave: () => void;
   onMouseUp: () => void;
   onTouchEnd: () => void;
-  onTouchStart: () => void;
+  onTouchStart: (event: React.TouchEvent) => void; // 変更: タッチイベントを受け取るように型定義
 };
 
 /**
@@ -38,11 +38,18 @@ export const useLongPress = (
     event.preventDefault(); // 右クリックメニューを無効化
   };
 
+  const preventTouchMenu = (event: React.TouchEvent) => {
+    event.preventDefault(); // スマホの長押し選択やメニュー表示を無効化
+  };
+
   return {
     onMouseDown: start,
     onMouseUp: stop,
     onMouseLeave: stop,
-    onTouchStart: start,
+    onTouchStart: (event) => {
+      preventTouchMenu(event); // 長押しメニューの無効化
+      start();
+    },
     onTouchEnd: stop,
     onContextMenu: preventContextMenu,
   };
