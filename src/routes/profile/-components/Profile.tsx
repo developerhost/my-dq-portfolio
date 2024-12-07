@@ -161,6 +161,7 @@ export const Profile = () => {
       ・MU-TON
       ・ミメイ
       ・fork
+      ・ゆうま
     `,
   ];
 
