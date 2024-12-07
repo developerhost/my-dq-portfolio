@@ -25,6 +25,7 @@ export const Profile = () => {
     '好きなYoutubeチャンネル',
     '好きなアニメ',
     '好きなゲーム',
+    '好きなMC',
   ];
   const messages = [
     '橋田至はペンネームです',
@@ -47,10 +48,22 @@ export const Profile = () => {
 
     味の濃い食べ物が好きです`,
     `・左ききのエレン
+          →かっぴー
     ・BECK
+    →ハロルド作石
     ・SLAM DUNK
+    →井上雄彦
     ・おやすみプンプン
-    ・ボーイズオンザラン`,
+    →浅野いにお
+    ・ボーイズオンザラン
+    →花沢健吾
+    ・20世紀少年
+    →浦沢直樹
+    ・PLUTO
+    →浦沢直樹
+    ・DEATH NOTE
+    →大場つぐみ
+    `,
     `・情熱プログラマー
     ・プリンシプルオブプログラミング
     ・プログラマー脳`,
@@ -63,7 +76,9 @@ export const Profile = () => {
     ・チョーキューメイ
     ・秋山黄色
     ・My Hair is Bad
-    ・Måneskin`,
+    ・Måneskin
+    ・不可思議/wonderboy
+    `,
     `・100秒tech
       ・ゆるコンピュータ科学ラジオ
       ・バキ童
@@ -107,7 +122,9 @@ export const Profile = () => {
       ・陽介`,
     `・STEINS;GATE
       ・四畳半神話大系
-      ・NHKへようこそ!`,
+      ・NHKへようこそ!
+      ・輪るピングドラム
+      `,
     `## ドラゴンクエストシリーズ
        ・ドラゴンクエスト1
        ・ドラゴンクエスト2
@@ -133,6 +150,17 @@ export const Profile = () => {
         ・モンスターハンター：ワールド
         ・モンスターハンターライズ
     ・ Fall Guys: Ultimate Knockout
+    `,
+    `・SAM
+      ・SKRYU
+      ・鎮座DOPENESS
+      ・韻マン
+      ・じょう
+      ・U-mallow
+      ・CHEHON
+      ・MU-TON
+      ・ミメイ
+      ・fork
     `,
   ];
 
