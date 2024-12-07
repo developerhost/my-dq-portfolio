@@ -12,11 +12,11 @@ export const Header = () => {
       </div>
 
       {/* サイドバー */}
-      <div className="md:hidden fixed top-0 left-0 w-full p-2 flex justify-between bg-opacity-10 shadow-md z-10 border-2">
+      <div className="md:hidden fixed left-0 w-full p-2 flex justify-between bg-opacity-10 shadow-md z-10">
         <AppSidebar />
 
         {/* トリガー付きメインヘッダー */}
-        <div className="fixed top-0 left-0 w-full p-2 flex justify-between bg-opacity-10 shadow-md z-10 border-2 md:hidden">
+        <div className="fixed left-0 w-full p-2 flex justify-between bg-opacity-10 shadow-md z-10 border-b-2 md:hidden border-white">
           <SidebarTrigger />
           <h1 className="text-lg font-bold">Hashida Portfolio</h1>
         </div>
