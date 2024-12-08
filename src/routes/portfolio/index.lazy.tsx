@@ -1,6 +1,8 @@
 import { createLazyFileRoute } from '@tanstack/react-router';
 import { FaBriefcase } from 'react-icons/fa';
 
+import ImageSlideshow from './-components/ImageSlideshow';
+
 const Portfolio = () => {
   const portfolioSites = [
     {
@@ -27,6 +29,7 @@ const Portfolio = () => {
   ];
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-black text-white">
+      <ImageSlideshow />
       <h1 className="text-white text-2xl font-bold mb-4 flex items-center gap-2">
         <FaBriefcase /> 制作サイト
       </h1>
