@@ -37,25 +37,37 @@ const images = [
 const ImageSlideshow = () => {
   // スライドショーの間隔
   const interval = 150;
-  const altText = 'スライドショーの画像';
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   // 画像を一定間隔で切り替える
   useEffect(() => {
+    if (isPaused) return;
+
     const timer = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, interval);
 
     return () => clearInterval(timer); // クリーンアップ
-  }, []);
+  }, [isPaused]);
+
+  const handleTogglePause = () => {
+    setIsPaused((prev) => !prev);
+  };
 
   return (
-    <img
-      alt={altText}
-      className="rounded-md mb-4 w-full h-72 object-cover"
-      src={images[currentIndex]}
-    />
+    <button
+      className="rounded-md mb-4 w-full h-72 object-cover cursor-pointer focus:outline-none"
+      onClick={handleTogglePause}
+      type="button"
+    >
+      <img
+        alt="スライドショーの画像"
+        className="rounded-md w-full h-72 object-cover"
+        src={images[currentIndex]} // 現在のインデックスの画像を表示
+      />
+    </button>
   );
 };
 
