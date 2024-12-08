@@ -63,7 +63,7 @@ const ImageSlideshow = () => {
       type="button"
     >
       <img
-        alt="スライドショーの画像"
+        alt={`スライドショーの画像 ${currentIndex + 1}`}
         className="rounded-md w-full h-72 object-cover"
         src={images[currentIndex]} // 現在のインデックスの画像を表示
       />

@@ -27,21 +27,37 @@ const GameController: React.FC<GameControllerProps> = ({
             aria-label="上"
             className="absolute top-2 left-1/2 -translate-x-1/2 w-8 h-8 bg-gray-300 rounded-md shadow-inner hover:bg-gray-400 active:bg-gray-500"
             {...handleUp}
+            style={{
+              WebkitUserSelect: 'none' /* Safari */,
+              userSelect: 'none',
+            }}
           />
           <button
             aria-label="下"
             className="absolute bottom-2 left-1/2 -translate-x-1/2 w-8 h-8 bg-gray-300 rounded-md shadow-inner hover:bg-gray-400 active:bg-gray-500"
             {...handleDown}
+            style={{
+              WebkitUserSelect: 'none' /* Safari */,
+              userSelect: 'none',
+            }}
           />
           <button
             aria-label="左"
             className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-gray-300 rounded-md shadow-inner hover:bg-gray-400 active:bg-gray-500"
             {...handleLeft}
+            style={{
+              WebkitUserSelect: 'none' /* Safari */,
+              userSelect: 'none',
+            }}
           />
           <button
             aria-label="右"
             className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-gray-300 rounded-md shadow-inner hover:bg-gray-400 active:bg-gray-500"
             {...handleRight}
+            style={{
+              WebkitUserSelect: 'none' /* Safari */,
+              userSelect: 'none',
+            }}
           />
         </div>
 
@@ -49,6 +65,10 @@ const GameController: React.FC<GameControllerProps> = ({
           aria-label="Aボタン"
           className="ml-8 w-16 h-16 bg-red-800 hover:bg-red-900 active:bg-red-800 rounded-full shadow-md border-4 border-red-900 flex items-center justify-center text-white font-bold text-xl"
           onClick={onAButtonPress}
+          style={{
+            WebkitUserSelect: 'none' /* Safari */,
+            userSelect: 'none',
+          }}
         >
           A
         </button>
