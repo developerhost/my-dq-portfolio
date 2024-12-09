@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { Slot } from '@radix-ui/react-slot';
 import { VariantProps, cva } from 'class-variance-authority';
-import { PanelLeft } from 'lucide-react';
+import { FiMenu } from 'react-icons/fi';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -273,7 +273,10 @@ const SidebarTrigger = React.forwardRef<
 
   return (
     <Button
-      className={cn('h-7 w-7', className)}
+      className={cn(
+        'flex items-center gap-2 h-10 px-3', // アイコンと文字の余白を設定
+        className
+      )}
       data-sidebar="trigger"
       onClick={(event) => {
         onClick?.(event);
@@ -284,8 +287,8 @@ const SidebarTrigger = React.forwardRef<
       variant="ghost"
       {...props}
     >
-      <PanelLeft />
-      <span className="sr-only">Toggle Sidebar</span>
+      <FiMenu className="text-xl" /> {/* react-iconsのアイコン */}
+      <span className="text-sm font-medium">Menu</span> {/* Menuの文字 */}
     </Button>
   );
 });
