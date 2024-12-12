@@ -43,6 +43,10 @@ const TileContent = ({
           alt="Hero"
           className="w-full h-full absolute z-10"
           src={Hero}
+          style={{
+            WebkitUserSelect: 'none' /* Safari */,
+            userSelect: 'none',
+          }}
           {...interactiveProps}
         />
       );
@@ -52,6 +56,10 @@ const TileContent = ({
           alt="Murabito"
           className="w-full h-full absolute z-10"
           src={Murabito}
+          style={{
+            WebkitUserSelect: 'none' /* Safari */,
+            userSelect: 'none',
+          }}
           {...interactiveProps}
         />
       );
@@ -61,6 +69,10 @@ const TileContent = ({
           alt="Cat"
           className="w-full h-full absolute z-10"
           src={Cat}
+          style={{
+            WebkitUserSelect: 'none' /* Safari */,
+            userSelect: 'none',
+          }}
           {...interactiveProps}
         />
       );
@@ -70,6 +82,10 @@ const TileContent = ({
           alt="Treasure Red Gold"
           className="w-full h-full absolute z-10"
           src={isTreasureRedGoldTaken ? TreasureRedGoldEmpty : TreasureRedGold}
+          style={{
+            WebkitUserSelect: 'none' /* Safari */,
+            userSelect: 'none',
+          }}
           {...interactiveProps}
         />
       );
@@ -83,17 +99,39 @@ const TileContent = ({
               ? TreasureGreenGoldEmpty
               : TreasureGreenGold
           }
+          style={{
+            WebkitUserSelect: 'none' /* Safari */,
+            userSelect: 'none',
+          }}
           {...interactiveProps}
         />
       );
     case TILES.BED:
       return (
-        <img alt="Bed" className="w-full h-full absolute z-10" src={Bed} />
+        <img
+          alt="Bed"
+          className="w-full h-full absolute z-10"
+          src={Bed}
+          style={{
+            WebkitUserSelect: 'none' /* Safari */,
+            userSelect: 'none',
+          }}
+        />
       );
     case TILES.WALL:
       return <img alt="Wall" src={Wall} />;
     default:
-      return <img alt="Floor" className="w-full h-full absolute" src={Floor} />;
+      return (
+        <img
+          alt="Floor"
+          className="w-full h-full absolute"
+          src={Floor}
+          style={{
+            WebkitUserSelect: 'none' /* Safari */,
+            userSelect: 'none',
+          }}
+        />
+      );
   }
 };
 

@@ -26,6 +26,10 @@ export const Tile = ({
         }
       }}
       role="button"
+      style={{
+        WebkitUserSelect: 'none' /* Safari */,
+        userSelect: 'none',
+      }}
       tabIndex={0}
     >
       <TileContent
@@ -35,7 +39,15 @@ export const Tile = ({
         type={type}
       />
       {type !== TILES.WALL && (
-        <img alt="Floor" className="w-full h-full absolute z-0" src={Floor} />
+        <img
+          alt="Floor"
+          className="w-full h-full absolute z-0"
+          src={Floor}
+          style={{
+            WebkitUserSelect: 'none' /* Safari */,
+            userSelect: 'none',
+          }}
+        />
       )}
     </div>
   );
