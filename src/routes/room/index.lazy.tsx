@@ -29,9 +29,21 @@ export const Room = () => {
   } = useMessage();
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col items-center">
+    <div
+      className="min-h-screen bg-black text-white flex flex-col items-center"
+      style={{
+        WebkitUserSelect: 'none' /* Safari */,
+        userSelect: 'none',
+      }}
+    >
       {/* ゲーム画面 */}
-      <div className="relative w-full max-w-4xl aspect-video bg-black border-2 border-gray-700">
+      <div
+        className="relative w-full max-w-4xl aspect-video bg-black border-2 border-gray-700"
+        style={{
+          WebkitUserSelect: 'none' /* Safari */,
+          userSelect: 'none',
+        }}
+      >
         {/* タイル表示 */}
         <div
           className="grid grid-cols-9 gap-0.5 w-full h-full"

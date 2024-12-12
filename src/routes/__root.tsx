@@ -16,7 +16,13 @@ const RootComponent = () => {
     <>
       <Header />
       <hr />
-      <div className="pt-16">
+      <div
+        className="pt-16"
+        style={{
+          WebkitUserSelect: 'none' /* Safari */,
+          userSelect: 'none',
+        }}
+      >
         <AnimatePresence mode="wait">
           {/* <PageTransition key={location.pathname}> */}
           <Outlet />
