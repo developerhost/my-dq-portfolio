@@ -26,6 +26,10 @@ export const Tile = ({
         }
       }}
       role="button"
+      style={{
+        WebkitUserSelect: 'none' /* Safari */,
+        userSelect: 'none',
+      }}
       tabIndex={0}
     >
       <TileContent

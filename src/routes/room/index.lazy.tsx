@@ -33,7 +33,13 @@ export const Room = () => {
       {/* ゲーム画面 */}
       <div className="relative w-full max-w-4xl aspect-video bg-black border-2 border-gray-700">
         {/* タイル表示 */}
-        <div className="grid grid-cols-9 gap-0.5 w-full h-full">
+        <div
+          className="grid grid-cols-9 gap-0.5 w-full h-full"
+          style={{
+            WebkitUserSelect: 'none' /* Safari */,
+            userSelect: 'none',
+          }}
+        >
           {roomMap.flatMap((row, rowIndex) =>
             row.map((tile, colIndex) => {
               const isHeroPosition =
@@ -50,6 +56,10 @@ export const Room = () => {
                 <div
                   className="flex items-center justify-center bg-gray-800 border border-gray-700"
                   key={`${rowIndex}-${colIndex}`}
+                  style={{
+                    WebkitUserSelect: 'none' /* Safari */,
+                    userSelect: 'none',
+                  }}
                 >
                   <Tile
                     isTreasureGreenGoldTaken={treasureGreenGoldTaken}
