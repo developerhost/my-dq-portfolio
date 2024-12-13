@@ -17,7 +17,7 @@ const Home = () => {
         <span>▶︎</span>
         <span>冒険をする</span>
       </Link>
-      <div className="flex items-center space-x-2 border-2 p-2 rounded mt-auto">
+      <div className="flex items-center space-x-2 border-2 p-2 rounded mt-auto z-20">
         <ChatMessage message={message} />
       </div>
     </div>

@@ -10,6 +10,7 @@ import { TILES } from '@/constants';
 export function useMessage() {
   const [message, setMessage] = useState('');
   const [treasureRedGoldTaken, setTreasureRedGoldTaken] = useState(false);
+  const [treasureRedGoldTaken2, setTreasureRedGoldTaken2] = useState(false);
   const [treasureGreenGoldTaken, setTreasureGreenGoldTaken] = useState(false);
 
   const handleTileClick = (type: number) => {
@@ -29,6 +30,14 @@ export function useMessage() {
         } else {
           setMessage('TypeScriptを手に入れた!');
           setTreasureRedGoldTaken(true);
+        }
+        break;
+      case TILES.TREASURE_RED_GOLD2:
+        if (treasureRedGoldTaken2) {
+          setMessage('宝箱は空のようだ');
+        } else {
+          setMessage('Next.jsを手に入れた!');
+          setTreasureRedGoldTaken2(true);
         }
         break;
       case TILES.TREASURE_GREEN_GOLD:
@@ -96,6 +105,7 @@ export function useMessage() {
     handleTileClick,
     handleAButtonPress,
     treasureRedGoldTaken,
+    treasureRedGoldTaken2,
     treasureGreenGoldTaken,
   };
 }

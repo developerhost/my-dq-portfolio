@@ -15,6 +15,7 @@ import { TILES } from '@/constants';
 interface TileContentProps {
   isTreasureGreenGoldTaken: boolean;
   isTreasureRedGoldTaken: boolean;
+  isTreasureRedGoldTaken2: boolean;
   onClick: () => void;
   type: number;
 }
@@ -22,6 +23,7 @@ interface TileContentProps {
 const TileContent = ({
   type,
   isTreasureRedGoldTaken,
+  isTreasureRedGoldTaken2,
   isTreasureGreenGoldTaken,
   onClick,
 }: TileContentProps) => {
@@ -84,6 +86,19 @@ const TileContent = ({
           alt="Treasure Red Gold"
           className="w-full h-full absolute z-10"
           src={isTreasureRedGoldTaken ? TreasureRedGoldEmpty : TreasureRedGold}
+          style={{
+            WebkitUserSelect: 'none' /* Safari */,
+            userSelect: 'none',
+          }}
+          {...interactiveProps}
+        />
+      );
+    case TILES.TREASURE_RED_GOLD2:
+      return (
+        <img
+          alt="Treasure Red Gold"
+          className="w-full h-full absolute z-10"
+          src={isTreasureRedGoldTaken2 ? TreasureRedGoldEmpty : TreasureRedGold}
           style={{
             WebkitUserSelect: 'none' /* Safari */,
             userSelect: 'none',

@@ -7,7 +7,7 @@ interface ChatMessageProps {
 
 export const ChatMessage = ({ message, typeSpeed = 50 }: ChatMessageProps) => {
   return (
-    <div style={{ whiteSpace: 'pre-line' }}>
+    <div className="z-20" style={{ whiteSpace: 'pre-line' }}>
       <Typewriter
         cursor
         cursorStyle="_"

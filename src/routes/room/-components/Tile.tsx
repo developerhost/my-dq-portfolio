@@ -6,6 +6,7 @@ import { TILES } from '@/constants';
 interface TileProps {
   isTreasureGreenGoldTaken: boolean;
   isTreasureRedGoldTaken: boolean;
+  isTreasureRedGoldTaken2: boolean;
   onClick: () => void;
   type: number;
 }
@@ -15,6 +16,7 @@ export const Tile = ({
   onClick,
   isTreasureRedGoldTaken,
   isTreasureGreenGoldTaken,
+  isTreasureRedGoldTaken2,
 }: TileProps) => {
   return (
     <div
@@ -35,6 +37,7 @@ export const Tile = ({
       <TileContent
         isTreasureGreenGoldTaken={isTreasureGreenGoldTaken}
         isTreasureRedGoldTaken={isTreasureRedGoldTaken}
+        isTreasureRedGoldTaken2={isTreasureRedGoldTaken2}
         onClick={onClick}
         type={type}
       />

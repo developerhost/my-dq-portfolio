@@ -10,4 +10,5 @@ export const TILES = {
   WALL: 9, // 壁タイル
   SOLDER_RED: 10, // 赤色の兵士
   SOLDER_BLUE: 11, // 青色の兵士
+  TREASURE_RED_GOLD2: 13, // 宝箱オブジェクト③
 } as const;

@@ -16,6 +16,7 @@ export const Room = () => {
     handleTileClick,
     handleAButtonPress,
     treasureRedGoldTaken,
+    treasureRedGoldTaken2,
     treasureGreenGoldTaken,
   } = useMessage();
 
@@ -67,6 +68,7 @@ export const Room = () => {
                   <Tile
                     isTreasureGreenGoldTaken={treasureGreenGoldTaken}
                     isTreasureRedGoldTaken={treasureRedGoldTaken}
+                    isTreasureRedGoldTaken2={treasureRedGoldTaken2}
                     onClick={() => handleTileClick(type)}
                     type={type}
                   />
@@ -77,7 +79,7 @@ export const Room = () => {
         </div>
         {/* チャット表示 */}
         {message && (
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-4/5 bg-black bg-opacity-70 p-4 rounded border border-gray-500">
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-4/5 bg-black bg-opacity-70 p-4 rounded border border-gray-500 z-20">
             <ChatMessage message={message} />
           </div>
         )}
