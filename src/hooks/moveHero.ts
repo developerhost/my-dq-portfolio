@@ -9,7 +9,19 @@ import type {
 import { TILES } from '@/constants';
 
 function canMoveToTile(tile: number | undefined): boolean {
-  return tile === TILES.HERO || tile === TILES.FLOOR;
+  return (
+    tile === TILES.HERO ||
+    tile === TILES.FLOOR ||
+    tile === TILES.CARPET_TOP_LEFT ||
+    tile === TILES.CARPET_TOP_RIGHT ||
+    tile === TILES.CARPET_BOTTOM_LEFT ||
+    tile === TILES.CARPET_BOTTOM_RIGHT ||
+    tile === TILES.CARPET_TOP ||
+    tile === TILES.CARPET_BOTTOM ||
+    tile === TILES.CARPET_LEFT ||
+    tile === TILES.CARPET_RIGHT ||
+    tile === TILES.CARPET_MIDDLE
+  );
 }
 
 const decrementRow = <T extends GameGrid>(row: Row<T>): Row<T> =>
