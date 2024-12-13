@@ -1,4 +1,5 @@
 import Cat from '@/assets/img/character/cat.svg';
+import Monster from '@/assets/img/character/character_monster_dragon_03_red.svg';
 import Hero from '@/assets/img/character/hero.svg';
 import Murabito from '@/assets/img/character/murabito.svg';
 import SoldierBlue from '@/assets/img/character/soldier_blue.svg';
@@ -153,6 +154,19 @@ const TileContent = ({
           alt="Soldier Blue"
           className="w-full h-full absolute z-10"
           src={SoldierBlue}
+          style={{
+            WebkitUserSelect: 'none' /* Safari */,
+            userSelect: 'none',
+          }}
+          {...interactiveProps}
+        />
+      );
+    case TILES.MONSTER:
+      return (
+        <img
+          alt="Monster"
+          className="w-full h-full absolute z-10"
+          src={Monster}
           style={{
             WebkitUserSelect: 'none' /* Safari */,
             userSelect: 'none',

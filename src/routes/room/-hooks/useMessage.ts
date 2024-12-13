@@ -56,6 +56,9 @@ export function useMessage() {
       case TILES.SOLDER_BLUE:
         setMessage('兵士2: 他のページのリンクも見てみるといいぞ');
         break;
+      case TILES.MONSTER:
+        setMessage('モンスター: 良かったら私のGitHubを見ていってください');
+        break;
       default:
         setMessage('');
         break;
