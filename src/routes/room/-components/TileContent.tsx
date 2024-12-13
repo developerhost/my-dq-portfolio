@@ -1,6 +1,8 @@
 import Cat from '@/assets/img/character/cat.svg';
 import Hero from '@/assets/img/character/hero.svg';
 import Murabito from '@/assets/img/character/murabito.svg';
+import SoldierBlue from '@/assets/img/character/soldier_blue.svg';
+import SoldierRed from '@/assets/img/character/soldier_red.svg';
 import Bed from '@/assets/img/object/bed.svg';
 import Floor from '@/assets/img/tile/floor.svg';
 import Wall from '@/assets/img/tile/wall.svg';
@@ -99,6 +101,32 @@ const TileContent = ({
               ? TreasureGreenGoldEmpty
               : TreasureGreenGold
           }
+          style={{
+            WebkitUserSelect: 'none' /* Safari */,
+            userSelect: 'none',
+          }}
+          {...interactiveProps}
+        />
+      );
+    case TILES.SOLDER_RED:
+      return (
+        <img
+          alt="Soldier Red"
+          className="w-full h-full absolute z-10"
+          src={SoldierRed}
+          style={{
+            WebkitUserSelect: 'none' /* Safari */,
+            userSelect: 'none',
+          }}
+          {...interactiveProps}
+        />
+      );
+    case TILES.SOLDER_BLUE:
+      return (
+        <img
+          alt="Soldier Blue"
+          className="w-full h-full absolute z-10"
+          src={SoldierBlue}
           style={{
             WebkitUserSelect: 'none' /* Safari */,
             userSelect: 'none',

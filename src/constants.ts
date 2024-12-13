@@ -8,4 +8,6 @@ export const TILES = {
   BED: 6, // ベッドタイル
   FLOOR: 8, // 床タイル
   WALL: 9, // 壁タイル
+  SOLDER_RED: 10, // 赤色の兵士
+  SOLDER_BLUE: 11, // 青色の兵士
 } as const;

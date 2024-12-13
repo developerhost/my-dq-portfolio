@@ -39,6 +39,14 @@ export function useMessage() {
           setTreasureGreenGoldTaken(true);
         }
         break;
+      case TILES.SOLDER_RED:
+        setMessage(
+          '兵士1: 橋田至はSTEINS;GATEのキャラクターから名前を取ったらしい'
+        );
+        break;
+      case TILES.SOLDER_BLUE:
+        setMessage('兵士2: 他のページのリンクも見てみるといいぞ');
+        break;
       default:
         setMessage('');
         break;
