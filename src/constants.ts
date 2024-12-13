@@ -22,4 +22,5 @@ export const TILES = {
   CARPET_RIGHT: 22, // カーペットの右
   CARPET_MIDDLE: 23, // カーペットの中央
   FLOOR_ICE: 24, // 氷の床
+  MONSTER: 25, // モンスタータイル
 } as const;
