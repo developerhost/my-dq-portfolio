@@ -18,6 +18,7 @@ import {
   SiNextdns,
   SiZod,
   SiRecoil,
+  SiPnpm,
 } from 'react-icons/si';
 
 const skills = [
@@ -43,6 +44,7 @@ const skills = [
   { name: 'AWS', icon: <FaAws /> },
   { name: 'GitHub', icon: <FaGithub /> },
   { name: 'trpc', icon: <SiTrpc /> },
+  { name: 'pnpm', icon: <SiPnpm /> },
 ];
 
 export const Skills = () => {
