@@ -38,7 +38,7 @@ export const Room = () => {
       >
         {/* タイル表示 */}
         <div
-          className="grid grid-cols-9 gap-0.5 w-full h-full"
+          className="grid grid-cols-9 gap-0 w-full h-full"
           style={{
             WebkitUserSelect: 'none' /* Safari */,
             userSelect: 'none',
@@ -53,12 +53,12 @@ export const Room = () => {
               const type = isHeroPosition
                 ? TILES.HERO
                 : isPreviousHeroPosition
-                  ? TILES.FLOOR
+                  ? TILES.CARPET_RIGHT
                   : tile;
 
               return (
                 <div
-                  className="flex items-center justify-center bg-gray-800 border border-gray-700"
+                  className="flex items-center justify-center bg-gray-800 border-gray-700"
                   key={`${rowIndex}-${colIndex}`}
                   style={{
                     WebkitUserSelect: 'none' /* Safari */,

@@ -20,7 +20,8 @@ function canMoveToTile(tile: number | undefined): boolean {
     tile === TILES.CARPET_BOTTOM ||
     tile === TILES.CARPET_LEFT ||
     tile === TILES.CARPET_RIGHT ||
-    tile === TILES.CARPET_MIDDLE
+    tile === TILES.CARPET_MIDDLE ||
+    tile === TILES.FLOOR_ICE
   );
 }
 

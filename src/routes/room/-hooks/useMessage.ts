@@ -79,25 +79,44 @@ export function useMessage() {
       { rowOffset: 0, colOffset: 1 }, // 右
     ];
 
-    for (const { rowOffset, colOffset } of directions) {
-      const neighborRow = heroPosition.row + rowOffset;
-      const neighborCol = heroPosition.col + colOffset;
+    // 有効なタイルを見つけるためのフラグ
+    let foundValidTile = false;
 
+    for (const { rowOffset, colOffset } of directions) {
+      const row = heroPosition.row + rowOffset;
+      const col = heroPosition.col + colOffset;
+
+      // 範囲外チェック
+      if (row < 0 || row >= map.length || col < 0 || col >= map[0].length) {
+        continue;
+      }
+
+      const tileType = map[row][col];
+
+      // 壁と床以外のタイルであれば有効とする
       if (
-        neighborRow >= 0 &&
-        neighborRow < map.length &&
-        neighborCol >= 0 &&
-        neighborCol < map[0].length
+        tileType !== TILES.FLOOR &&
+        tileType !== TILES.WALL &&
+        tileType !== TILES.FLOOR_ICE &&
+        tileType !== TILES.CARPET_TOP_LEFT &&
+        tileType !== TILES.CARPET_TOP_RIGHT &&
+        tileType !== TILES.CARPET_BOTTOM_LEFT &&
+        tileType !== TILES.CARPET_BOTTOM_RIGHT &&
+        tileType !== TILES.CARPET_TOP &&
+        tileType !== TILES.CARPET_BOTTOM &&
+        tileType !== TILES.CARPET_LEFT &&
+        tileType !== TILES.CARPET_RIGHT &&
+        tileType !== TILES.CARPET_MIDDLE
       ) {
-        const tileType = map[neighborRow][neighborCol];
-        if (tileType !== TILES.FLOOR && tileType !== TILES.WALL) {
-          handleTileClick(tileType);
-          return; // 最初に見つかったオブジェクトのメッセージを表示
-        }
+        handleTileClick(tileType);
+        foundValidTile = true;
+        break;
       }
     }
 
-    setMessage('近くに何もないようだ');
+    if (!foundValidTile) {
+      setMessage('近くに何もないようだ');
+    }
   };
 
   return {
