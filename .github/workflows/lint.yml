@@ -10,5 +10,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - run: npm ci
-      - run: npm run lint
+      - run: npm install -g pnpm # 必要に応じてpnpmの最新版をインストール
+      - run: pnpm install # パッケージのインストール
+      - run: pnpm run lint # lintの実行

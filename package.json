@@ -13,7 +13,8 @@
     "preview": "vite preview",
     "update-rss": "node ./src/rss/rss-parser.mjs",
     "prepare": "husky install",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.2",
@@ -49,6 +50,7 @@
     "@testing-library/jest-dom": "^6.4.8",
     "@testing-library/react": "^16.0.0",
     "@testing-library/user-event": "^14.5.2",
+    "@types/node": "^22.10.2",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@types/react-howler": "^5.2.3",
@@ -91,7 +93,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "npm run lint && npm run prettier -- --check"
+      "pre-push": "pnpm run lint && pnpm run prettier -- --check"
     }
   }
 }
