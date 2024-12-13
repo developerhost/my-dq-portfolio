@@ -21,6 +21,7 @@ const SnsIndexLazyImport = createFileRoute('/sns/')()
 const RoomIndexLazyImport = createFileRoute('/room/')()
 const ProfileIndexLazyImport = createFileRoute('/profile/')()
 const PortfolioIndexLazyImport = createFileRoute('/portfolio/')()
+const DeveloperIndexLazyImport = createFileRoute('/developer/')()
 
 // Create/Update Routes
 
@@ -51,6 +52,13 @@ const PortfolioIndexLazyRoute = PortfolioIndexLazyImport.update({
   import('./routes/portfolio/index.lazy').then((d) => d.Route),
 )
 
+const DeveloperIndexLazyRoute = DeveloperIndexLazyImport.update({
+  path: '/developer/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/developer/index.lazy').then((d) => d.Route),
+)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -60,6 +68,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/developer/': {
+      id: '/developer/'
+      path: '/developer'
+      fullPath: '/developer'
+      preLoaderRoute: typeof DeveloperIndexLazyImport
       parentRoute: typeof rootRoute
     }
     '/portfolio/': {
@@ -97,6 +112,7 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   IndexLazyRoute,
+  DeveloperIndexLazyRoute,
   PortfolioIndexLazyRoute,
   ProfileIndexLazyRoute,
   RoomIndexLazyRoute,
@@ -112,6 +128,7 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/developer/",
         "/portfolio/",
         "/profile/",
         "/room/",
@@ -120,6 +137,9 @@ export const routeTree = rootRoute.addChildren({
     },
     "/": {
       "filePath": "index.lazy.tsx"
+    },
+    "/developer/": {
+      "filePath": "developer/index.lazy.tsx"
     },
     "/portfolio/": {
       "filePath": "portfolio/index.lazy.tsx"
