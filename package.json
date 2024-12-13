@@ -13,7 +13,8 @@
     "preview": "vite preview",
     "update-rss": "node ./src/rss/rss-parser.mjs",
     "prepare": "husky install",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.2",
