@@ -11,7 +11,6 @@ jobs:
         with:
           node-version: '20'
           cache: 'pnpm' # pnpmのキャッシュを有効にする
-      - run: corepack enable # corepackでpnpmを有効化
       - run: pnpm install -g pnpm # 必要に応じてpnpmの最新版をインストール
       - run: pnpm install # パッケージのインストール
       - run: pnpm run lint # lintの実行

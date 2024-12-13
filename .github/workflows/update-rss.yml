@@ -23,9 +23,6 @@ jobs:
           node-version: 20.x
           cache: 'pnpm' # pnpmのキャッシュを有効にする
 
-      - name: Enable Corepack
-        run: corepack enable # corepackでpnpmを有効化
-
       - name: Install pnpm
         run: pnpm install -g pnpm # 必要に応じてpnpmの最新版をインストール
 
