@@ -23,7 +23,7 @@ jobs:
           node-version: 20.x
 
       - name: Install pnpm
-        run: pnpm install -g pnpm # 必要に応じてpnpmの最新版をインストール
+        run: npm install -g pnpm # 必要に応じてpnpmの最新版をインストール
 
       - name: Install dependencies
         run: pnpm install
