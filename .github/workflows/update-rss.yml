@@ -23,10 +23,10 @@ jobs:
           node-version: 20.x
 
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
 
       - name: Update RSS Feeds
-        run: npm run update-rss
+        run: pnpm run update-rss
 
       - name: Commit and push RSS update
         run: |
