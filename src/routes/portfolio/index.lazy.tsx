@@ -6,6 +6,12 @@ import ImageSlideshow from './-components/ImageSlideshow';
 const Portfolio = () => {
   const portfolioSites = [
     {
+      title: '1-infinity',
+      description: '1/2を当て続けてハイスコアを狙うブラウザゲーム',
+      image: 'https://1-infinity.vercel.app/assets/opengraph-image.png',
+      link: 'https://1-infinity.vercel.app/',
+    },
+    {
       title: 'ランダム指名くん',
       description: '生徒をランダム指名できます',
       image:

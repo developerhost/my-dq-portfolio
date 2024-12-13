@@ -8,19 +8,20 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router';
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
+import { Route as rootRoute } from './routes/__root';
 
 // Create Virtual Routes
 
-const IndexLazyImport = createFileRoute('/')()
-const SnsIndexLazyImport = createFileRoute('/sns/')()
-const RoomIndexLazyImport = createFileRoute('/room/')()
-const ProfileIndexLazyImport = createFileRoute('/profile/')()
-const PortfolioIndexLazyImport = createFileRoute('/portfolio/')()
+const IndexLazyImport = createFileRoute('/')();
+const SnsIndexLazyImport = createFileRoute('/sns/')();
+const RoomIndexLazyImport = createFileRoute('/room/')();
+const ProfileIndexLazyImport = createFileRoute('/profile/')();
+const PortfolioIndexLazyImport = createFileRoute('/portfolio/')();
+const DeveloperIndexLazyImport = createFileRoute('/developer/')();
 
 // Create/Update Routes
 
@@ -28,131 +29,171 @@ const IndexLazyRoute = IndexLazyImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route));
 
 const SnsIndexLazyRoute = SnsIndexLazyImport.update({
   id: '/sns/',
   path: '/sns/',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/sns/index.lazy').then((d) => d.Route))
+} as any).lazy(() => import('./routes/sns/index.lazy').then((d) => d.Route));
 
 const RoomIndexLazyRoute = RoomIndexLazyImport.update({
   id: '/room/',
   path: '/room/',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/room/index.lazy').then((d) => d.Route))
+} as any).lazy(() => import('./routes/room/index.lazy').then((d) => d.Route));
 
 const ProfileIndexLazyRoute = ProfileIndexLazyImport.update({
   id: '/profile/',
   path: '/profile/',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/profile/index.lazy').then((d) => d.Route))
+} as any).lazy(() =>
+  import('./routes/profile/index.lazy').then((d) => d.Route)
+);
 
 const PortfolioIndexLazyRoute = PortfolioIndexLazyImport.update({
   id: '/portfolio/',
   path: '/portfolio/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() =>
-  import('./routes/portfolio/index.lazy').then((d) => d.Route),
-)
+  import('./routes/portfolio/index.lazy').then((d) => d.Route)
+);
+
+const DeveloperIndexLazyRoute = DeveloperIndexLazyImport.update({
+  id: '/developer/',
+  path: '/developer/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/developer/index.lazy').then((d) => d.Route)
+);
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexLazyImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/';
+      path: '/';
+      fullPath: '/';
+      preLoaderRoute: typeof IndexLazyImport;
+      parentRoute: typeof rootRoute;
+    };
+    '/developer/': {
+      id: '/developer/';
+      path: '/developer';
+      fullPath: '/developer';
+      preLoaderRoute: typeof DeveloperIndexLazyImport;
+      parentRoute: typeof rootRoute;
+    };
     '/portfolio/': {
-      id: '/portfolio/'
-      path: '/portfolio'
-      fullPath: '/portfolio'
-      preLoaderRoute: typeof PortfolioIndexLazyImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/portfolio/';
+      path: '/portfolio';
+      fullPath: '/portfolio';
+      preLoaderRoute: typeof PortfolioIndexLazyImport;
+      parentRoute: typeof rootRoute;
+    };
     '/profile/': {
-      id: '/profile/'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof ProfileIndexLazyImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/profile/';
+      path: '/profile';
+      fullPath: '/profile';
+      preLoaderRoute: typeof ProfileIndexLazyImport;
+      parentRoute: typeof rootRoute;
+    };
     '/room/': {
-      id: '/room/'
-      path: '/room'
-      fullPath: '/room'
-      preLoaderRoute: typeof RoomIndexLazyImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/room/';
+      path: '/room';
+      fullPath: '/room';
+      preLoaderRoute: typeof RoomIndexLazyImport;
+      parentRoute: typeof rootRoute;
+    };
     '/sns/': {
-      id: '/sns/'
-      path: '/sns'
-      fullPath: '/sns'
-      preLoaderRoute: typeof SnsIndexLazyImport
-      parentRoute: typeof rootRoute
-    }
+      id: '/sns/';
+      path: '/sns';
+      fullPath: '/sns';
+      preLoaderRoute: typeof SnsIndexLazyImport;
+      parentRoute: typeof rootRoute;
+    };
   }
 }
 
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexLazyRoute
-  '/portfolio': typeof PortfolioIndexLazyRoute
-  '/profile': typeof ProfileIndexLazyRoute
-  '/room': typeof RoomIndexLazyRoute
-  '/sns': typeof SnsIndexLazyRoute
+  '/': typeof IndexLazyRoute;
+  '/developer': typeof DeveloperIndexLazyRoute;
+  '/portfolio': typeof PortfolioIndexLazyRoute;
+  '/profile': typeof ProfileIndexLazyRoute;
+  '/room': typeof RoomIndexLazyRoute;
+  '/sns': typeof SnsIndexLazyRoute;
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexLazyRoute
-  '/portfolio': typeof PortfolioIndexLazyRoute
-  '/profile': typeof ProfileIndexLazyRoute
-  '/room': typeof RoomIndexLazyRoute
-  '/sns': typeof SnsIndexLazyRoute
+  '/': typeof IndexLazyRoute;
+  '/developer': typeof DeveloperIndexLazyRoute;
+  '/portfolio': typeof PortfolioIndexLazyRoute;
+  '/profile': typeof ProfileIndexLazyRoute;
+  '/room': typeof RoomIndexLazyRoute;
+  '/sns': typeof SnsIndexLazyRoute;
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/': typeof IndexLazyRoute
-  '/portfolio/': typeof PortfolioIndexLazyRoute
-  '/profile/': typeof ProfileIndexLazyRoute
-  '/room/': typeof RoomIndexLazyRoute
-  '/sns/': typeof SnsIndexLazyRoute
+  __root__: typeof rootRoute;
+  '/': typeof IndexLazyRoute;
+  '/developer/': typeof DeveloperIndexLazyRoute;
+  '/portfolio/': typeof PortfolioIndexLazyRoute;
+  '/profile/': typeof ProfileIndexLazyRoute;
+  '/room/': typeof RoomIndexLazyRoute;
+  '/sns/': typeof SnsIndexLazyRoute;
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/portfolio' | '/profile' | '/room' | '/sns'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/portfolio' | '/profile' | '/room' | '/sns'
-  id: '__root__' | '/' | '/portfolio/' | '/profile/' | '/room/' | '/sns/'
-  fileRoutesById: FileRoutesById
+  fileRoutesByFullPath: FileRoutesByFullPath;
+  fullPaths: '/' | '/portfolio' | '/profile' | '/room' | '/sns' | '/developer';
+  fileRoutesByTo: FileRoutesByTo;
+  to: '/' | '/portfolio' | '/profile' | '/room' | '/sns' | '/developer';
+  id:
+    | '__root__'
+    | '/'
+    | '/portfolio/'
+    | '/profile/'
+    | '/room/'
+    | '/sns/'
+    | '/developer';
+  fullPaths: '/' | '/developer' | '/portfolio' | '/profile' | '/room' | '/sns';
+  fileRoutesByTo: FileRoutesByTo;
+  to: '/' | '/developer' | '/portfolio' | '/profile' | '/room' | '/sns';
+  id:
+    | '__root__'
+    | '/'
+    | '/developer/'
+    | '/portfolio/'
+    | '/profile/'
+    | '/room/'
+    | '/sns/';
+  fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
-  IndexLazyRoute: typeof IndexLazyRoute
-  PortfolioIndexLazyRoute: typeof PortfolioIndexLazyRoute
-  ProfileIndexLazyRoute: typeof ProfileIndexLazyRoute
-  RoomIndexLazyRoute: typeof RoomIndexLazyRoute
-  SnsIndexLazyRoute: typeof SnsIndexLazyRoute
+  IndexLazyRoute: typeof IndexLazyRoute;
+  DeveloperIndexLazyRoute: typeof DeveloperIndexLazyRoute;
+  PortfolioIndexLazyRoute: typeof PortfolioIndexLazyRoute;
+  ProfileIndexLazyRoute: typeof ProfileIndexLazyRoute;
+  RoomIndexLazyRoute: typeof RoomIndexLazyRoute;
+  SnsIndexLazyRoute: typeof SnsIndexLazyRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
+  DeveloperIndexLazyRoute: DeveloperIndexLazyRoute,
   PortfolioIndexLazyRoute: PortfolioIndexLazyRoute,
   ProfileIndexLazyRoute: ProfileIndexLazyRoute,
   RoomIndexLazyRoute: RoomIndexLazyRoute,
   SnsIndexLazyRoute: SnsIndexLazyRoute,
-}
+};
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();
 
 /* ROUTE_MANIFEST_START
 {
@@ -161,6 +202,7 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/developer/",
         "/portfolio/",
         "/profile/",
         "/room/",
@@ -169,6 +211,9 @@ export const routeTree = rootRoute
     },
     "/": {
       "filePath": "index.lazy.tsx"
+    },
+    "/developer/": {
+      "filePath": "developer/index.lazy.tsx"
     },
     "/portfolio/": {
       "filePath": "portfolio/index.lazy.tsx"
