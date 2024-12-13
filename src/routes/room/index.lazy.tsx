@@ -30,7 +30,8 @@ export const Room = () => {
     >
       {/* ゲーム画面 */}
       <div
-        className="relative w-full max-w-4xl aspect-[4/3] lg:aspect-video  bg-black border-2 border-gray-700 md:mt-8"
+        className="relative w-full max-w-4xl bg-black border-2 border-gray-700 md:mt-8
+    aspect-[4/3] sm:aspect-[3/3] md:aspect-[16/16] lg:aspect-[21/21]"
         style={{
           WebkitUserSelect: 'none' /* Safari */,
           userSelect: 'none',
