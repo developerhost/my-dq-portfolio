@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import type { GameGrid, Position } from '../-types/types';
+
 import { TILES } from '@/constants';
 
 /**
@@ -43,9 +45,9 @@ export function useMessage() {
     }
   };
 
-  const handleAButtonPress = (
-    heroPosition: { col: number; row: number },
-    roomMap: number[][]
+  const handleAButtonPress = <T extends GameGrid>(
+    heroPosition: Position<T>,
+    map: T
   ) => {
     if (message) {
       // メッセージがすでに表示されている場合はクリア
@@ -66,11 +68,11 @@ export function useMessage() {
 
       if (
         neighborRow >= 0 &&
-        neighborRow < roomMap.length &&
+        neighborRow < map.length &&
         neighborCol >= 0 &&
-        neighborCol < roomMap[0].length
+        neighborCol < map[0].length
       ) {
-        const tileType = roomMap[neighborRow][neighborCol];
+        const tileType = map[neighborRow][neighborCol];
         if (tileType !== TILES.FLOOR && tileType !== TILES.WALL) {
           handleTileClick(tileType);
           return; // 最初に見つかったオブジェクトのメッセージを表示
