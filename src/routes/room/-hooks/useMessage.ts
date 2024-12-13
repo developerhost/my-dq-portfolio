@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import type { GameGrid, Position } from '../-types/types';
+
 import { TILES } from '@/constants';
 
 /**
@@ -8,6 +10,7 @@ import { TILES } from '@/constants';
 export function useMessage() {
   const [message, setMessage] = useState('');
   const [treasureRedGoldTaken, setTreasureRedGoldTaken] = useState(false);
+  const [treasureRedGoldTaken2, setTreasureRedGoldTaken2] = useState(false);
   const [treasureGreenGoldTaken, setTreasureGreenGoldTaken] = useState(false);
 
   const handleTileClick = (type: number) => {
@@ -29,6 +32,14 @@ export function useMessage() {
           setTreasureRedGoldTaken(true);
         }
         break;
+      case TILES.TREASURE_RED_GOLD2:
+        if (treasureRedGoldTaken2) {
+          setMessage('宝箱は空のようだ');
+        } else {
+          setMessage('Next.jsを手に入れた!');
+          setTreasureRedGoldTaken2(true);
+        }
+        break;
       case TILES.TREASURE_GREEN_GOLD:
         if (treasureGreenGoldTaken) {
           setMessage('宝箱は空のようだ');
@@ -37,15 +48,23 @@ export function useMessage() {
           setTreasureGreenGoldTaken(true);
         }
         break;
+      case TILES.SOLDER_RED:
+        setMessage(
+          '兵士1: 橋田至はSTEINS;GATEのキャラクターから名前を取ったらしい'
+        );
+        break;
+      case TILES.SOLDER_BLUE:
+        setMessage('兵士2: 他のページのリンクも見てみるといいぞ');
+        break;
       default:
         setMessage('');
         break;
     }
   };
 
-  const handleAButtonPress = (
-    heroPosition: { col: number; row: number },
-    roomMap: number[][]
+  const handleAButtonPress = <T extends GameGrid>(
+    heroPosition: Position<T>,
+    map: T
   ) => {
     if (message) {
       // メッセージがすでに表示されている場合はクリア
@@ -60,25 +79,44 @@ export function useMessage() {
       { rowOffset: 0, colOffset: 1 }, // 右
     ];
 
-    for (const { rowOffset, colOffset } of directions) {
-      const neighborRow = heroPosition.row + rowOffset;
-      const neighborCol = heroPosition.col + colOffset;
+    // 有効なタイルを見つけるためのフラグ
+    let foundValidTile = false;
 
+    for (const { rowOffset, colOffset } of directions) {
+      const row = heroPosition.row + rowOffset;
+      const col = heroPosition.col + colOffset;
+
+      // 範囲外チェック
+      if (row < 0 || row >= map.length || col < 0 || col >= map[0].length) {
+        continue;
+      }
+
+      const tileType = map[row][col];
+
+      // 壁と床以外のタイルであれば有効とする
       if (
-        neighborRow >= 0 &&
-        neighborRow < roomMap.length &&
-        neighborCol >= 0 &&
-        neighborCol < roomMap[0].length
+        tileType !== TILES.FLOOR &&
+        tileType !== TILES.WALL &&
+        tileType !== TILES.FLOOR_ICE &&
+        tileType !== TILES.CARPET_TOP_LEFT &&
+        tileType !== TILES.CARPET_TOP_RIGHT &&
+        tileType !== TILES.CARPET_BOTTOM_LEFT &&
+        tileType !== TILES.CARPET_BOTTOM_RIGHT &&
+        tileType !== TILES.CARPET_TOP &&
+        tileType !== TILES.CARPET_BOTTOM &&
+        tileType !== TILES.CARPET_LEFT &&
+        tileType !== TILES.CARPET_RIGHT &&
+        tileType !== TILES.CARPET_MIDDLE
       ) {
-        const tileType = roomMap[neighborRow][neighborCol];
-        if (tileType !== TILES.FLOOR && tileType !== TILES.WALL) {
-          handleTileClick(tileType);
-          return; // 最初に見つかったオブジェクトのメッセージを表示
-        }
+        handleTileClick(tileType);
+        foundValidTile = true;
+        break;
       }
     }
 
-    setMessage('近くに何もないようだ');
+    if (!foundValidTile) {
+      setMessage('近くに何もないようだ');
+    }
   };
 
   return {
@@ -86,6 +124,7 @@ export function useMessage() {
     handleTileClick,
     handleAButtonPress,
     treasureRedGoldTaken,
+    treasureRedGoldTaken2,
     treasureGreenGoldTaken,
   };
 }

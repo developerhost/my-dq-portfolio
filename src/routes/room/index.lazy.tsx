@@ -1,6 +1,7 @@
 import { createLazyFileRoute } from '@tanstack/react-router';
 
 import { Tile } from './-components/Tile';
+import { initialPosition, ROOM_MAP } from './-const/const';
 import { useMessage } from './-hooks/useMessage';
 
 import ChatMessage from '@/components/ChatMessage';
@@ -9,22 +10,13 @@ import { TILES } from '@/constants';
 import { useHeroMovement } from '@/hooks/useHeroMovement';
 
 export const Room = () => {
-  const roomMap = [
-    [9, 9, 9, 9, 9, 9, 9, 9, 9],
-    [9, 4, 5, 8, 8, 8, 0, 6, 9],
-    [9, 8, 8, 8, 8, 8, 8, 8, 9],
-    [9, 8, 8, 8, 1, 8, 8, 2, 9],
-    [9, 9, 9, 9, 9, 9, 9, 9, 9],
-  ];
-
-  const initialPosition = { row: 1, col: 6 };
-
-  const { heroPosition, moveHero } = useHeroMovement(initialPosition, roomMap);
+  const { heroPosition, moveHero } = useHeroMovement(initialPosition, ROOM_MAP);
   const {
     message,
     handleTileClick,
     handleAButtonPress,
     treasureRedGoldTaken,
+    treasureRedGoldTaken2,
     treasureGreenGoldTaken,
   } = useMessage();
 
@@ -38,7 +30,7 @@ export const Room = () => {
     >
       {/* ゲーム画面 */}
       <div
-        className="relative w-full max-w-4xl aspect-video bg-black border-2 border-gray-700"
+        className="relative w-full max-w-4xl aspect-[4/3] lg:aspect-video  bg-black border-2 border-gray-700 md:mt-8"
         style={{
           WebkitUserSelect: 'none' /* Safari */,
           userSelect: 'none',
@@ -46,27 +38,27 @@ export const Room = () => {
       >
         {/* タイル表示 */}
         <div
-          className="grid grid-cols-9 gap-0.5 w-full h-full"
+          className="grid grid-cols-9 gap-0 w-full h-full"
           style={{
             WebkitUserSelect: 'none' /* Safari */,
             userSelect: 'none',
           }}
         >
-          {roomMap.flatMap((row, rowIndex) =>
+          {ROOM_MAP.flatMap((row, rowIndex) =>
             row.map((tile, colIndex) => {
               const isHeroPosition =
                 rowIndex === heroPosition.row && colIndex === heroPosition.col;
-              const isPreviousHeroPosition = roomMap[rowIndex][colIndex] === 0;
+              const isPreviousHeroPosition = ROOM_MAP[rowIndex][colIndex] === 0;
 
               const type = isHeroPosition
                 ? TILES.HERO
                 : isPreviousHeroPosition
-                  ? TILES.FLOOR
+                  ? TILES.CARPET_RIGHT
                   : tile;
 
               return (
                 <div
-                  className="flex items-center justify-center bg-gray-800 border border-gray-700"
+                  className="flex items-center justify-center bg-gray-800 border-gray-700"
                   key={`${rowIndex}-${colIndex}`}
                   style={{
                     WebkitUserSelect: 'none' /* Safari */,
@@ -76,6 +68,7 @@ export const Room = () => {
                   <Tile
                     isTreasureGreenGoldTaken={treasureGreenGoldTaken}
                     isTreasureRedGoldTaken={treasureRedGoldTaken}
+                    isTreasureRedGoldTaken2={treasureRedGoldTaken2}
                     onClick={() => handleTileClick(type)}
                     type={type}
                   />
@@ -86,14 +79,14 @@ export const Room = () => {
         </div>
         {/* チャット表示 */}
         {message && (
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-4/5 bg-black bg-opacity-70 p-4 rounded border border-gray-500">
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-4/5 bg-black bg-opacity-70 p-4 rounded border border-gray-500 z-20">
             <ChatMessage message={message} />
           </div>
         )}
       </div>
       <GameController
         moveHero={moveHero}
-        onAButtonPress={() => handleAButtonPress(heroPosition, roomMap)}
+        onAButtonPress={() => handleAButtonPress(heroPosition, ROOM_MAP)}
       />
     </div>
   );
