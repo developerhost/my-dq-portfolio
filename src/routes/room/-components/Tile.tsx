@@ -1,6 +1,5 @@
 import TileContent from './TileContent';
 
-import Floor from '@/assets/img/tile/floor.svg';
 import { TILES } from '@/constants';
 
 interface TileProps {
@@ -20,7 +19,7 @@ export const Tile = ({
 }: TileProps) => {
   return (
     <div
-      className="relative w-full h-full"
+      className={`relative w-full h-full ${type !== TILES.WALL ? 'bg-transparent' : ''}`}
       onClick={onClick}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -41,17 +40,6 @@ export const Tile = ({
         onClick={onClick}
         type={type}
       />
-      {type !== TILES.WALL && (
-        <img
-          alt="Floor"
-          className="w-full h-full absolute z-0"
-          src={Floor}
-          style={{
-            WebkitUserSelect: 'none' /* Safari */,
-            userSelect: 'none',
-          }}
-        />
-      )}
     </div>
   );
 };
