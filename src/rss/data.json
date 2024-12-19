@@ -1,5 +1,13 @@
 [
   {
+    "title": "【個人開発】1-infinityというブラウザゲームを開発しました",
+    "url": "https://zenn.dev/dirtyman/articles/83739a69f55512",
+    "date": "2024-12-18T08:08:43.000Z",
+    "thumbnail": "https://res.cloudinary.com/zenn/image/upload/s--6U32EEZ3--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590%25E5%2580%258B%25E4%25BA%25BA%25E9%2596%258B%25E7%2599%25BA%25E3%2580%25911-infinity%25E3%2581%25A8%25E3%2581%2584%25E3%2581%2586%25E3%2583%2596%25E3%2583%25A9%25E3%2582%25A6%25E3%2582%25B6%25E3%2582%25B2%25E3%2583%25BC%25E3%2583%25A0%25E3%2582%2592%25E9%2596%258B%25E7%2599%25BA%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2597%25E3%2581%259F%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A9%258B%25E7%2594%25B0%25E8%2587%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2JjOTgwMGE1MGIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png",
+    "favicon": "https://zenn.dev/images/logo-transparent.png",
+    "site": "zenn"
+  },
+  {
     "title": "【React】RPG風のポートフォリオサイトを作成しました",
     "url": "https://zenn.dev/dirtyman/articles/93b736c8f89111",
     "date": "2024-12-06T23:30:20.000Z",
