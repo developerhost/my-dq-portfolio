@@ -9,6 +9,7 @@ import { Articles } from './-components/Articles';
 import NoteIcon from '@/assets/icon/note-icon.svg';
 import QiitaIcon from '@/assets/icon/qiita-icon.png';
 import ZennIcon from '@/assets/icon/zenn-logo.svg';
+import SafeSuspense from '@/components/SafeSuspense';
 import { useArrowNavigation } from '@/hooks/useArrowNavigation';
 
 const SNS = () => {
@@ -55,31 +56,33 @@ const SNS = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
-      <div className="bg-black border-2 border-white rounded-md p-6 w-72">
-        <div className="flex items-center justify-center mb-4">
-          <FaShareAlt className="w-8 h-8" />
-          <h2 className="text-xl font-bold ml-2">SNS Links</h2>
+      <SafeSuspense>
+        <div className="bg-black border-2 border-white rounded-md p-6 w-72">
+          <div className="flex items-center justify-center mb-4">
+            <FaShareAlt className="w-8 h-8" />
+            <h2 className="text-xl font-bold ml-2">SNS Links</h2>
+          </div>
+          <div className="text-left flex flex-col gap-y-2">
+            {fields.map((field, index) => (
+              <Link
+                className="flex items-center"
+                key={index}
+                onClick={() => handleSelect(index)}
+                tabIndex={0}
+                target="_blank"
+                to={field.link}
+              >
+                {selectedIndex === index && (
+                  <span className="mr-2 animate-blink">▶️</span>
+                )}
+                {field.icon}
+                <span className="ml-2">{field.label}</span>
+              </Link>
+            ))}
+          </div>
         </div>
-        <div className="text-left flex flex-col gap-y-2">
-          {fields.map((field, index) => (
-            <Link
-              className="flex items-center"
-              key={index}
-              onClick={() => handleSelect(index)}
-              tabIndex={0}
-              target="_blank"
-              to={field.link}
-            >
-              {selectedIndex === index && (
-                <span className="mr-2 animate-blink">▶️</span>
-              )}
-              {field.icon}
-              <span className="ml-2">{field.label}</span>
-            </Link>
-          ))}
-        </div>
-      </div>
-      <Articles />
+        <Articles />
+      </SafeSuspense>
     </div>
   );
 };
