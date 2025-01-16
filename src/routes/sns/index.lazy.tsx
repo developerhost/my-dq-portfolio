@@ -6,6 +6,7 @@ import { useKey } from 'react-use';
 
 import { Articles } from './-components/Articles';
 
+import mondIcon from '@/assets/icon/mond-icon.svg';
 import NoteIcon from '@/assets/icon/note-icon.svg';
 import QiitaIcon from '@/assets/icon/qiita-icon.png';
 import ZennIcon from '@/assets/icon/zenn-logo.svg';
@@ -38,6 +39,11 @@ const SNS = () => {
       label: 'note',
       icon: <img alt="note" className="w-4 h-4" src={NoteIcon} />,
       link: 'https://note.com/dall_develop',
+    },
+    {
+      label: 'mond',
+      icon: <img alt="mond" className="w-4 h-4" src={mondIcon} />,
+      link: 'https://mond.how/ja/dall_develop',
     },
   ];
 
