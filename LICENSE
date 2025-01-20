@@ -14,3 +14,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
+
+
+This project includes work derived from "pokemon-cards-css" by Simon Goellner (https://github.com/simeydotme/), licensed under the GNU General Public License v3.0.
+
+Original project details:
+- Project name: Pokémon Cards Holographic effect in CSS
+- Repository: https://github.com/simeydotme/pokemon-cards-css
+- License: GNU General Public License v3.0
+
+Copyright (C) 2022 Simon Goellner
+
+## Attribution
+
+This project was inspired by and includes work derived from the project ["pokemon-cards-css"](https://github.com/simeydotme/pokemon-cards-css) by Simon Goellner, which is licensed under the GNU General Public License v3.0.
