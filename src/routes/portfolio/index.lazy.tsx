@@ -1,44 +1,51 @@
 import { createLazyFileRoute } from '@tanstack/react-router';
-import { FaBriefcase } from 'react-icons/fa';
+import { FaBriefcase, FaChevronDown } from 'react-icons/fa';
 
 import ImageSlideshow from './-components/ImageSlideshow';
+import { portfolioSites } from './-utils/portfolioSites';
 
 import { pokemonCards } from '@/components/pokemon/cards';
 import PokemonCardList from '@/components/pokemon/PokemonCardList';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@/components/ui/collapsible';
 
 const Portfolio = () => {
-  const portfolioSites = [
-    {
-      title: '1-infinity',
-      description: '1/2を当て続けてハイスコアを狙うブラウザゲーム',
-      image: 'https://1-infinity.vercel.app/assets/opengraph-image.png',
-      link: 'https://1-infinity.vercel.app/',
-    },
-    {
-      title: 'ランダム指名くん',
-      description: '生徒をランダム指名できます',
-      image:
-        'https://firebasestorage.googleapis.com/v0/b/seat-99688.appspot.com/o/ogp.jpeg?alt=media&token=8e7cc982-f801-44a2-8ed5-b1b9f56185aa',
-      link: 'https://seat-99688.web.app/',
-    },
-    {
-      title: 'エンジニア自己紹介カードメーカー',
-      description: 'エンジニアの自己紹介カードを簡単にカスタマイズできます',
-      image:
-        'https://firebasestorage.googleapis.com/v0/b/it-intro-67781.appspot.com/o/comp288.png?alt=media&token=59fc1ade-5a83-45b8-9224-f76b981ab881',
-      link: 'https://it-intro-67781.web.app/',
-    },
-    {
-      title: 'サメの3D水族館',
-      description: 'Three.jsで作ったサメの3D水族館です',
-      image:
-        'https://firebasestorage.googleapis.com/v0/b/seat-99688.appspot.com/o/shark3d.png?alt=media&token=9740e01f-44bc-465a-9dcf-fcb7bca70db5',
-      link: 'https://fish3d.vercel.app/',
-    },
-  ];
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-black text-white">
       <ImageSlideshow />
+
+      {/* 注意書きの追加 */}
+      <div className="mb-6 w-full px-4">
+        <Collapsible>
+          <CollapsibleTrigger className="flex items-center text-lg font-semibold cursor-pointer">
+            注意書き
+            <span className="ml-2">
+              <FaChevronDown />
+            </span>
+          </CollapsibleTrigger>
+          <CollapsibleContent className="mt-4">
+            <div className="rounded-lg border border-gray-700 bg-gray-800 p-4">
+              <p className="text-sm text-gray-300">
+                <strong>タイトル:</strong> ポケモンカードをReactで実装してみた
+              </p>
+              <p className="mt-2 text-sm text-gray-400">
+                本記事では、ポケモンカードの表示の実装方法、実装した理由を解説しています
+              </p>
+              <a
+                className="mt-4 inline-block text-blue-400 hover:underline"
+                href="https://zenn.dev/dirtyman/articles/d8f920ce595e95"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                記事を読む
+              </a>
+            </div>
+          </CollapsibleContent>
+        </Collapsible>
+      </div>
       <PokemonCardList cards={pokemonCards} />
       <h1 className="text-white text-2xl font-bold mb-4 flex items-center gap-2">
         <FaBriefcase /> 制作サイト
