@@ -42,7 +42,10 @@
     "rss-parser": "^3.13.0",
     "styled-components": "^6.1.12",
     "tailwind-merge": "^2.5.5",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zenn-content-css": "^0.1.158",
+    "zenn-embed-elements": "^0.1.158",
+    "zenn-markdown-html": "^0.1.158"
   },
   "devDependencies": {
     "@eslint/compat": "^1.2.3",
