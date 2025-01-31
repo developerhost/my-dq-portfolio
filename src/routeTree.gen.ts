@@ -22,6 +22,8 @@ const RoomIndexLazyImport = createFileRoute('/room/')()
 const ProfileIndexLazyImport = createFileRoute('/profile/')()
 const PortfolioIndexLazyImport = createFileRoute('/portfolio/')()
 const DeveloperIndexLazyImport = createFileRoute('/developer/')()
+const BlogIndexLazyImport = createFileRoute('/blog/')()
+const BlogSlugIndexLazyImport = createFileRoute('/blog/$slug/')()
 
 // Create/Update Routes
 
@@ -65,6 +67,20 @@ const DeveloperIndexLazyRoute = DeveloperIndexLazyImport.update({
   import('./routes/developer/index.lazy').then((d) => d.Route),
 )
 
+const BlogIndexLazyRoute = BlogIndexLazyImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/blog/index.lazy').then((d) => d.Route))
+
+const BlogSlugIndexLazyRoute = BlogSlugIndexLazyImport.update({
+  id: '/blog/$slug/',
+  path: '/blog/$slug/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/blog/$slug/index.lazy').then((d) => d.Route),
+)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -74,6 +90,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogIndexLazyImport
       parentRoute: typeof rootRoute
     }
     '/developer/': {
@@ -111,6 +134,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SnsIndexLazyImport
       parentRoute: typeof rootRoute
     }
+    '/blog/$slug/': {
+      id: '/blog/$slug/'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -118,64 +148,92 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
+  '/blog': typeof BlogIndexLazyRoute
   '/developer': typeof DeveloperIndexLazyRoute
   '/portfolio': typeof PortfolioIndexLazyRoute
   '/profile': typeof ProfileIndexLazyRoute
   '/room': typeof RoomIndexLazyRoute
   '/sns': typeof SnsIndexLazyRoute
+  '/blog/$slug': typeof BlogSlugIndexLazyRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
+  '/blog': typeof BlogIndexLazyRoute
   '/developer': typeof DeveloperIndexLazyRoute
   '/portfolio': typeof PortfolioIndexLazyRoute
   '/profile': typeof ProfileIndexLazyRoute
   '/room': typeof RoomIndexLazyRoute
   '/sns': typeof SnsIndexLazyRoute
+  '/blog/$slug': typeof BlogSlugIndexLazyRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexLazyRoute
+  '/blog/': typeof BlogIndexLazyRoute
   '/developer/': typeof DeveloperIndexLazyRoute
   '/portfolio/': typeof PortfolioIndexLazyRoute
   '/profile/': typeof ProfileIndexLazyRoute
   '/room/': typeof RoomIndexLazyRoute
   '/sns/': typeof SnsIndexLazyRoute
+  '/blog/$slug/': typeof BlogSlugIndexLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/developer' | '/portfolio' | '/profile' | '/room' | '/sns'
+  fullPaths:
+    | '/'
+    | '/blog'
+    | '/developer'
+    | '/portfolio'
+    | '/profile'
+    | '/room'
+    | '/sns'
+    | '/blog/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/developer' | '/portfolio' | '/profile' | '/room' | '/sns'
+  to:
+    | '/'
+    | '/blog'
+    | '/developer'
+    | '/portfolio'
+    | '/profile'
+    | '/room'
+    | '/sns'
+    | '/blog/$slug'
   id:
     | '__root__'
     | '/'
+    | '/blog/'
     | '/developer/'
     | '/portfolio/'
     | '/profile/'
     | '/room/'
     | '/sns/'
+    | '/blog/$slug/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
+  BlogIndexLazyRoute: typeof BlogIndexLazyRoute
   DeveloperIndexLazyRoute: typeof DeveloperIndexLazyRoute
   PortfolioIndexLazyRoute: typeof PortfolioIndexLazyRoute
   ProfileIndexLazyRoute: typeof ProfileIndexLazyRoute
   RoomIndexLazyRoute: typeof RoomIndexLazyRoute
   SnsIndexLazyRoute: typeof SnsIndexLazyRoute
+  BlogSlugIndexLazyRoute: typeof BlogSlugIndexLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
+  BlogIndexLazyRoute: BlogIndexLazyRoute,
   DeveloperIndexLazyRoute: DeveloperIndexLazyRoute,
   PortfolioIndexLazyRoute: PortfolioIndexLazyRoute,
   ProfileIndexLazyRoute: ProfileIndexLazyRoute,
   RoomIndexLazyRoute: RoomIndexLazyRoute,
   SnsIndexLazyRoute: SnsIndexLazyRoute,
+  BlogSlugIndexLazyRoute: BlogSlugIndexLazyRoute,
 }
 
 export const routeTree = rootRoute
@@ -189,15 +247,20 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/blog/",
         "/developer/",
         "/portfolio/",
         "/profile/",
         "/room/",
-        "/sns/"
+        "/sns/",
+        "/blog/$slug/"
       ]
     },
     "/": {
       "filePath": "index.lazy.tsx"
+    },
+    "/blog/": {
+      "filePath": "blog/index.lazy.tsx"
     },
     "/developer/": {
       "filePath": "developer/index.lazy.tsx"
@@ -213,6 +276,9 @@ export const routeTree = rootRoute
     },
     "/sns/": {
       "filePath": "sns/index.lazy.tsx"
+    },
+    "/blog/$slug/": {
+      "filePath": "blog/$slug/index.lazy.tsx"
     }
   }
 }
