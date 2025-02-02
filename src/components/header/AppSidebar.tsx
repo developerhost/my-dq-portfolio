@@ -1,4 +1,10 @@
-import { FaHome, FaUser, FaShareAlt, FaBriefcase } from 'react-icons/fa';
+import {
+  FaHome,
+  FaUser,
+  FaShareAlt,
+  FaBriefcase,
+  FaBlog,
+} from 'react-icons/fa';
 import { SiCodeigniter } from 'react-icons/si';
 
 import {
@@ -20,6 +26,7 @@ const items = [
   { title: 'SNS', url: '/sns', icon: FaShareAlt },
   { title: 'Portfolio', url: '/portfolio', icon: FaBriefcase },
   { title: 'Developer', url: '/developer', icon: SiCodeigniter },
+  { title: 'Blog', url: '/blog', icon: FaBlog },
 ];
 
 export const AppSidebar = () => {
