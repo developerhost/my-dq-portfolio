@@ -1,5 +1,11 @@
 import { Link } from '@tanstack/react-router';
-import { FaHome, FaShareAlt, FaUser, FaBriefcase } from 'react-icons/fa';
+import {
+  FaHome,
+  FaShareAlt,
+  FaUser,
+  FaBriefcase,
+  FaBlog,
+} from 'react-icons/fa';
 import { SiCodeigniter } from 'react-icons/si';
 
 import { BgmPlayer } from '@/components/BgmPlayer';
@@ -34,6 +40,12 @@ export const PCHeader = () => {
           to="/developer"
         >
           <SiCodeigniter /> Developer
+        </Link>
+        <Link
+          className="[&.active]:font-bold flex items-center gap-1"
+          to="/blog"
+        >
+          <FaBlog /> Blog
         </Link>
       </div>
       <BgmPlayer src="/bgm/8bit-jo-jokyoku.mp3" />
