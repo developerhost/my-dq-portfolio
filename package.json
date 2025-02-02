@@ -26,6 +26,7 @@
     "@tanstack/react-query-devtools": "^5.59.19",
     "@tanstack/react-router": "^1.47.1",
     "@tanstack/react-table": "^8.20.5",
+    "buffer": "^6.0.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
@@ -104,5 +105,8 @@
       "pre-commit": "lint-staged",
       "pre-push": "pnpm run lint && pnpm run prettier -- --check"
     }
+  },
+  "browser": {
+    "buffer": "buffer"
   }
 }
