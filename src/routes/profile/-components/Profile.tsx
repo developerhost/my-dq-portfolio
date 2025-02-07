@@ -71,7 +71,12 @@ export const Profile = () => {
     `,
     `・情熱プログラマー
     ・プリンシプルオブプログラミング
-    ・プログラマー脳`,
+    ・プログラマー脳
+    ・利己的な遺伝子
+    ・生命科学的思考
+    ・サラバ
+    ・ザ・ゲーム
+    `,
     `・Fear, and Loathing in Las Vegas
     ・MOROHA
     ・Avicii
