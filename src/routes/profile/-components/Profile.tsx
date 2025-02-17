@@ -76,6 +76,8 @@ export const Profile = () => {
     ・生命科学的思考
     ・サラバ
     ・ザ・ゲーム
+    ・GIVE&TAKE
+    ・ハッカーと画家
     `,
     `・Fear, and Loathing in Las Vegas
     ・MOROHA
