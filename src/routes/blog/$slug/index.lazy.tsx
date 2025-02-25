@@ -39,6 +39,58 @@ export const BlogPost = () => {
       <p className="text-gray-500">{post.date}</p>
       {/* eslint-disable-next-line react/no-danger */}
       <div className="znc" dangerouslySetInnerHTML={{ __html: post.content }} />
+
+      {/* アフィリエイトリンクを記事の最後に追加 */}
+      <div className="mt-8 text-center">
+        <p className="text-lg font-semibold">
+          フリーランスにおすすめのサービス
+        </p>
+        <div className="mt-4 mx-auto">
+          {/* フリーランス */}
+          <a
+            href="https://px.a8.net/svt/ejp?a8mat=35AZCF+5JG8FM+47L8+63WO1"
+            rel="nofollow"
+          >
+            <img
+              alt="広告"
+              className="mx-auto"
+              height="250"
+              src="https://www23.a8.net/svt/bgt?aid=190308975335&wid=001&eno=01&mid=s00000019646001026000&mc=1"
+              width="300"
+            />
+          </a>
+          <img
+            alt="広告"
+            className="mx-auto"
+            height="1"
+            src="https://www11.a8.net/0.gif?a8mat=35AZCF+5JG8FM+47L8+63WO1"
+            width="1"
+          />
+        </div>
+
+        <div className="mt-4 mx-auto">
+          {/* クラウドソーシング */}
+          <a
+            href="https://px.a8.net/svt/ejp?a8mat=44Z73C+DYHVCI+4F8I+C28PT"
+            rel="nofollow"
+          >
+            <img
+              alt="広告"
+              className="mx-auto"
+              height="250"
+              src="https://www23.a8.net/svt/bgt?aid=250225320844&wid=001&eno=01&mid=s00000020637002026000&mc=1"
+              width="300"
+            />
+          </a>
+          <img
+            alt="広告"
+            className="mx-auto"
+            height="1"
+            src="https://www11.a8.net/0.gif?a8mat=44Z73C+DYHVCI+4F8I+C28PT"
+            width="1"
+          />
+        </div>
+      </div>
     </div>
   );
 };
