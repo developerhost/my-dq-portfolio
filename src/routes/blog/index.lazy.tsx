@@ -21,7 +21,7 @@ export const BlogList = () => {
           <li className="mb-4" key={post.slug}>
             <Link
               className="text-blue-500 hover:underline"
-              to={`/blog/${post.slug}`}
+              to={`/blog/${post.slug}` as const}
             >
               <h2 className="text-xl font-bold">{post.title}</h2>
             </Link>
