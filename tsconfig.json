@@ -12,6 +12,6 @@
       "@/lib/*": ["./src/lib/*"],
       "@/styles/*": ["./src/styles/*"]
     },
-    "maxDepth": 50
+    "skipLibCheck": true
   }
 }
