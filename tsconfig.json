@@ -11,6 +11,7 @@
       "@/components/*": ["./src/components/*"],
       "@/lib/*": ["./src/lib/*"],
       "@/styles/*": ["./src/styles/*"]
-    }
+    },
+    "skipLibCheck": true
   }
 }
