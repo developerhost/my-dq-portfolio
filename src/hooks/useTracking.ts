@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useRouterState } from '@tanstack/react-router';
 import ReactGA from 'react-ga4';
 
-const TRACKING_ID = import.meta.env.VITE_GOOGLE_ANALYTICS_ID; // 環境変数から取得
+const TRACKING_ID = 'G-FSSXRWL3SD'; // 環境変数から取得
 
 const usePageTracking = () => {
   const routerState = useRouterState() as {
