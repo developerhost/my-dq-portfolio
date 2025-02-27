@@ -98,6 +98,7 @@ export const BlogPost = () => {
           >
             <img
               alt=""
+              className="mx-auto"
               height="250"
               src="https://www24.a8.net/svt/bgt?aid=250227338562&wid=001&eno=01&mid=s00000001004012015000&mc=1"
               width="250"
@@ -105,6 +106,7 @@ export const BlogPost = () => {
           </a>
           <img
             alt=""
+            className="mx-auto"
             height="1"
             src="https://www16.a8.net/0.gif?a8mat=44Z8NE+9ALMR6+7QW+1ZJ8C1"
             width="1"
