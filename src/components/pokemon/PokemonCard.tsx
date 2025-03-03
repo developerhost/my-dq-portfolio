@@ -29,10 +29,6 @@ const PokemonCard = ({ card }: { card: PokemonCardProps }) => {
     const rotateXValue = (deltaY / cardRect.height) * 20; // Y軸に基づく回転
     const rotateYValue = (deltaX / cardRect.width) * -20; // X軸に基づく回転
 
-    // 計算された値をconsole.logで確認
-    console.log(`deltaX: ${deltaX}, deltaY: ${deltaY}`);
-    console.log(`rotateXValue: ${rotateXValue}, rotateYValue: ${rotateYValue}`);
-
     setRotateX(rotateXValue);
     setRotateY(rotateYValue);
   };
