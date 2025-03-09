@@ -21,6 +21,7 @@ const SnsIndexLazyImport = createFileRoute('/sns/')()
 const RoomIndexLazyImport = createFileRoute('/room/')()
 const ProfileIndexLazyImport = createFileRoute('/profile/')()
 const PortfolioIndexLazyImport = createFileRoute('/portfolio/')()
+const MusicIndexLazyImport = createFileRoute('/music/')()
 const DeveloperIndexLazyImport = createFileRoute('/developer/')()
 const BlogIndexLazyImport = createFileRoute('/blog/')()
 const BlogSlugIndexLazyImport = createFileRoute('/blog/$slug/')()
@@ -58,6 +59,12 @@ const PortfolioIndexLazyRoute = PortfolioIndexLazyImport.update({
 } as any).lazy(() =>
   import('./routes/portfolio/index.lazy').then((d) => d.Route),
 )
+
+const MusicIndexLazyRoute = MusicIndexLazyImport.update({
+  id: '/music/',
+  path: '/music/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/music/index.lazy').then((d) => d.Route))
 
 const DeveloperIndexLazyRoute = DeveloperIndexLazyImport.update({
   id: '/developer/',
@@ -106,6 +113,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DeveloperIndexLazyImport
       parentRoute: typeof rootRoute
     }
+    '/music/': {
+      id: '/music/'
+      path: '/music'
+      fullPath: '/music'
+      preLoaderRoute: typeof MusicIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/portfolio/': {
       id: '/portfolio/'
       path: '/portfolio'
@@ -150,6 +164,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
   '/blog': typeof BlogIndexLazyRoute
   '/developer': typeof DeveloperIndexLazyRoute
+  '/music': typeof MusicIndexLazyRoute
   '/portfolio': typeof PortfolioIndexLazyRoute
   '/profile': typeof ProfileIndexLazyRoute
   '/room': typeof RoomIndexLazyRoute
@@ -161,6 +176,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '/blog': typeof BlogIndexLazyRoute
   '/developer': typeof DeveloperIndexLazyRoute
+  '/music': typeof MusicIndexLazyRoute
   '/portfolio': typeof PortfolioIndexLazyRoute
   '/profile': typeof ProfileIndexLazyRoute
   '/room': typeof RoomIndexLazyRoute
@@ -173,6 +189,7 @@ export interface FileRoutesById {
   '/': typeof IndexLazyRoute
   '/blog/': typeof BlogIndexLazyRoute
   '/developer/': typeof DeveloperIndexLazyRoute
+  '/music/': typeof MusicIndexLazyRoute
   '/portfolio/': typeof PortfolioIndexLazyRoute
   '/profile/': typeof ProfileIndexLazyRoute
   '/room/': typeof RoomIndexLazyRoute
@@ -186,6 +203,7 @@ export interface FileRouteTypes {
     | '/'
     | '/blog'
     | '/developer'
+    | '/music'
     | '/portfolio'
     | '/profile'
     | '/room'
@@ -196,6 +214,7 @@ export interface FileRouteTypes {
     | '/'
     | '/blog'
     | '/developer'
+    | '/music'
     | '/portfolio'
     | '/profile'
     | '/room'
@@ -206,6 +225,7 @@ export interface FileRouteTypes {
     | '/'
     | '/blog/'
     | '/developer/'
+    | '/music/'
     | '/portfolio/'
     | '/profile/'
     | '/room/'
@@ -218,6 +238,7 @@ export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
   BlogIndexLazyRoute: typeof BlogIndexLazyRoute
   DeveloperIndexLazyRoute: typeof DeveloperIndexLazyRoute
+  MusicIndexLazyRoute: typeof MusicIndexLazyRoute
   PortfolioIndexLazyRoute: typeof PortfolioIndexLazyRoute
   ProfileIndexLazyRoute: typeof ProfileIndexLazyRoute
   RoomIndexLazyRoute: typeof RoomIndexLazyRoute
@@ -229,6 +250,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   BlogIndexLazyRoute: BlogIndexLazyRoute,
   DeveloperIndexLazyRoute: DeveloperIndexLazyRoute,
+  MusicIndexLazyRoute: MusicIndexLazyRoute,
   PortfolioIndexLazyRoute: PortfolioIndexLazyRoute,
   ProfileIndexLazyRoute: ProfileIndexLazyRoute,
   RoomIndexLazyRoute: RoomIndexLazyRoute,
@@ -249,6 +271,7 @@ export const routeTree = rootRoute
         "/",
         "/blog/",
         "/developer/",
+        "/music/",
         "/portfolio/",
         "/profile/",
         "/room/",
@@ -264,6 +287,9 @@ export const routeTree = rootRoute
     },
     "/developer/": {
       "filePath": "developer/index.lazy.tsx"
+    },
+    "/music/": {
+      "filePath": "music/index.lazy.tsx"
     },
     "/portfolio/": {
       "filePath": "portfolio/index.lazy.tsx"
