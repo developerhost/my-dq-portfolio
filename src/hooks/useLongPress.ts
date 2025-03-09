@@ -9,41 +9,66 @@ type LongPressSet = {
   onTouchStart: () => void;
 };
 
+interface UseLongPressOptions {
+  delay?: number; // 長押し時の連続コール間隔（ミリ秒）
+  onClick: () => void;
+  onLongPress: () => void;
+  threshold?: number; // 短押し判定の閾値（ミリ秒）
+}
+
 /**
- * 長押しイベントを処理するためのカスタムフック。
+ * 長押しイベントを処理するカスタムフック。
  *
- * @param callback - 長押しが発生したときに呼び出されるコールバック関数。
- * @param ms - 長押しと見なすまでの時間（ミリ秒）。
+ * @param options - 短押し・長押しのコールバック関数、および設定オプション。
  * @returns 長押しイベントを処理するためのイベントハンドラを含むオブジェクト。
  */
-export const useLongPress = (
-  callback: () => void,
-  ms: number
-): LongPressSet => {
+export const useLongPress = ({
+  onClick,
+  onLongPress,
+  delay = 100,
+  threshold = 300,
+}: UseLongPressOptions): LongPressSet => {
   const timeout = useRef<NodeJS.Timeout | null>(null);
+  const interval = useRef<NodeJS.Timeout | null>(null);
+  const isLongPress = useRef(false);
 
   const start = () => {
-    if (timeout.current) return; // すでにタイマーが動作中の場合は何もしない
-    timeout.current = setInterval(callback, ms);
+    isLongPress.current = false;
+    timeout.current = setTimeout(() => {
+      isLongPress.current = true;
+      onLongPress();
+      interval.current = setInterval(onLongPress, delay);
+    }, threshold);
   };
 
   const stop = () => {
     if (timeout.current) {
-      clearInterval(timeout.current);
+      clearTimeout(timeout.current);
       timeout.current = null;
+    }
+    if (interval.current) {
+      clearInterval(interval.current);
+      interval.current = null;
+    }
+  };
+
+  const handleRelease = () => {
+    stop();
+    if (!isLongPress.current) {
+      onClick();
     }
   };
 
   const preventContextMenu = (event: React.MouseEvent) => {
-    event.preventDefault(); // 右クリックメニューを無効化
+    event.preventDefault();
   };
 
   return {
     onMouseDown: start,
-    onMouseUp: stop,
+    onMouseUp: handleRelease,
     onMouseLeave: stop,
     onTouchStart: start,
-    onTouchEnd: stop,
+    onTouchEnd: handleRelease,
     onContextMenu: preventContextMenu,
   };
 };
