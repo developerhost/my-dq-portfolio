@@ -1,3 +1,6 @@
+import { FaHome, FaUser, FaShareAlt, FaBriefcase, FaBlog } from "react-icons/fa";
+import { SiCodeigniter } from "react-icons/si";
+
 export const TILES = {
   HERO: 0, // 勇者タイル
   MURABITO: 1, // 村人タイル
@@ -24,3 +27,12 @@ export const TILES = {
   FLOOR_ICE: 24, // 氷の床
   MONSTER: 25, // モンスタータイル
 } as const;
+
+export const linkItems = [
+  { title: 'Home', url: '/', icon: FaHome },
+  { title: 'Profile', url: '/profile', icon: FaUser },
+  { title: 'SNS', url: '/sns', icon: FaShareAlt },
+  { title: 'Portfolio', url: '/portfolio', icon: FaBriefcase },
+  { title: 'Developer', url: '/developer', icon: SiCodeigniter },
+  { title: 'Blog', url: '/blog', icon: FaBlog },
+];

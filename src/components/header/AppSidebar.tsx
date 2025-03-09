@@ -1,13 +1,4 @@
 import {
-  FaHome,
-  FaUser,
-  FaShareAlt,
-  FaBriefcase,
-  FaBlog,
-} from 'react-icons/fa';
-import { SiCodeigniter } from 'react-icons/si';
-
-import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
@@ -19,15 +10,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
-
-const items = [
-  { title: 'Home', url: '/', icon: FaHome },
-  { title: 'Profile', url: '/profile', icon: FaUser },
-  { title: 'SNS', url: '/sns', icon: FaShareAlt },
-  { title: 'Portfolio', url: '/portfolio', icon: FaBriefcase },
-  { title: 'Developer', url: '/developer', icon: SiCodeigniter },
-  { title: 'Blog', url: '/blog', icon: FaBlog },
-];
+import { linkItems } from '@/constants';
 
 export const AppSidebar = () => {
   return (
@@ -40,7 +23,7 @@ export const AppSidebar = () => {
           <SidebarGroupLabel>Menu</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => (
+              {linkItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <a
