@@ -1,5 +1,13 @@
 [
   {
+    "title": "Booksを書いて一年経ったので売上を公開します！",
+    "url": "https://zenn.dev/dirtyman/articles/3bbfe2f9eea7b1",
+    "date": "2025-03-09T03:36:01.000Z",
+    "thumbnail": "https://res.cloudinary.com/zenn/image/upload/s--BI7bEgGk--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:Books%25E3%2582%2592%25E6%259B%25B8%25E3%2581%2584%25E3%2581%25A6%25E4%25B8%2580%25E5%25B9%25B4%25E7%25B5%258C%25E3%2581%25A3%25E3%2581%259F%25E3%2581%25AE%25E3%2581%25A7%25E5%25A3%25B2%25E4%25B8%258A%25E3%2582%2592%25E5%2585%25AC%25E9%2596%258B%25E3%2581%2597%25E3%2581%25BE%25E3%2581%2599%25EF%25BC%2581%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A9%258B%25E7%2594%25B0%25E8%2587%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2Q5NTFjNWE1YzIuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png",
+    "favicon": "https://zenn.dev/images/logo-transparent.png",
+    "site": "zenn"
+  },
+  {
     "title": "ポケポケ(ポケモンカード)のアニメーションを実装しました",
     "url": "https://zenn.dev/dirtyman/articles/776e3539e40171",
     "date": "2025-03-03T05:52:39.000Z",
@@ -134,6 +142,14 @@
     "thumbnail": "",
     "favicon": "https://cdn.qiita.com/assets/favicons/public/production-c620d3e403342b1022967ba5e3db1aaa.ico",
     "site": "qiita"
+  },
+  {
+    "title": "治験バイトで一ヶ月で60万円近く稼いだ話",
+    "url": "https://note.com/dall_develop/n/n52b71a4729a1",
+    "date": "2025-03-09T04:31:08.000Z",
+    "thumbnail": "",
+    "favicon": "https://assets.st-note.com/poc-image/manual/note-common-images/production/svg/production.ico",
+    "site": "note"
   },
   {
     "title": "【非エンジニアに読んで欲しい】システム開発に対する心得",
