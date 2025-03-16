@@ -1,11 +1,8 @@
-/* eslint-disable react/jsx-sort-props */
 import { useState, useEffect, useCallback } from 'react';
 
-import { useQuery } from '@tanstack/react-query';
+import { CLIENT_ID, CLIENT_SECRET } from './constants';
 
-import { CLIENT_ID, CLIENT_SECRET, PLAYLIST_ID } from './constants';
-
-import type { Artist, TrackItem, ArtistDetails } from './type';
+import type { Track, ArtistDetails } from './type';
 
 /*
   注意: この実装はデモ用です。本番環境ではクライアント側で Client Secret を扱うのはセキュリティ上好ましくないため、
@@ -13,17 +10,28 @@ import type { Artist, TrackItem, ArtistDetails } from './type';
   下記の Spotify API のクライアントクレデンシャルは .env ファイルから読み込みます。
 */
 
+// アーティスト名で検索する
+const AVICII_NAME = 'Avicii';
+const MRCHILDREN_NAME = 'Mr.Children';
+
 const MusicPlayer = () => {
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
-  const [artistData, setArtistData] = useState<ArtistDetails | null>(null);
+  const [aviciiData, setAviciiData] = useState<{
+    artist: ArtistDetails;
+    topTrack: Track;
+  } | null>(null);
+  const [mrChildrenData, setMrChildrenData] = useState<{
+    artist: ArtistDetails;
+    topTrack: Track;
+  } | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   const clientId = CLIENT_ID;
   const clientSecret = CLIENT_SECRET;
-  const playlistId = PLAYLIST_ID;
 
-  const fetchPlaylist = async (): Promise<TrackItem[]> => {
-    console.log('Fetching access token for playlist...');
-    // アクセストークン取得
+  // アクセストークンを取得する共通関数
+  const fetchAccessToken = useCallback(async (): Promise<string> => {
     const tokenResponse = await fetch(
       'https://accounts.spotify.com/api/token',
       {
@@ -36,72 +44,84 @@ const MusicPlayer = () => {
       }
     );
     const tokenData = await tokenResponse.json();
-    const accessToken = tokenData.access_token;
-    console.log('Access token received:', accessToken);
+    return tokenData.access_token;
+  }, [clientId, clientSecret]);
 
-    console.log('Fetching playlist data...');
-    // プレイリストのトラック情報を取得
-    const playlistResponse = await fetch(
-      `https://api.spotify.com/v1/playlists/${playlistId}`,
-      {
-        headers: {
-          Authorization: 'Bearer ' + accessToken,
-        },
-      }
-    );
-    const playlistData = await playlistResponse.json();
-    console.log('Playlist data:', playlistData);
-    return playlistData.tracks.items;
-  };
-
-  const {
-    data: tracks = [],
-    isLoading,
-    error,
-  } = useQuery<TrackItem[]>({
-    queryKey: ['playlist'],
-    queryFn: fetchPlaylist,
-  });
-
-  // 新たなデバッグ用関数: アーティスト情報を取得して state に保存する
-  const fetchArtist = useCallback(async () => {
-    try {
-      console.log('Fetching access token for artist...');
-      const tokenResponse = await fetch(
-        'https://accounts.spotify.com/api/token',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            Authorization: 'Basic ' + btoa(clientId + ':' + clientSecret),
-          },
-          body: 'grant_type=client_credentials',
-        }
-      );
-      const tokenData = await tokenResponse.json();
-      const accessToken = tokenData.access_token;
-      console.log('Access token for artist:', accessToken);
-
-      console.log('Fetching artist data for ID: 0TnOYISbd1XYRBk9myaseg...');
-      const artistResponse = await fetch(
-        'https://api.spotify.com/v1/artists/0TnOYISbd1XYRBk9myaseg',
+  // 指定したアーティスト名で検索し、IDを取得する関数
+  const getArtistIdByName = useCallback(
+    async (artistName: string): Promise<string> => {
+      const accessToken = await fetchAccessToken();
+      const searchResponse = await fetch(
+        `https://api.spotify.com/v1/search?q=${encodeURIComponent('artist:' + artistName)}&type=artist`,
         {
           headers: {
             Authorization: 'Bearer ' + accessToken,
           },
         }
       );
-      const artistData = await artistResponse.json();
-      console.log('Artist data:', artistData);
-      setArtistData(artistData);
-    } catch (error) {
-      console.error('Error fetching artist data:', error);
-    }
-  }, [clientId, clientSecret]);
+      const searchData = await searchResponse.json();
+      const items = searchData.artists.items;
+      if (!items || items.length === 0) {
+        throw new Error('No artist found for ' + artistName);
+      }
+      return items[0].id;
+    },
+    [fetchAccessToken]
+  );
 
+  // 指定したアーティスト名のトップトラックを取得する関数（国コードはJP）
+  const fetchTopTrack = useCallback(
+    async (
+      artistName: string
+    ): Promise<{ artist: ArtistDetails; topTrack: Track }> => {
+      const accessToken = await fetchAccessToken();
+      const artistId = await getArtistIdByName(artistName);
+      // アーティストの情報取得
+      const artistResponse = await fetch(
+        `https://api.spotify.com/v1/artists/${artistId}`,
+        {
+          headers: {
+            Authorization: 'Bearer ' + accessToken,
+          },
+        }
+      );
+      const artistData: ArtistDetails = await artistResponse.json();
+      // アーティストのトップトラック取得
+      const topTracksResponse = await fetch(
+        `https://api.spotify.com/v1/artists/${artistId}/top-tracks?country=JP`,
+        {
+          headers: {
+            Authorization: 'Bearer ' + accessToken,
+          },
+        }
+      );
+      const topTracksData = await topTracksResponse.json();
+      // 一番人気のトラック（配列の先頭を使用）
+      const topTrack: Track = topTracksData.tracks[0];
+      return { artist: artistData, topTrack };
+    },
+    [fetchAccessToken, getArtistIdByName]
+  );
+
+  // 両アーティストの情報とトップトラックを一括取得
   useEffect(() => {
-    fetchArtist();
-  }, [fetchArtist]);
+    const fetchData = async () => {
+      try {
+        const [avicii, mrChildren] = await Promise.all([
+          fetchTopTrack(AVICII_NAME),
+          fetchTopTrack(MRCHILDREN_NAME),
+        ]);
+        setAviciiData(avicii);
+        setMrChildrenData(mrChildren);
+      } catch (err) {
+        console.error('Error fetching top tracks:', err);
+        setError('トップトラックの取得に失敗しました。');
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [fetchTopTrack]);
 
   const handlePlay = (previewUrl: string) => {
     if (audio) {
@@ -115,69 +135,95 @@ const MusicPlayer = () => {
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Music Player</h1>
-
-      {artistData && (
-        <div className="mb-4 p-4 border rounded shadow">
-          <h2 className="text-xl font-semibold">Artist Info</h2>
-          <p>
-            <strong>Name:</strong> {artistData.name}
-          </p>
-          <p>
-            <strong>Followers:</strong> {artistData.followers.total}
-          </p>
-          {artistData.images && artistData.images[0] && (
-            <img
-              alt={artistData.name}
-              className="w-32 h-32 object-cover"
-              src={artistData.images[0].url}
-            />
-          )}
-          <p>
-            <strong>Popularity:</strong> {artistData.popularity}
-          </p>
-          <p>
-            <strong>Spotify URI:</strong> {artistData.uri}
-          </p>
-        </div>
-      )}
-      {isLoading ? (
-        <p>Loading playlist...</p>
+      {loading ? (
+        <p>データを読み込み中...</p>
       ) : error ? (
-        <p>Error loading playlist.</p>
+        <p className="text-red-500">{error}</p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {tracks.map((item: TrackItem, index: number) => {
-            const track = item.track;
-            return (
-              <div key={index} className="border rounded p-4 shadow">
-                {track.album.images && track.album.images[0] && (
+        <div className="space-y-8">
+          {aviciiData && (
+            <div className="mb-4 p-4 border rounded shadow">
+              <h2 className="text-xl font-semibold">
+                {' '}
+                {aviciiData.artist.name}
+              </h2>
+              {aviciiData.artist.images && aviciiData.artist.images[0] && (
+                <img
+                  alt={aviciiData.artist.name}
+                  className="w-32 h-32 object-cover mb-2"
+                  src={aviciiData.artist.images[0].url}
+                />
+              )}
+              <p>
+                <strong>トップトラック:</strong> {aviciiData.topTrack.name}
+              </p>
+              {aviciiData.topTrack.album.images &&
+                aviciiData.topTrack.album.images[0] && (
                   <img
-                    alt={track.name}
+                    alt={aviciiData.topTrack.name}
                     className="w-full h-48 object-cover mb-2"
-                    src={track.album.images[0].url}
+                    src={aviciiData.topTrack.album.images[0].url}
                   />
                 )}
-                <h2 className="text-lg font-semibold">{track.name}</h2>
-                <p className="text-sm text-gray-600">
-                  {track.artists
-                    .map((artist: Artist) => artist.name)
-                    .join(', ')}
-                </p>
-                {track.preview_url ? (
-                  <button
-                    className="bg-blue-500 hover:bg-blue-600 mt-2 px-4 py-2 rounded text-white"
-                    onClick={() =>
-                      track.preview_url && handlePlay(track.preview_url)
+              {aviciiData.topTrack.preview_url ? (
+                <button
+                  className="bg-blue-500 hover:bg-blue-600 mt-2 px-4 py-2 rounded text-white"
+                  onClick={() => {
+                    const url = aviciiData.topTrack.preview_url;
+                    if (url) {
+                      handlePlay(url);
                     }
-                  >
-                    再生
-                  </button>
-                ) : (
-                  <p className="mt-2 text-red-500">プレビューなし</p>
+                  }}
+                >
+                  再生
+                </button>
+              ) : (
+                <p className="mt-2 text-red-500">♫</p>
+              )}
+            </div>
+          )}
+
+          {mrChildrenData && (
+            <div className="mb-4 p-4 border rounded shadow">
+              <h2 className="text-xl font-semibold">
+                {mrChildrenData.artist.name}
+              </h2>
+              {mrChildrenData.artist.images &&
+                mrChildrenData.artist.images[0] && (
+                  <img
+                    alt={mrChildrenData.artist.name}
+                    className="w-32 h-32 object-cover mb-2"
+                    src={mrChildrenData.artist.images[0].url}
+                  />
                 )}
-              </div>
-            );
-          })}
+              <p>
+                <strong>トップトラック:</strong> {mrChildrenData.topTrack.name}
+              </p>
+              {mrChildrenData.topTrack.album.images &&
+                mrChildrenData.topTrack.album.images[0] && (
+                  <img
+                    alt={mrChildrenData.topTrack.name}
+                    className="w-full h-48 object-cover mb-2"
+                    src={mrChildrenData.topTrack.album.images[0].url}
+                  />
+                )}
+              {mrChildrenData.topTrack.preview_url ? (
+                <button
+                  className="bg-blue-500 hover:bg-blue-600 mt-2 px-4 py-2 rounded text-white"
+                  onClick={() => {
+                    const url = mrChildrenData.topTrack.preview_url;
+                    if (url) {
+                      handlePlay(url);
+                    }
+                  }}
+                >
+                  再生
+                </button>
+              ) : (
+                <p className="mt-2 text-red-500">♫</p>
+              )}
+            </div>
+          )}
         </div>
       )}
     </div>
