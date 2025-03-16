@@ -5,6 +5,7 @@ import {
   FaUser,
   FaBriefcase,
   FaBlog,
+  FaMusic,
 } from 'react-icons/fa';
 import { SiCodeigniter } from 'react-icons/si';
 
@@ -46,6 +47,12 @@ export const PCHeader = () => {
           to="/blog"
         >
           <FaBlog /> Blog
+        </Link>
+        <Link
+          className="[&.active]:font-bold flex items-center gap-1"
+          to="/music"
+        >
+          <FaMusic /> Music
         </Link>
       </div>
       <BgmPlayer src="/bgm/8bit-jo-jokyoku.mp3" />

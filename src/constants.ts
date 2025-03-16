@@ -1,4 +1,4 @@
-import { FaHome, FaUser, FaShareAlt, FaBriefcase, FaBlog } from "react-icons/fa";
+import { FaHome, FaUser, FaShareAlt, FaBriefcase, FaBlog, FaMusic } from "react-icons/fa";
 import { SiCodeigniter } from "react-icons/si";
 
 export const TILES = {
@@ -35,4 +35,5 @@ export const linkItems = [
   { title: 'Portfolio', url: '/portfolio', icon: FaBriefcase },
   { title: 'Developer', url: '/developer', icon: SiCodeigniter },
   { title: 'Blog', url: '/blog', icon: FaBlog },
+  { title: 'Music', url: '/music', icon: FaMusic },
 ];
