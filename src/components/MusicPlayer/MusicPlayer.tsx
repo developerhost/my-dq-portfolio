@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-sort-props */
 import { useState, useEffect, useCallback } from 'react';
 
 import { CLIENT_ID, CLIENT_SECRET } from './constants';
@@ -132,6 +133,51 @@ const MusicPlayer = () => {
     newAudio.play();
   };
 
+  // 共通化されたアーティストカードコンポーネント
+  const ArtistCard = ({
+    title,
+    data,
+  }: {
+    data: { artist: ArtistDetails; topTrack: Track };
+    title: string;
+  }) => (
+    <div className="mb-4 p-4 border rounded shadow">
+      <h2 className="text-xl font-semibold">{title}</h2>
+      {data.artist.images && data.artist.images[0] && (
+        <img
+          alt={data.artist.name}
+          className="w-32 h-32 object-cover mb-2"
+          src={data.artist.images[0].url}
+        />
+      )}
+      <p>
+        <strong>トップトラック:</strong> {data.topTrack.name}
+      </p>
+      {data.topTrack.album.images && data.topTrack.album.images[0] && (
+        <img
+          alt={data.topTrack.name}
+          className="w-full h-48 object-cover mb-2"
+          src={data.topTrack.album.images[0].url}
+        />
+      )}
+      {data.topTrack.preview_url ? (
+        <button
+          className="bg-blue-500 hover:bg-blue-600 mt-2 px-4 py-2 rounded text-white"
+          onClick={() => {
+            const url = data.topTrack.preview_url;
+            if (url) {
+              handlePlay(url);
+            }
+          }}
+        >
+          再生
+        </button>
+      ) : (
+        <p className="mt-2 text-red-500">♫</p>
+      )}
+    </div>
+  );
+
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Music Player</h1>
@@ -141,88 +187,9 @@ const MusicPlayer = () => {
         <p className="text-red-500">{error}</p>
       ) : (
         <div className="space-y-8">
-          {aviciiData && (
-            <div className="mb-4 p-4 border rounded shadow">
-              <h2 className="text-xl font-semibold">
-                {' '}
-                {aviciiData.artist.name}
-              </h2>
-              {aviciiData.artist.images && aviciiData.artist.images[0] && (
-                <img
-                  alt={aviciiData.artist.name}
-                  className="w-32 h-32 object-cover mb-2"
-                  src={aviciiData.artist.images[0].url}
-                />
-              )}
-              <p>
-                <strong>トップトラック:</strong> {aviciiData.topTrack.name}
-              </p>
-              {aviciiData.topTrack.album.images &&
-                aviciiData.topTrack.album.images[0] && (
-                  <img
-                    alt={aviciiData.topTrack.name}
-                    className="w-full h-48 object-cover mb-2"
-                    src={aviciiData.topTrack.album.images[0].url}
-                  />
-                )}
-              {aviciiData.topTrack.preview_url ? (
-                <button
-                  className="bg-blue-500 hover:bg-blue-600 mt-2 px-4 py-2 rounded text-white"
-                  onClick={() => {
-                    const url = aviciiData.topTrack.preview_url;
-                    if (url) {
-                      handlePlay(url);
-                    }
-                  }}
-                >
-                  再生
-                </button>
-              ) : (
-                <p className="mt-2 text-red-500">♫</p>
-              )}
-            </div>
-          )}
-
+          {aviciiData && <ArtistCard title="Avicii" data={aviciiData} />}
           {mrChildrenData && (
-            <div className="mb-4 p-4 border rounded shadow">
-              <h2 className="text-xl font-semibold">
-                {mrChildrenData.artist.name}
-              </h2>
-              {mrChildrenData.artist.images &&
-                mrChildrenData.artist.images[0] && (
-                  <img
-                    alt={mrChildrenData.artist.name}
-                    className="w-32 h-32 object-cover mb-2"
-                    src={mrChildrenData.artist.images[0].url}
-                  />
-                )}
-              <p>
-                <strong>トップトラック:</strong> {mrChildrenData.topTrack.name}
-              </p>
-              {mrChildrenData.topTrack.album.images &&
-                mrChildrenData.topTrack.album.images[0] && (
-                  <img
-                    alt={mrChildrenData.topTrack.name}
-                    className="w-full h-48 object-cover mb-2"
-                    src={mrChildrenData.topTrack.album.images[0].url}
-                  />
-                )}
-              {mrChildrenData.topTrack.preview_url ? (
-                <button
-                  className="bg-blue-500 hover:bg-blue-600 mt-2 px-4 py-2 rounded text-white"
-                  onClick={() => {
-                    const url = mrChildrenData.topTrack.preview_url;
-                    if (url) {
-                      handlePlay(url);
-                    }
-                  }}
-                >
-                  再生
-                </button>
-              ) : (
-                <p className="mt-2 text-red-500">♫</p>
-              )}
-            </div>
+            <ArtistCard title="Mr.Children" data={mrChildrenData} />
           )}
         </div>
       )}
