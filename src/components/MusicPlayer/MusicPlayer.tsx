@@ -3,6 +3,8 @@ import { useState, useEffect, useCallback } from 'react';
 
 import { useQuery } from '@tanstack/react-query';
 
+import { CLIENT_ID, CLIENT_SECRET, PLAYLIST_ID } from './constants';
+
 import type { Artist, TrackItem, ArtistDetails } from './type';
 
 /*
@@ -15,11 +17,9 @@ const MusicPlayer = () => {
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
   const [artistData, setArtistData] = useState<ArtistDetails | null>(null);
 
-  // .envファイルから Spotify API のクライアントクレデンシャルを取得（Viteの場合、VITE_プレフィックスを付与）
-  const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
-  const clientSecret = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET;
-  // サンプルプレイリスト ID（例として）
-  const playlistId = '37i9dQZF1DXcBWIGoYBM5M';
+  const clientId = CLIENT_ID;
+  const clientSecret = CLIENT_SECRET;
+  const playlistId = PLAYLIST_ID;
 
   const fetchPlaylist = async (): Promise<TrackItem[]> => {
     console.log('Fetching access token for playlist...');
