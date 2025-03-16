@@ -20,3 +20,16 @@ export interface Track {
 export interface TrackItem {
   track: Track;
 }
+
+export interface ArtistDetails {
+  external_urls: { spotify: string };
+  followers: { total: number };
+  genres: string[];
+  href: string;
+  id: string;
+  images: AlbumImage[];
+  name: string;
+  popularity: number;
+  type: string;
+  uri: string;
+}
