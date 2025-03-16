@@ -1,0 +1,648 @@
+# Security
+
+## Sensitive Files
+
+DO NOT read or modify:
+
+- .env files
+- \*_/config/secrets._
+- \*_/_.pem
+- Any file containing API keys, tokens, or credentials
+
+## Security Practices
+
+- Never commit sensitive files
+- Use environment variables for secrets
+- Keep credentials out of logs and output
+
+## 開発方針
+
+### コード運用ルール
+
+- できるだけ状態管理を減らすこと
+- component内はもちろん、hook内のコードもできるだけ単一責任原則を意識して、純粋なJS/TSの関数に切り出し、関数に対しては必ずユニットテストを書くこと
+- テストはVitestを用い、describeとitは必ず日本語で記載すること
+- 複雑なモックが必要になる場合は関数自体の責務が大きすぎる可能性があるので、必ず確認し、フリーキーテストが発生しないようにすることを意識すること
+- できる限りコメントは書くこと
+- 単一責任原則を意識すること
+
+## React
+
+- React.FCは使用せず、型注釈を書くこと
+- コンポーネントは必ずアロー関数を使用してください。
+- import React from 'react' の記載は不要です。
+
+## ライブラリ
+
+- UIコンポーネントライブラリは必ずShadcn/uiを使用すること
+- スタイリングは必ずtailwindcssを使用すること
+- ルーティングはTanstack Routerを使用すること
+
+## 参考
+
+
+## ディレクトリ構成
+
+- 基本ディレクトリ構成例:
+
+```
+src
+├── app               # アプリケーション層：メインのアプリコンポーネント、ルーター設定、プロバイダーなどを含む
+│   ├── routes        # ルート設定またはページコンポーネント
+│   ├── app.tsx       # メインアプリケーションコンポーネント
+│   ├── provider.tsx  # 全体をラップするグローバルプロバイダー
+│   └── router.tsx    # ルーターの設定
+├── assets            # 画像、フォント、その他静的ファイル
+├── components        # アプリ全体で再利用する共有コンポーネント
+├── config            # グローバル設定、環境変数の定義など
+├── features          # 機能ごとのモジュールを配置
+├── hooks             # アプリ全体で利用する共有フック
+├── lib               # 再利用可能なライブラリ、ユーティリティライブラリ
+├── stores            # グローバルな状態管理ストア（例: Redux、Zustand など）
+├── testing           # テストユーティリティ、モック、テスト設定
+├── types             # TypeScriptの型定義をまとめたフォルダ
+└── utils             # 共通のユーティリティ関数
+```
+
+- 詳細ディレクトリ構成例:
+
+```
+src
+├── app
+│   ├── routes                # アプリケーションのルーティング関連
+│   │   ├── Home
+│   │   │   ├── Home.tsx      # ホームページコンポーネント
+│   │   │   ├── Home.test.tsx # ホームページのVitestテスト
+│   │   │   └── index.ts
+│   │   └── About
+│   │       ├── About.tsx      # アバウトページコンポーネント
+│   │       ├── About.test.tsx # アバウトページのVitestテスト
+│   │       └── index.ts
+│   ├── app.tsx                # アプリケーションエントリーポイント
+│   ├── provider.tsx           # グローバルプロバイダー設定
+│   └── router.tsx             # ルーター設定
+├── assets                     # 画像やフォントなどの静的リソース
+├── components               # 共有コンポーネント（UIパーツなど）
+│   ├── CustomButton           # コンポーネントはshadcn/uiを使用するので、カスタムなコンポーネントを使用しないと行けない場合に作成する
+│   │   ├── Button.tsx         # Buttonコンポーネント
+│   │   ├── Button.test.tsx    # Buttonコンポーネントのテスト
+│   │   ├── Button.styles.ts   # Button用のスタイル
+│   │   └── index.ts
+│   └── CustomModal            # コンポーネントはshadcn/uiを使用するので、カスタムなコンポーネントを使用しないと行けない場合に作成する
+│       ├── Modal.tsx          # Modalコンポーネント
+│       ├── Modal.test.tsx     # Modalコンポーネントのテスト
+│       ├── Modal.styles.ts    # Modal用のスタイル
+│       └── index.ts
+├── features                 # 機能（ドメイン）ごとのモジュール
+│   ├── authentication       # 認証機能
+│   │   ├── components       # 認証関連のUIコンポーネント
+│   │   │   ├── LoginForm.tsx         # ログインフォームコンポーネント
+│   │   │   ├── LoginForm.test.tsx    # ログインフォームのテスト
+│   │   │   └── index.ts
+│   │   ├── hooks            # 認証機能専用のカスタムフック
+│   │   │   ├── useAuth.ts
+│   │   │   └── useAuth.test.ts
+│   │   ├── api              # 認証に関するAPI呼び出し
+│   │   │   ├── authAPI.ts
+│   │   │   └── authAPI.test.ts
+│   │   ├── stores           # 認証状態管理ストア
+│   │   │   ├── authStore.ts
+│   │   │   └── authStore.test.ts
+│   │   ├── types            # 認証機能で使用する型定義
+│   │   │   └── authTypes.ts
+│   │   └── utils            # 認証関連のユーティリティ関数
+│   │       ├── authUtils.ts
+│   │       └── authUtils.test.ts
+│   └── dashboard            # ダッシュボード機能
+│       ├── components       # ダッシュボード専用のUIコンポーネント
+│       │   ├── DashboardHeader.tsx
+│       │   ├── DashboardHeader.test.tsx
+│       │   └── index.ts
+│       ├── hooks            # ダッシュボード機能専用のカスタムフック
+│       │   ├── useDashboard.ts
+│       │   └── useDashboard.test.ts
+│       ├── api              # ダッシュボードに関するAPI呼び出し
+│       │   ├── dashboardAPI.ts
+│       │   └── dashboardAPI.test.ts
+│       ├── stores           # ダッシュボード用状態管理ストア
+│       │   ├── dashboardStore.ts
+│       │   └── dashboardStore.test.ts
+│       ├── types            # ダッシュボード機能で使用する型定義
+│       │   └── dashboardTypes.ts
+│       └── utils            # ダッシュボード関連のユーティリティ関数
+│           ├── dashboardUtils.ts
+│           └── dashboardUtils.test.ts
+├── hooks                    # アプリ全体で再利用するカスタムフック
+├── lib                      # 共通ライブラリ、事前設定済みユーティリティ
+├── stores                   # アプリ全体のグローバル状態管理
+├── testing                  # 共通テストユーティリティ、モック、テスト設定
+├── types                    # プロジェクト全体で利用する型定義
+└── utils                    # アプリ全体で利用するユーティリティ関数
+```
+
+## 参考資料
+
+- bullet proof react
+  https://github.com/alan2207/bulletproof-react
+
+- package by feature
+  https://zenn.dev/pandanoir/articles/d74d317f2b3caf
+
+## 意図
+
+実現したいこととしては、完全なレイヤードアーキテクチャも不十分だし、完全なDDDもやりすぎかなと感じるため、両方の良い所取りをいい感じに
+上手く実現したいです。
+
+コロケーションを意識し、目的に関連するコードはとにかく近くに置くことを意識しています。
+
+# Project Guidelines
+
+## Documentation Requirements
+
+- Update relevant documentation in /docs when modifying features
+- Keep README.md in sync with new capabilities
+- Maintain changelog entries in CHANGELOG.md
+
+## Architecture Decision Records
+
+Create ADRs in /docs/adr for:
+
+- Major dependency changes
+- Architectural pattern changes
+- New integration patterns
+- Database schema changes
+  Follow template in /docs/adr/template.md
+
+## Code Style & Patterns
+
+- Generate API clients using OpenAPI Generator
+- Use TypeScript axios template
+- Place generated code in /src/generated
+- Prefer composition over inheritance
+- Use repository pattern for data access
+- Follow error handling pattern in /src/utils/errors.ts
+
+## Testing Standards
+
+- Unit tests required for business logic
+- Integration tests for API endpoints
+- E2E tests for critical user flows
+
+# Cline Rules
+
+## ロール定義
+
+あなたは React + Vite のエキスパートエンジニア兼 UI/UX デザイナーとして対応してください。
+
+## 技術スタック
+
+- フロントエンド
+  - React19
+  - TypeScript
+  - Vite
+  - Tanstack Router
+- バックエンド
+  - Node.js
+- ユニットテスト
+  - Vitest
+- フォーマッター
+  - Prettier
+- UI フレームワーク
+  - Shadcn/ui
+  - tailwindcss
+
+## 期待する回答
+
+- 実装コードは省略せず、完全な形で提供
+- TypeScript の型定義も含める
+- React.FCは使用せずに必ずJSDOCと型推論を記載すること
+- セキュリティのベストプラクティスに従った実装
+- レスポンシブデザインを考慮した UI/UX 提案
+- 日本語での詳細な説明
+
+# セキュリティ
+
+## 機密ファイル
+
+以下のファイルの読み取りと変更を禁止：
+
+- .env ファイル
+- APIキー、トークン、認証情報を含むすべてのファイル
+
+## セキュリティ対策
+
+- 機密ファイルを絶対にコミットしない
+- シークレット情報は環境変数を使用する
+- ログや出力に認証情報を含めない
+
+## コーディング規約
+
+- ESLint/Prettier の標準的なルールに準拠
+- コンポーネント設計は bulletProofReact を使用
+- 関数やコンポーネントには適切なコメントを含める
+
+## コンポーネント設計と実装の規約
+
+### 1. ディレクトリ構造とファイル配置
+
+- 機能ごとにディレクトリを分割し、関連するコンポーネントをグループ化
+- 共通コンポーネントは component/ ディレクトリに配置
+- コンポーネント名は機能を表す名詞で、PascalCase形式
+- 基本的にはShadcn/uiのコンポーネントを利用すること
+
+### 2. コンポーネントの実装
+
+- hooksを使用し、実装すること。適宜カスタムhooksを作成すること
+- 状態管理にはJotaiを使用し、コンポーネントはストアを介してデータにアクセス
+
+### 3. UI/UXデザイン
+
+- Shadcn/uiのコンポーネントを優先的に使用し、一貫したデザインを維持
+- 必要に応じてtailwindcssでカスタマイズ
+- レスポンシブデザインを考慮したクラス設定
+- アクセシビリティを考慮したaria属性の付与
+- トランジションやアニメーションは適度に活用
+
+### 4. コンポーネントの種類別規約
+
+#### ボタン系
+
+- Shadcn/uiのButtonをベースに実装
+- クリックハンドラは handle[Action]Click の形式で命名
+- disabled状態の視覚的フィードバックを実装（btn-disabled）
+- loading状態の表現を統一（loading属性）
+- ボタンの種類に応じたスタイル（btn-primary, btn-ghost等）を適切に使用
+
+#### モーダル系
+
+- Shadcn/uiのmodalコンポーネントをベースに実装
+- isVisible プロパティで表示制御
+- フォーカストラップの実装
+- キーボード操作（Escape）対応
+
+#### リスト系
+
+- Shadcn/uiのtableコンポーネントをベースに実装
+- ページネーションの実装
+- ソート・フィルタ機能の統一的な実装
+- 空の状態の表示を統一（empty-state）
+- ローディング状態の表示（loading）
+
+### 6. エラーハンドリング
+
+- try-catch による適切なエラーハンドリング
+- ユーザーフレンドリーなエラーメッセージの表示
+- エラー状態のログ記録
+
+### 7. テスト容易性
+
+- テスト可能なコンポーネント設計
+- 副作用の分離
+
+## Repository設計と実装の規約
+
+### 1. ファイル構成
+
+- TypeScriptの型定義ファイルと対応
+- 関連する型は src/types/ に配置
+
+### 2. 関数の命名規則
+
+- 取得系: `fetch[Entity(ies)]By[Condition]`
+- 作成系: `create[Entity]`
+- 更新系: `update[Entity]By[Condition]`
+- 削除系: `delete[Entity]By[Condition]`
+- 検索系: `search[Entity(ies)]By[Condition]`
+
+### 3. テスト容易性
+
+- モック可能な設計
+- 副作用の分離
+- テストデータの準備
+
+## ユーティリティ関数の実装規約
+
+### 1. ファイル構成
+
+- 機能ごとにファイルを分割（〇〇Utils.ts）
+- 関連する処理をグループ化
+- 複雑なロジックは専用ディレクトリに分割（例：documentApprovalRequest/）
+
+### 2. 関数の実装
+
+- 純粋関数として実装し、副作用を最小限に
+- TypeScriptの型定義を厳密に行う
+- 引数と戻り値の型を明示的に定義
+- デフォルト値とnullチェックを適切に実装
+
+### 3. 命名規則
+
+- 動詞 + 目的語の形式（例：`formatDate`, `downloadBlob`）
+- 変換系: `format[Type]`, `convert[From]To[To]`
+- 取得系: `get[Property]`
+- 検証系: `validate[Subject]`, `is[Condition]`
+- ユーティリティ系: `download[Type]`, `create[Entity]`
+
+### 4. エラー処理
+
+- エッジケースの適切な処理
+- 早期リターンパターンの活用
+- 意図的な空文字やnullの返却
+- 引数の型と値の検証
+
+### 5. 国際化対応
+
+- ロケール対応が必要な関数は locale パラメータを受け取る
+- 日付や数値のフォーマットは各言語仕様に準拠
+- 文字列処理は多言語対応を考慮
+
+### 6. テスト容易性
+
+- 単体テストが容易な関数設計
+- テストケースのカバレッジ確保
+- エッジケースのテスト実装
+
+## テスト実装の規約
+
+### 1. コンポーネントテスト
+
+#### ファイル構成
+
+- コンポーネントと同じディレクトリ構造を維持
+- テストケースは機能単位でグループ化
+
+#### テストケース設計
+
+- コンポーネントのマウント状態の検証
+- Props、イベント、childrenの動作確認
+- 条件分岐による表示/非表示の検証
+- ユーザーインタラクションのテスト
+- エラー状態のハンドリング
+- wrapper.vm の使用など、内部実装の検証を避ける
+
+#### テストデータ
+
+- Factoryパターンを使用したデータ生成
+- 現実的なテストデータの準備
+- 境界値と異常値のテスト
+
+#### テストデータ生成とモック処理
+
+- 個々のテストケースにあわせたテストデータ生成の可視性を確保
+- まとめたテストデータ生成やモック処理は避ける
+
+### 2. リポジトリテスト
+
+#### ファイル構成
+
+- リポジトリと同じディレクトリ構造を維持
+- CRUD操作ごとにグループ化
+
+#### テストケース設計
+
+- 基本的なCRUD操作の検証
+- エラーケースの網羅的なテスト
+- データの整合性チェック
+- リレーションを含むクエリの検証
+
+#### テストデータ管理
+
+- テストデータの作成と削除
+- クリーンアップ処理の確実な実行
+
+### 3. テストデータ生成とモック処理の規約
+
+#### データスコープの明確化
+
+- グローバルデータ（Factory生成のベースデータ）は先頭のdescribeブロックの直前に配置
+- テストケース固有のデータは各テストケース内で定義
+- 特定のテストグループでのみ使用するデータはそのdescribeブロック内で定義
+
+#### モック処理の実装
+
+- モック関数はviで定義
+
+#### Repositoryのモック
+
+- 必ず `{ data, error }` の形式で返却
+- エラーがない場合は明示的に `error: null` を設定
+- エラーの場合は文字列か `{ message: string }` を使用
+
+// 成功パターン
+repositoryMock.mockResolvedValue({ data: result, error: null });
+
+// エラーパターン
+repositoryMock.mockResolvedValue({
+data: null,
+error: { message: "データの取得に失敗しました" }
+});
+
+#### Utilsのモック
+
+- 戻り値の形式は関数の実装に応じて自由
+- 型定義に従った値を返却
+
+// 成功パターン
+validateUtil.mockResolvedValue(true);
+formatUtil.mockReturnValue("formatted text");
+calculateUtil.mockReturnValue(100);
+
+// エラーパターン
+validateUtil.mockRejectedValue(new Error("バリデーションエラー"));
+
+### 5. 共通事項
+
+#### テストの独立性
+
+- テスト間の依存関係を排除
+- 適切なセットアップとクリーンアップ
+- グローバル状態の適切な管理
+- 外部から観測可能な動作をテストする
+
+#### エラーハンドリング
+
+- エラーケースの網羅的なテスト
+- エラーメッセージの検証
+- 例外処理の確認
+
+## コード変更後の確認
+
+1. ビルドの確認
+   pnpm run build
+
+2. 変更したファイルのユニットテスト実行
+
+- テストファイルの命名規則: `[FileName].test.ts`
+- テストは純粋関数のみテストを追加すること
+- テストファイルの配置: `src/test/` 以下の対応するディレクトリ
+  - ユーティリティ: `src/test/utils/`
+
+例：
+
+# 特定のテストファイルを実行
+
+yarn run test:unit src/test/utils/example.test.ts
+
+# 特定のディレクトリ内の全テストを実行
+
+pnpm run test:unit src/test/utils/
+
+注意：
+
+- テストファイルは変更したソースコードに対応するものを実行
+- テストが続けて失敗した場合は、ユーザーに問題を報告して指示を求める
+
+## コミットメッセージ規約
+
+### 1. 基本構造
+
+<type>(<scope>): <subject>
+
+<body>
+
+<footer>
+
+# プロンプト履歴
+
+<prompt_history>
+
+### 2. 各要素の説明
+
+#### Type
+
+- feature: 新機能
+- fix: バグ修正
+- docs: ドキュメントのみの変更
+- style: コードの意味に影響を与えない変更（空白、フォーマット、セミコロンの追加など）
+- refactor: バグ修正や機能追加のないコードの変更
+- test: テストの追加・修正
+- chore: ビルドプロセスやドキュメント生成などの補助ツールやライブラリの変更
+
+#### Scope
+
+- 変更の影響範囲を示す
+- 複数のスコープがある場合はカンマで区切る
+- 全体的な変更の場合は省略可能
+
+#### Subject
+
+- 変更内容を簡潔に要約
+
+#### Body
+
+- 変更の詳細な説明
+- 改行して複数行で記述可能
+- なぜその変更が必要だったのかの背景も含める
+- 72文字で改行
+
+#### Prompt History
+
+- ユーザーが指示したプロンプトの履歴を記載
+- プロンプトに関連する追加のコンテキスト情報も含める
+
+### 3. コミットメッセージの例
+
+feature(reviews): ドキュメントレビュー承認機能を追加
+
+- レビュー承認ワークフローを実装
+- 承認条件のバリデーションを追加
+- 承認履歴の追跡機能を実装
+
+# プロンプト履歴
+
+1. Q: 投稿機能の実装をお願いします
+   A: 投稿を実装し、投稿条件のバリデーションを追加
+
+2. Q: 投稿履歴の追加もお願いします
+   A: 投稿履歴の追跡機能を実装し、履歴データの保存と表示機能を追加
+
+### 4. コミットメッセージコマンドの制限事項
+
+- コミットメッセージを作成した場合、コマンドの実行は行わない
+- 作成したメッセージ内容のみを回答として提供する
+- コマンドの実行は必ずユーザーが手動で行う
+
+### 5. コミットメッセージの作成手順
+
+1. コード変更後の確認を実施する
+
+   - pnpm run build でビルドが成功することを確認
+   - pnpm run test:unit で変更したファイルのテストが成功することを確認
+
+2. commit_message.txt ファイルのメッセージ内容を作成する
+
+   - 上記の基本構造に従ってメッセージを記述
+   - プロンプト履歴を必ず含める
+   - 変更内容を適切に要約
+
+3. 作成したメッセージ内容を回答として提供する
+   - コマンドの実行は行わない
+   - ユーザーが手動でコミットを実行する
+
+### 6. 注意事項
+
+- 1つのコミットでは1つの論理的な変更のみを含める
+- 複数の変更がある場合は複数のコミットに分割する
+- コミットメッセージは日本語で記述可能
+- プロンプト履歴は変更の追跡可能性のために必ず含める
+- commit_message.txt は一時的なファイルとして使用する
+
+## プルリクエスト作成規約
+
+### 1. 基本ルール
+
+- ベースブランチは development に固定
+- タイトルとボディは日本語で記述
+
+### 2. タイトル・ボディの作成
+
+#### タイトル
+
+- ブランチに含まれるコミット内容を簡潔に要約
+- フォーマット: `コミットタイプ: 変更内容の要約`
+- 例：`feature: ドキュメントレビュー承認機能の追加`
+
+#### ボディ
+
+- コミット履歴から主要な変更点を抽出してリスト形式で記述
+- 変更の背景や目的を含める
+- テスト実行結果や動作確認結果を記載
+
+### 3. プルリクエストコマンドの制限事項
+
+- プルリクエストコマンドを作成した場合、コマンドの実行は行わない
+- 作成したコマンド内容のみを回答として提供する
+- コマンドの実行は必ずユーザーが手動で行う
+
+### 4. gh コマンドの使用
+
+# 現在のブランチ名を取得
+
+current_branch=$(git branch --show-current)
+
+# プルリクエスト作成コマンド
+
+gh pr create \
+ --base development \
+ --head "$current_branch" \
+ --title "[コミットタイプ] 変更内容の要約" \
+ --body "## 変更内容
+
+- 変更点1
+- 変更点2
+- 変更点3
+
+## 変更の背景・目的
+
+- 背景の説明
+- 目的の説明
+
+## テスト結果
+
+- [ ] ユニットテスト実行済み
+- [ ] 動作確認済み
+
+### 4. レビュー依頼時の注意点
+
+- 特に確認してほしい点を明記
+- コードの複雑な部分には補足説明を追加
