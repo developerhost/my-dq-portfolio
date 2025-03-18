@@ -23,8 +23,6 @@ export const ArtistCard = ({
     newAudio.play();
   };
 
-  console.log('data', data.topTrack);
-
   return (
     <div className="mb-4 p-4 border rounded shadow">
       <h2 className="text-xl font-semibold">{title}</h2>
