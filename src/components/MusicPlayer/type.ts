@@ -1,4 +1,7 @@
 export interface Artist {
+  description: string;
+  id: string;
+  image: string;
   name: string;
 }
 
