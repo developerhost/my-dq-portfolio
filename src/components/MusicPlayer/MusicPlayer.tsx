@@ -3,38 +3,24 @@ import { useState, useEffect, useCallback } from 'react';
 
 import { ArtistCard } from './ArtistCard';
 import { CLIENT_ID, CLIENT_SECRET } from './constants';
+import { useArtistData } from '../../hooks/useArtistData';
 
 import type { Track, ArtistDetails } from './type';
 
-/*
-  注意: この実装はデモ用です。本番環境ではクライアント側で Client Secret を扱うのはセキュリティ上好ましくないため、
-  サーバー経由でアクセストークンを取得する実装に変更してください。
-  下記の Spotify API のクライアントクレデンシャルは .env ファイルから読み込みます。
-*/
-
-// アーティスト名で検索する
+// 定数定義：各アーティスト名
 const AVICII_NAME = 'Avicii';
 const MRCHILDREN_NAME = 'Mr.Children';
 const CLOUDY_NAME = 'Cloudy';
 
 const MusicPlayer = () => {
-  const [aviciiData, setAviciiData] = useState<{
-    artist: ArtistDetails;
-    topTrack: Track;
-  } | null>(null);
-  const [mrChildrenData, setMrChildrenData] = useState<{
-    artist: ArtistDetails;
-    topTrack: Track;
-  } | null>(null);
-  const [cloudyData, setCloudyData] = useState<{
-    artist: ArtistDetails;
-    topTrack: Track;
-  } | null>(null);
+  // 各アーティストのデータ管理用のフック
+  const [aviciiData, setAviciiData] = useArtistData();
+  const [mrChildrenData, setMrChildrenData] = useArtistData();
+  const [cloudyData, setCloudyData] = useArtistData();
+
+  // 読み込み状態とエラー状態の管理
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-
-  const clientId = CLIENT_ID;
-  const clientSecret = CLIENT_SECRET;
 
   // アクセストークンを取得する共通関数
   const fetchAccessToken = useCallback(async (): Promise<string> => {
@@ -44,19 +30,23 @@ const MusicPlayer = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          Authorization: 'Basic ' + btoa(clientId + ':' + clientSecret),
+          Authorization: 'Basic ' + btoa(CLIENT_ID + ':' + CLIENT_SECRET),
         },
         body: 'grant_type=client_credentials',
       }
     );
     const tokenData = await tokenResponse.json();
     return tokenData.access_token;
-  }, [clientId, clientSecret]);
+  }, []);
 
-  // 指定したアーティスト名で検索し、IDを取得する関数
-  const getArtistIdByName = useCallback(
-    async (artistName: string): Promise<string> => {
+  // 指定したアーティスト名で検索し、該当アーティストの情報とトップトラックを取得する関数
+  const fetchTopTrack = useCallback(
+    async (
+      artistName: string
+    ): Promise<{ artist: ArtistDetails; topTrack: Track }> => {
       const accessToken = await fetchAccessToken();
+
+      // アーティスト検索
       const searchResponse = await fetch(
         `https://api.spotify.com/v1/search?q=${encodeURIComponent('artist:' + artistName)}&type=artist`,
         {
@@ -70,19 +60,9 @@ const MusicPlayer = () => {
       if (!items || items.length === 0) {
         throw new Error('No artist found for ' + artistName);
       }
-      return items[0].id;
-    },
-    [fetchAccessToken]
-  );
+      const artistId = items[0].id;
 
-  // 指定したアーティスト名のトップトラックを取得する関数（国コードはJP）
-  const fetchTopTrack = useCallback(
-    async (
-      artistName: string
-    ): Promise<{ artist: ArtistDetails; topTrack: Track }> => {
-      const accessToken = await fetchAccessToken();
-      const artistId = await getArtistIdByName(artistName);
-      // アーティストの情報取得
+      // アーティスト情報の取得
       const artistResponse = await fetch(
         `https://api.spotify.com/v1/artists/${artistId}`,
         {
@@ -92,7 +72,8 @@ const MusicPlayer = () => {
         }
       );
       const artistData: ArtistDetails = await artistResponse.json();
-      // アーティストのトップトラック取得
+
+      // トップトラックの取得（国コードJP）
       const topTracksResponse = await fetch(
         `https://api.spotify.com/v1/artists/${artistId}/top-tracks?country=JP`,
         {
@@ -102,14 +83,14 @@ const MusicPlayer = () => {
         }
       );
       const topTracksData = await topTracksResponse.json();
-      // 一番人気のトラック（配列の先頭を使用）
       const topTrack: Track = topTracksData.tracks[0];
+
       return { artist: artistData, topTrack };
     },
-    [fetchAccessToken, getArtistIdByName]
+    [fetchAccessToken]
   );
 
-  // 両アーティストの情報とトップトラックを一括取得
+  // データの一括取得をuseEffectで実行
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -129,7 +110,7 @@ const MusicPlayer = () => {
       }
     };
     fetchData();
-  }, [fetchTopTrack]);
+  }, [fetchTopTrack, setAviciiData, setMrChildrenData, setCloudyData]);
 
   return (
     <div className="p-4">
