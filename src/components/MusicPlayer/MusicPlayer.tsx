@@ -15,6 +15,7 @@ import type { Track, ArtistDetails } from './type';
 // アーティスト名で検索する
 const AVICII_NAME = 'Avicii';
 const MRCHILDREN_NAME = 'Mr.Children';
+const CLOUDY_NAME = 'Cloudy';
 
 const MusicPlayer = () => {
   const [aviciiData, setAviciiData] = useState<{
@@ -22,6 +23,10 @@ const MusicPlayer = () => {
     topTrack: Track;
   } | null>(null);
   const [mrChildrenData, setMrChildrenData] = useState<{
+    artist: ArtistDetails;
+    topTrack: Track;
+  } | null>(null);
+  const [cloudyData, setCloudyData] = useState<{
     artist: ArtistDetails;
     topTrack: Track;
   } | null>(null);
@@ -108,12 +113,14 @@ const MusicPlayer = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [avicii, mrChildren] = await Promise.all([
+        const [avicii, mrChildren, cloudy] = await Promise.all([
           fetchTopTrack(AVICII_NAME),
           fetchTopTrack(MRCHILDREN_NAME),
+          fetchTopTrack(CLOUDY_NAME),
         ]);
         setAviciiData(avicii);
         setMrChildrenData(mrChildren);
+        setCloudyData(cloudy);
       } catch (err) {
         console.error('Error fetching top tracks:', err);
         setError('トップトラックの取得に失敗しました。');
@@ -137,6 +144,7 @@ const MusicPlayer = () => {
           {mrChildrenData && (
             <ArtistCard title="Mr.Children" data={mrChildrenData} />
           )}
+          {cloudyData && <ArtistCard title="Cloudy" data={cloudyData} />}
         </div>
       )}
     </div>
