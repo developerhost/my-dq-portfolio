@@ -2,15 +2,11 @@
 import { useState, useEffect, useCallback } from 'react';
 
 import { ArtistCard } from './ArtistCard';
-import { CLIENT_ID, CLIENT_SECRET } from './constants';
+import { CLIENT_ID, CLIENT_SECRET, AVICII_NAME, MRCHILDREN_NAME, CLOUDY_NAME } from './constants';
 import { useArtistData } from '../../hooks/useArtistData';
 
 import type { Track, ArtistDetails } from './type';
 
-// 定数定義：各アーティスト名
-const AVICII_NAME = 'Avicii';
-const MRCHILDREN_NAME = 'Mr.Children';
-const CLOUDY_NAME = 'Cloudy';
 
 const MusicPlayer = () => {
   // 各アーティストのデータ管理用のフック
