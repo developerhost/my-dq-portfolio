@@ -1,5 +1,13 @@
 [
   {
+    "title": "個人開発で月10万円以上の利益を出した方法を紹介します。",
+    "url": "https://zenn.dev/dirtyman/books/3ddf2589e3b422",
+    "date": "2025-04-12T01:52:00.000Z",
+    "thumbnail": "https://res.cloudinary.com/zenn/image/upload/s--PAlJqG_Y--/g_center%2Ch_280%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYm9va19jb3Zlci9hZWQxNTU1Zjk4LmpwZWc=%2Cw_200/v1627283836/default/og-base-book_yz4z02.jpg",
+    "favicon": "https://zenn.dev/images/logo-transparent.png",
+    "site": "zenn"
+  },
+  {
     "title": "【個人開発】Spotify APIを使用してプレイリストを作りました",
     "url": "https://zenn.dev/dirtyman/articles/e5870b2918a5f1",
     "date": "2025-03-18T09:35:51.000Z",
@@ -150,6 +158,14 @@
     "thumbnail": "",
     "favicon": "https://cdn.qiita.com/assets/favicons/public/production-c620d3e403342b1022967ba5e3db1aaa.ico",
     "site": "qiita"
+  },
+  {
+    "title": "tinderに生息するなりすまし男の実態",
+    "url": "https://note.com/dall_develop/n/nf20f070d5f8c",
+    "date": "2025-04-12T07:10:59.000Z",
+    "thumbnail": "",
+    "favicon": "https://assets.st-note.com/poc-image/manual/note-common-images/production/svg/production.ico",
+    "site": "note"
   },
   {
     "title": "ビジネスマンにこそ将棋をオススメしたい",
@@ -339,14 +355,6 @@
     "title": "「読書メモ」考えすぎない人の考え方",
     "url": "https://note.com/dall_develop/n/nf10e5b364fbf",
     "date": "2024-11-03T04:46:42.000Z",
-    "thumbnail": "",
-    "favicon": "https://assets.st-note.com/poc-image/manual/note-common-images/production/svg/production.ico",
-    "site": "note"
-  },
-  {
-    "title": "毎日の楽しみ",
-    "url": "https://note.com/dall_develop/n/nde0cf4f59ae7",
-    "date": "2024-09-04T13:07:40.000Z",
     "thumbnail": "",
     "favicon": "https://assets.st-note.com/poc-image/manual/note-common-images/production/svg/production.ico",
     "site": "note"
