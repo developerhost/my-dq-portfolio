@@ -1,11 +1,11 @@
-import { createLazyFileRoute } from '@tanstack/react-router';
+// import { createLazyFileRoute } from '@tanstack/react-router';
 
-import MusicPlayer from '@/components/MusicPlayer/MusicPlayer';
+// import MusicPlayer from '@/components/MusicPlayer/MusicPlayer';
 
-const RouteComponent = () => {
-  return <MusicPlayer />;
-};
+// const RouteComponent = () => {
+//   return <MusicPlayer />;
+// };
 
-export const Route = createLazyFileRoute('/music/')({
-  component: RouteComponent,
-});
+// export const Route = createLazyFileRoute('/music/')({
+//   component: RouteComponent,
+// });
