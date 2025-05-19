@@ -1,6 +1,7 @@
 import { createLazyFileRoute } from '@tanstack/react-router';
 
 import AcademicTable from './-components/AcademicTable';
+import AchievementTable from './-components/AchievementTable';
 import { Profile } from './-components/Profile';
 import { Skills } from './-components/Skills';
 
@@ -9,6 +10,8 @@ const ProfileContainer = () => {
     <div className="min-h-screen flex flex-col items-center justify-center">
       <Profile />
       <Skills />
+      <h2 className="text-2xl font-semibold mt-8 text-center">Achievements</h2>
+      <AchievementTable />
       <h2 className="text-2xl font-semibold mt-8 text-center">
         Educational background
       </h2>
