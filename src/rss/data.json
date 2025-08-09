@@ -1,5 +1,13 @@
 [
   {
+    "title": "gpt-ossを動かす",
+    "url": "https://zenn.dev/dirtyman/articles/5e07fe9398bd8e",
+    "date": "2025-08-08T04:19:13.000Z",
+    "thumbnail": "https://res.cloudinary.com/zenn/image/upload/s--v7tqpujq--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_66:gpt-oss%25E3%2582%2592%25E5%258B%2595%25E3%2581%258B%25E3%2581%2599%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A9%258B%25E7%2594%25B0%25E8%2587%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4MjI1N2NmNmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png",
+    "favicon": "https://zenn.dev/images/logo-transparent.png",
+    "site": "zenn"
+  },
+  {
     "title": "【Claude Code】メモリ管理と効率的な開発手法~AI を活用した次世代コーディング~",
     "url": "https://zenn.dev/dirtyman/articles/d44968788cf94b",
     "date": "2025-07-22T05:22:43.000Z",
@@ -148,14 +156,6 @@
     "url": "https://zenn.dev/dirtyman/articles/3dbefb5a09a778",
     "date": "2023-11-27T03:44:40.000Z",
     "thumbnail": "https://res.cloudinary.com/zenn/image/upload/s--r5qChxp---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Next.js%25E3%2580%2591%25E3%2583%2581%25E3%2583%25BC%25E3%2583%25A0%25E9%2596%258B%25E7%2599%25BA%25E3%2581%25BE%25E3%2581%25A7%25E3%2581%25AE%25E7%2592%25B0%25E5%25A2%2583%25E6%2595%25B4%25E5%2582%2599%25E6%2589%258B%25E9%25A0%2586%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A9%258B%25E7%2594%25B0%25E8%2587%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4MjI1N2NmNmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png",
-    "favicon": "https://zenn.dev/images/logo-transparent.png",
-    "site": "zenn"
-  },
-  {
-    "title": "【Next.js】middlewareでリダイレクト処理を行いつつ、動的OGPを設定する際にハマった話",
-    "url": "https://zenn.dev/dirtyman/articles/9ed469e6be715f",
-    "date": "2023-11-24T05:27:55.000Z",
-    "thumbnail": "https://res.cloudinary.com/zenn/image/upload/s--QZWRTv0---/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:%25E3%2580%2590Next.js%25E3%2580%2591middleware%25E3%2581%25A7%25E3%2583%25AA%25E3%2583%2580%25E3%2582%25A4%25E3%2583%25AC%25E3%2582%25AF%25E3%2583%2588%25E5%2587%25A6%25E7%2590%2586%25E3%2582%2592%25E8%25A1%258C%25E3%2581%2584%25E3%2581%25A4%25E3%2581%25A4%25E3%2580%2581%25E5%258B%2595%25E7%259A%2584OGP%25E3%2582%2592%25E8%25A8%25AD%25E5%25AE%259A%25E3%2581%2599%25E3%2582%258B%25E9%259A%259B%25E3%2581%25AB%25E3%2583%258F%25E3%2583%259E%25E3%2581%25A3%25E3%2581%259F%25E8%25A9%25B1%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E6%25A9%258B%25E7%2594%25B0%25E8%2587%25B3%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyLzY4MjI1N2NmNmMuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png",
     "favicon": "https://zenn.dev/images/logo-transparent.png",
     "site": "zenn"
   },
