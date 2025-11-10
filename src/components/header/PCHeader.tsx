@@ -5,6 +5,7 @@ import {
   FaUser,
   FaBriefcase,
   FaBlog,
+  FaClipboardList,
 } from 'react-icons/fa';
 import { SiCodeigniter } from 'react-icons/si';
 
@@ -34,6 +35,12 @@ export const PCHeader = () => {
           to="/portfolio"
         >
           <FaBriefcase /> Portfolio
+        </Link>
+        <Link
+          className="[&.active]:font-bold flex items-center gap-1"
+          to="/work"
+        >
+          <FaClipboardList /> Work
         </Link>
         <Link
           className="[&.active]:font-bold flex items-center gap-1"

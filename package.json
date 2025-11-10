@@ -35,6 +35,7 @@
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.427.0",
     "markdown-it": "^14.1.0",
+    "microcms-js-sdk": "^3.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-error-boundary": "^5.0.0",

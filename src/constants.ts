@@ -4,6 +4,7 @@ import {
   FaShareAlt,
   FaBriefcase,
   FaBlog,
+  FaClipboardList,
 } from 'react-icons/fa';
 import { SiCodeigniter } from 'react-icons/si';
 
@@ -39,6 +40,7 @@ export const linkItems = [
   { title: 'Profile', url: '/profile', icon: FaUser },
   { title: 'SNS', url: '/sns', icon: FaShareAlt },
   { title: 'Portfolio', url: '/portfolio', icon: FaBriefcase },
+  { title: 'Work', url: '/work', icon: FaClipboardList },
   { title: 'Developer', url: '/developer', icon: SiCodeigniter },
   { title: 'Blog', url: '/blog', icon: FaBlog },
   // { title: 'Music', url: '/music', icon: FaMusic },
