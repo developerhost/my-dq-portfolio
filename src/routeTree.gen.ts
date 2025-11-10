@@ -17,6 +17,7 @@ import { Route as rootRoute } from './routes/__root'
 // Create Virtual Routes
 
 const IndexLazyImport = createFileRoute('/')()
+const WorkIndexLazyImport = createFileRoute('/work/')()
 const SnsIndexLazyImport = createFileRoute('/sns/')()
 const RoomIndexLazyImport = createFileRoute('/room/')()
 const ProfileIndexLazyImport = createFileRoute('/profile/')()
@@ -33,6 +34,12 @@ const IndexLazyRoute = IndexLazyImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+
+const WorkIndexLazyRoute = WorkIndexLazyImport.update({
+  id: '/work/',
+  path: '/work/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/work/index.lazy').then((d) => d.Route))
 
 const SnsIndexLazyRoute = SnsIndexLazyImport.update({
   id: '/sns/',
@@ -148,6 +155,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SnsIndexLazyImport
       parentRoute: typeof rootRoute
     }
+    '/work/': {
+      id: '/work/'
+      path: '/work'
+      fullPath: '/work'
+      preLoaderRoute: typeof WorkIndexLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/blog/$slug/': {
       id: '/blog/$slug/'
       path: '/blog/$slug'
@@ -169,6 +183,7 @@ export interface FileRoutesByFullPath {
   '/profile': typeof ProfileIndexLazyRoute
   '/room': typeof RoomIndexLazyRoute
   '/sns': typeof SnsIndexLazyRoute
+  '/work': typeof WorkIndexLazyRoute
   '/blog/$slug': typeof BlogSlugIndexLazyRoute
 }
 
@@ -181,6 +196,7 @@ export interface FileRoutesByTo {
   '/profile': typeof ProfileIndexLazyRoute
   '/room': typeof RoomIndexLazyRoute
   '/sns': typeof SnsIndexLazyRoute
+  '/work': typeof WorkIndexLazyRoute
   '/blog/$slug': typeof BlogSlugIndexLazyRoute
 }
 
@@ -194,6 +210,7 @@ export interface FileRoutesById {
   '/profile/': typeof ProfileIndexLazyRoute
   '/room/': typeof RoomIndexLazyRoute
   '/sns/': typeof SnsIndexLazyRoute
+  '/work/': typeof WorkIndexLazyRoute
   '/blog/$slug/': typeof BlogSlugIndexLazyRoute
 }
 
@@ -208,6 +225,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/room'
     | '/sns'
+    | '/work'
     | '/blog/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -219,6 +237,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/room'
     | '/sns'
+    | '/work'
     | '/blog/$slug'
   id:
     | '__root__'
@@ -230,6 +249,7 @@ export interface FileRouteTypes {
     | '/profile/'
     | '/room/'
     | '/sns/'
+    | '/work/'
     | '/blog/$slug/'
   fileRoutesById: FileRoutesById
 }
@@ -243,6 +263,7 @@ export interface RootRouteChildren {
   ProfileIndexLazyRoute: typeof ProfileIndexLazyRoute
   RoomIndexLazyRoute: typeof RoomIndexLazyRoute
   SnsIndexLazyRoute: typeof SnsIndexLazyRoute
+  WorkIndexLazyRoute: typeof WorkIndexLazyRoute
   BlogSlugIndexLazyRoute: typeof BlogSlugIndexLazyRoute
 }
 
@@ -255,6 +276,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProfileIndexLazyRoute: ProfileIndexLazyRoute,
   RoomIndexLazyRoute: RoomIndexLazyRoute,
   SnsIndexLazyRoute: SnsIndexLazyRoute,
+  WorkIndexLazyRoute: WorkIndexLazyRoute,
   BlogSlugIndexLazyRoute: BlogSlugIndexLazyRoute,
 }
 
@@ -276,6 +298,7 @@ export const routeTree = rootRoute
         "/profile/",
         "/room/",
         "/sns/",
+        "/work/",
         "/blog/$slug/"
       ]
     },
@@ -302,6 +325,9 @@ export const routeTree = rootRoute
     },
     "/sns/": {
       "filePath": "sns/index.lazy.tsx"
+    },
+    "/work/": {
+      "filePath": "work/index.lazy.tsx"
     },
     "/blog/$slug/": {
       "filePath": "blog/$slug/index.lazy.tsx"
