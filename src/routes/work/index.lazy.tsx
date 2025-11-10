@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { createLazyFileRoute } from '@tanstack/react-router';
+import { createLazyFileRoute, Link } from '@tanstack/react-router';
 import { format } from 'date-fns';
 
 import { getWorks } from './-utils/workData';
@@ -46,9 +46,11 @@ export const WorkList = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {works.map((work) => (
-            <div
-              className="group block bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-shadow overflow-hidden cursor-pointer"
+            <Link
+              className="group block bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-shadow overflow-hidden"
               key={work.id}
+              params={{ id: work.id }}
+              to="/work/$id"
             >
               {/* アイキャッチ画像 */}
               {work.eyecatch && (
@@ -79,7 +81,7 @@ export const WorkList = () => {
                   {format(new Date(work.publishedAt), 'yyyy年MM月dd日')}
                 </p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       )}

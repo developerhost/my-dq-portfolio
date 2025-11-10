@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import { useEffect, useState } from 'react';
 
 import { createLazyFileRoute, useParams } from '@tanstack/react-router';
@@ -37,7 +38,6 @@ export const BlogPost = () => {
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold">{post.title}</h1>
       <p className="text-gray-500">{post.date}</p>
-      {/* eslint-disable-next-line react/no-danger */}
       <div className="znc" dangerouslySetInnerHTML={{ __html: post.content }} />
 
       {/* アフィリエイトリンクを記事の最後に追加 */}
