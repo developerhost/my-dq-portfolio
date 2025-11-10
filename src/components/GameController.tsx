@@ -42,7 +42,7 @@ const GameController: React.FC<GameControllerProps> = ({
   });
 
   return (
-    <div className="flex flex-col items-center p-4 bg-gray-700 rounded-lg shadow-lg border-4 border-gray-800 w-full">
+    <div className="flex flex-col items-center p-4 bg-gray-700 rounded-lg shadow-lg border-4 border-gray-800 w-full max-w-md mx-auto">
       <div className="flex justify-between items-center w-full">
         {/* 矢印ボタンエリア */}
         <div className="relative w-32 h-32 bg-gray-800 rounded-full border-4 border-gray-800 flex items-center justify-center">
