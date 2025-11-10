@@ -1,0 +1,97 @@
+import { useQuery } from '@tanstack/react-query';
+import { createLazyFileRoute } from '@tanstack/react-router';
+import { format } from 'date-fns';
+
+import { getWorks } from './-utils/workData';
+
+export const WorkList = () => {
+  const { data, error, isLoading } = useQuery({
+    queryFn: getWorks,
+    queryKey: ['works'],
+  });
+
+  if (isLoading) {
+    return (
+      <div className="container mx-auto p-4">
+        <div className="flex items-center justify-center min-h-[400px]">
+          <p className="text-lg">読み込み中...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="container mx-auto p-4">
+        <div className="flex items-center justify-center min-h-[400px]">
+          <p className="text-lg text-red-500">
+            エラーが発生しました: {error.message}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  const works = data?.contents || [];
+
+  return (
+    <div className="container mx-auto p-4 md:p-8">
+      <div className="flex gap-4">
+        <h1 className="text-3xl font-bold mb-8">実績一覧</h1>
+        <p>今までのお仕事の実績や自主制作アプリ</p>
+      </div>
+
+      {works.length === 0 ? (
+        <p className="text-gray-500">実績がまだありません。</p>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {works.map((work) => (
+            <div
+              className="group block bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-shadow overflow-hidden cursor-pointer"
+              key={work.id}
+            >
+              {/* アイキャッチ画像 */}
+              {work.eyecatch && (
+                <div className="aspect-video w-full overflow-hidden bg-gray-200 dark:bg-gray-700">
+                  <img
+                    alt={work.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    src={work.eyecatch.url}
+                  />
+                </div>
+              )}
+
+              <div className="p-4">
+                {/* タイトル */}
+                <h2 className="text-xl font-bold mb-2 group-hover:text-blue-500 transition-colors line-clamp-2">
+                  {work.title}
+                </h2>
+
+                {/* カテゴリー */}
+                {work.category && (
+                  <span className="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-2 py-1 rounded mb-2">
+                    {work.category.name}
+                  </span>
+                )}
+
+                {/* 公開日 */}
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  {format(new Date(work.publishedAt), 'yyyy年MM月dd日')}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* 総件数 */}
+      <div className="mt-8 text-center text-gray-600 dark:text-gray-400">
+        <p>全 {data?.totalCount || 0} 件</p>
+      </div>
+    </div>
+  );
+};
+
+export const Route = createLazyFileRoute('/work/')({
+  component: WorkList,
+});
