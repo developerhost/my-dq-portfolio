@@ -27,21 +27,25 @@ export type MicroCMSCategory = {
  * ブログコンテンツの型定義
  */
 export type MicroCMSBlog = {
-  category?: MicroCMSCategory;
+  category?: string[];
   content: string;
   createdAt: string;
+  credit?: string;
   end?: string;
   eyecatch?: MicroCMSImage;
   id: string;
   languages?: string[];
   libraries?: string[];
+  position?: string;
   publishedAt: string;
+  responsibleProcesses?: string;
   revisedAt: string;
   server?: string[];
   start?: string;
   title: string;
   tools?: string[];
   updatedAt: string;
+  workDetail?: string;
 };
 
 /**
