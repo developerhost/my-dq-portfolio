@@ -101,9 +101,13 @@ export const WorkList = () => {
                 {/* タグセクション */}
                 <div className="space-y-2">
                   {/* カテゴリー */}
-                  {work.category && (
+                  {work.category && work.category.length > 0 && (
                     <div className="flex flex-wrap gap-1">
-                      <Badge variant="default">{work.category.name}</Badge>
+                      {work.category.map((cat, index) => (
+                        <Badge key={index} variant="default">
+                          {cat}
+                        </Badge>
+                      ))}
                     </div>
                   )}
 
