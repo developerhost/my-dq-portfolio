@@ -1,8 +1,30 @@
 import { useQuery } from '@tanstack/react-query';
 import { createLazyFileRoute, Link } from '@tanstack/react-router';
 import { format } from 'date-fns';
+import { ja } from 'date-fns/locale';
 
 import { getWorks } from './-utils/workData';
+
+import { Badge } from '@/components/ui/badge';
+
+/**
+ * 参画期間をフォーマットする
+ */
+const formatPeriod = (start?: string, end?: string): string => {
+  if (!start && !end) return '';
+
+  const formatDate = (dateStr: string) => {
+    return format(new Date(dateStr), 'yyyy年M月', { locale: ja });
+  };
+
+  if (start && end) {
+    return `参画期間 ${formatDate(start)}~${formatDate(end)}`;
+  } else if (start) {
+    return `参画期間 ${formatDate(start)}~`;
+  }
+
+  return '';
+};
 
 export const WorkList = () => {
   const { data, error, isLoading } = useQuery({
@@ -65,21 +87,70 @@ export const WorkList = () => {
 
               <div className="p-4">
                 {/* タイトル */}
-                <h2 className="text-xl font-bold mb-2 group-hover:text-blue-500 transition-colors line-clamp-2">
+                <h2 className="text-xl font-bold mb-3 group-hover:text-blue-500 transition-colors line-clamp-2">
                   {work.title}
                 </h2>
 
-                {/* カテゴリー */}
-                {work.category && (
-                  <span className="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-2 py-1 rounded mb-2">
-                    {work.category.name}
-                  </span>
+                {/* 参画期間 */}
+                {(work.start || work.end) && (
+                  <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
+                    {formatPeriod(work.start, work.end)}
+                  </p>
                 )}
 
-                {/* 公開日 */}
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  {format(new Date(work.publishedAt), 'yyyy年MM月dd日')}
-                </p>
+                {/* タグセクション */}
+                <div className="space-y-2">
+                  {/* カテゴリー */}
+                  {work.category && (
+                    <div className="flex flex-wrap gap-1">
+                      <Badge variant="default">{work.category.name}</Badge>
+                    </div>
+                  )}
+
+                  {/* 言語 */}
+                  {work.languages && work.languages.length > 0 && (
+                    <div className="flex flex-wrap gap-1">
+                      {work.languages.map((lang, index) => (
+                        <Badge key={index} variant="default">
+                          {lang}
+                        </Badge>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* ライブラリ */}
+                  {work.libraries && work.libraries.length > 0 && (
+                    <div className="flex flex-wrap gap-1">
+                      {work.libraries.map((lib, index) => (
+                        <Badge key={index} variant="default">
+                          {lib}
+                        </Badge>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* サーバー */}
+                  {work.server && work.server.length > 0 && (
+                    <div className="flex flex-wrap gap-1">
+                      {work.server.map((srv, index) => (
+                        <Badge key={index} variant="default">
+                          {srv}
+                        </Badge>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* ツール */}
+                  {work.tools && work.tools.length > 0 && (
+                    <div className="flex flex-wrap gap-1">
+                      {work.tools.map((tool, index) => (
+                        <Badge key={index} variant="default">
+                          {tool}
+                        </Badge>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
             </Link>
           ))}

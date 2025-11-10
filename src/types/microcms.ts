@@ -30,11 +30,17 @@ export type MicroCMSBlog = {
   category?: MicroCMSCategory;
   content: string;
   createdAt: string;
+  end?: string;
   eyecatch?: MicroCMSImage;
   id: string;
+  languages?: string[];
+  libraries?: string[];
   publishedAt: string;
   revisedAt: string;
+  server?: string[];
+  start?: string;
   title: string;
+  tools?: string[];
   updatedAt: string;
 };
 
