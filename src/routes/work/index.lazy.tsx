@@ -1,30 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { createLazyFileRoute, Link } from '@tanstack/react-router';
-import { format } from 'date-fns';
-import { ja } from 'date-fns/locale';
 
 import { getWorks } from './-utils/workData';
 
 import { Badge } from '@/components/ui/badge';
-
-/**
- * 参画期間をフォーマットする
- */
-const formatPeriod = (start?: string, end?: string): string => {
-  if (!start && !end) return '';
-
-  const formatDate = (dateStr: string) => {
-    return format(new Date(dateStr), 'yyyy年M月', { locale: ja });
-  };
-
-  if (start && end) {
-    return `参画期間 ${formatDate(start)}~${formatDate(end)}`;
-  } else if (start) {
-    return `参画期間 ${formatDate(start)}~`;
-  }
-
-  return '';
-};
+import { formatPeriod } from '@/lib/format';
 
 export const WorkList = () => {
   const { data, error, isLoading } = useQuery({
@@ -94,7 +74,7 @@ export const WorkList = () => {
                 {/* 参画期間 */}
                 {(work.start || work.end) && (
                   <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
-                    {formatPeriod(work.start, work.end)}
+                    参画期間 {formatPeriod(work.start, work.end)}
                   </p>
                 )}
 
