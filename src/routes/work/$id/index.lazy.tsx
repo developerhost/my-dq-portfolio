@@ -90,11 +90,11 @@ export const WorkDetail = () => {
 
       {/* メタ情報セクション */}
       <div className="space-y-4 mb-8 p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
-        {/* 参画期間 */}
+        {/* 参画期間 / 公開日 */}
         {(work.start || work.end) && (
           <div className="flex items-start gap-3">
             <span className="font-semibold min-w-[100px] text-gray-700 dark:text-gray-300">
-              参画期間:
+              {work.end ? '参画期間:' : '公開日:'}
             </span>
             <span className="text-gray-900 dark:text-gray-100">
               {formatPeriod(work.start, work.end)}

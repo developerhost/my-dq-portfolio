@@ -1,12 +1,34 @@
 import { useQuery } from '@tanstack/react-query';
-import { createLazyFileRoute, Link } from '@tanstack/react-router';
+import {
+  createLazyFileRoute,
+  Link,
+  useNavigate,
+  useSearch,
+} from '@tanstack/react-router';
 
 import { getWorks } from './-utils/workData';
 
 import { Badge } from '@/components/ui/badge';
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/components/ui/pagination';
 import { formatPeriod } from '@/lib/format';
 
+const ITEMS_PER_PAGE = 6;
+
 export const WorkList = () => {
+  const navigate = useNavigate();
+  const searchParams = useSearch({ from: '/work/' }) as { page?: number };
+  const page =
+    typeof searchParams.page === 'number' && searchParams.page > 0
+      ? searchParams.page
+      : 1;
+
   const { data, error, isLoading } = useQuery({
     queryFn: getWorks,
     queryKey: ['works'],
@@ -34,7 +56,29 @@ export const WorkList = () => {
     );
   }
 
-  const works = data?.contents || [];
+  // work.startでソート（新しい順）
+  const allWorks = data?.contents || [];
+  const sortedWorks = [...allWorks].sort((a, b) => {
+    if (!a.start && !b.start) return 0;
+    if (!a.start) return 1;
+    if (!b.start) return -1;
+    return new Date(b.start).getTime() - new Date(a.start).getTime();
+  });
+
+  // ページネーション計算
+  const totalPages = Math.ceil(sortedWorks.length / ITEMS_PER_PAGE);
+  const currentPage = Math.min(Math.max(1, page), totalPages);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const works = sortedWorks.slice(startIndex, endIndex);
+
+  // ページ変更ハンドラー
+  const handlePageChange = (newPage: number) => {
+    navigate({
+      to: '/work',
+      search: { page: newPage },
+    });
+  };
 
   return (
     <div className="container mx-auto p-4 md:p-8">
@@ -71,10 +115,11 @@ export const WorkList = () => {
                   {work.title}
                 </h2>
 
-                {/* 参画期間 */}
+                {/* 参画期間 / 公開日 */}
                 {(work.start || work.end) && (
                   <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
-                    参画期間 {formatPeriod(work.start, work.end)}
+                    {work.end ? '参画期間' : '公開日'}{' '}
+                    {formatPeriod(work.start, work.end)}
                   </p>
                 )}
 
@@ -141,9 +186,72 @@ export const WorkList = () => {
         </div>
       )}
 
+      {/* ページネーション */}
+      {totalPages > 1 && (
+        <div className="mt-8">
+          <Pagination>
+            <PaginationContent>
+              {/* 前へボタン */}
+              <PaginationItem>
+                <PaginationPrevious
+                  className={
+                    currentPage === 1
+                      ? 'pointer-events-none opacity-50'
+                      : 'cursor-pointer'
+                  }
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (currentPage > 1) {
+                      handlePageChange(currentPage - 1);
+                    }
+                  }}
+                />
+              </PaginationItem>
+
+              {/* ページ番号 */}
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                (pageNum) => (
+                  <PaginationItem key={pageNum}>
+                    <PaginationLink
+                      className="cursor-pointer"
+                      isActive={pageNum === currentPage}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handlePageChange(pageNum);
+                      }}
+                    >
+                      {pageNum}
+                    </PaginationLink>
+                  </PaginationItem>
+                )
+              )}
+
+              {/* 次へボタン */}
+              <PaginationItem>
+                <PaginationNext
+                  className={
+                    currentPage === totalPages
+                      ? 'pointer-events-none opacity-50'
+                      : 'cursor-pointer'
+                  }
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (currentPage < totalPages) {
+                      handlePageChange(currentPage + 1);
+                    }
+                  }}
+                />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        </div>
+      )}
+
       {/* 総件数 */}
       <div className="mt-8 text-center text-gray-600 dark:text-gray-400">
-        <p>全 {data?.totalCount || 0} 件</p>
+        <p>
+          全 {sortedWorks.length} 件 (ページ {currentPage} / {totalPages})
+        </p>
       </div>
     </div>
   );
