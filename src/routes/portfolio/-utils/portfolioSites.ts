@@ -1,5 +1,11 @@
 export const portfolioSites = [
   {
+    title: 'Github スカウター',
+    description: 'GitHubアカウントの活動から戦闘力を計算します',
+    image: 'https://github-scouter.com/ogp.png',
+    link: 'https://github-scouter.com/',
+  },
+  {
     title: '1-infinity',
     description: '1/2を当て続けてハイスコアを狙うブラウザゲーム',
     image: 'https://1-infinity.vercel.app/assets/opengraph-image.png',
