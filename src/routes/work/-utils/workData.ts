@@ -4,15 +4,23 @@ import { client } from '@/lib/microcms';
 
 /**
  * 実績一覧を取得する
+ * getAllContentsメソッドを使用して全件取得
  */
 export const getWorks = async (): Promise<
   MicroCMSListResponse<MicroCMSBlog>
 > => {
-  const response = await client.get<MicroCMSListResponse<MicroCMSBlog>>({
+  // getAllContentsで全件取得（自動的にページネーション処理される）
+  const contents = await client.getAllContents<MicroCMSBlog>({
     endpoint: 'blogs',
   });
 
-  return response;
+  // 既存のコードとの互換性を保つためにMicroCMSListResponse形式で返す
+  return {
+    contents,
+    limit: contents.length,
+    offset: 0,
+    totalCount: contents.length,
+  };
 };
 
 /**
