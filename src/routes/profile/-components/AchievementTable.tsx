@@ -17,7 +17,7 @@ import {
  * @property {number} month - 実績の月
  * @property {string} description - 実績内容
  */
-type Achievement = {
+export type Achievement = {
   description: string;
   month: number;
   year: number;
@@ -26,7 +26,7 @@ type Achievement = {
 /**
  * 実績データ（例）
  */
-const achievementData: Achievement[] = [
+export const achievementData: Achievement[] = [
   {
     year: 2019,
     month: 6,
