@@ -22,7 +22,7 @@ export const Room = () => {
 
   return (
     <div
-      className="min-h-screen bg-black text-white flex flex-col items-center"
+      className="min-h-[calc(100vh-64px-1px)] bg-black text-white flex flex-col items-center" // header(16*4=64px), shared hr(1px)
       style={{
         WebkitUserSelect: 'none' /* Safari */,
         userSelect: 'none',
